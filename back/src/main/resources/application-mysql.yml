@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: kwicweb
+    password: kwicweb
+    url: jdbc:mysql://localhost:3306/gourmet
+    driver-class-name: com.mysql.cj.jdbc.Driver
