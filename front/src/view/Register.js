@@ -2,16 +2,16 @@ import React from "react";
 import { useEffect } from "react";
 
 const Register = (props) => {
-  useEffect(() => {
-    // 👇 add className to body element
-    document.body.classNameList.add("Register-body");
+  //   useEffect(() => {
+  //     // 👇 add className to body element
+  //     document.body.classNameList.add("Register-body");
 
-    return () => {
-      // 👇️ optionally remove styles when component unmounts
-      document.body.style.backgroundColor = null;
-      document.body.classNameList.remove("Register-body");
-    };
-  }, []);
+  //     return () => {
+  //       // 👇️ optionally remove styles when component unmounts
+  //       document.body.style.backgroundColor = null;
+  //       document.body.classNameList.remove("Register-body");
+  //     };
+  //   }, []);
 
   return (
     <>
