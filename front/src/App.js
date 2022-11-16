@@ -7,11 +7,11 @@ import Register from "./view/Register";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ height: "100vh" }}>
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         <Routes>
-          <Route path={"/"} element={<Main />}></Route>
+          <Route path={"/"} element={<Main />} exact={true}></Route>
           <Route path={"/register"} element={<Register />}></Route>
           <Route path={"/example/*"} element={<Example />}></Route>
           <Route path={"*"} element={<NotFound />}></Route>

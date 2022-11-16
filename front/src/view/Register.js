@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import "./register.css";
 
 const Register = (props) => {
   //   useEffect(() => {
@@ -16,7 +17,7 @@ const Register = (props) => {
   return (
     <>
       <section
-        className="vh-100 bg-image"
+        className="h-100 bg-image"
         style={{
           backgroundImage: `url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp')`,
         }}
