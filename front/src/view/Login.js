@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import "./login.css";
 
-const Login = () => {
+const Login = (props) => {
   useEffect(() => {
     // 👇 add class to body element
     document.body.classList.add("Login-body");

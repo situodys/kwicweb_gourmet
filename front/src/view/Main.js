@@ -11,9 +11,7 @@ export default function Main(props) {
         <Link to={"/example/2"} state={{ variable: 2 }}>
           2번{" "}
         </Link>
-        <Link to={"/login"} state={{ variable: 2 }}>
-          Login{" "}
-        </Link>
+        <Link to={"/login"}>Login </Link>
       </ul>
     </div>
   );
