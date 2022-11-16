@@ -1,20 +1,26 @@
-package kw.ic.backend.domain.restaurant.core;
+package kw.ic.backend.domain.restaurant.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import kw.ic.backend.domain.menu.Menu;
-import kw.ic.backend.domain.restaurant.notification.Notification;
-import kw.ic.backend.domain.restaurant.core.embbed.Address;
-import kw.ic.backend.domain.restaurant.core.embbed.RestaurantType;
-import kw.ic.backend.domain.restaurant.core.embbed.RunningTime;
+import kw.ic.backend.domain.restaurant.dto.embbed.Address;
+import kw.ic.backend.domain.restaurant.dto.embbed.RestaurantType;
+import kw.ic.backend.domain.restaurant.dto.embbed.RunningTime;
 import kw.ic.backend.global.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
