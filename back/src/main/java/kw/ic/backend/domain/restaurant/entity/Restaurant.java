@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import kw.ic.backend.domain.menu.Menu;
+import kw.ic.backend.domain.notification.Notification;
 import kw.ic.backend.domain.restaurant.dto.embbed.Address;
 import kw.ic.backend.domain.restaurant.dto.embbed.RestaurantType;
 import kw.ic.backend.domain.restaurant.dto.embbed.RunningTime;

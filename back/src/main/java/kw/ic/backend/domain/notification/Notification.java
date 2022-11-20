@@ -1,4 +1,4 @@
-package kw.ic.backend.domain.restaurant.entity;
+package kw.ic.backend.domain.notification;
 
 import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;

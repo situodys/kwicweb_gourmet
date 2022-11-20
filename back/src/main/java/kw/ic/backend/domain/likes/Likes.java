@@ -1,4 +1,4 @@
-package kw.ic.backend.domain.restaurant.likes;
+package kw.ic.backend.domain.likes;
 
 import kw.ic.backend.domain.restaurant.core.Restaurant;
 import kw.ic.backend.domain.member.Member;

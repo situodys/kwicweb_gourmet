@@ -6,7 +6,7 @@ import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.menu.MenuResponse;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
-import kw.ic.backend.domain.restaurant.entity.Notification;
+import kw.ic.backend.domain.notification.Notification;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import org.springframework.stereotype.Component;
 
