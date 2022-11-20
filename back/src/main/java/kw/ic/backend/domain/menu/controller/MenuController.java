@@ -1,5 +1,9 @@
 package kw.ic.backend.domain.menu.controller;
 
+import kw.ic.backend.domain.menu.dto.request.MenuPageRequest;
+import kw.ic.backend.domain.menu.dto.request.MenuRequest;
+import kw.ic.backend.domain.menu.dto.response.MenuPageResponse;
+import kw.ic.backend.domain.menu.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -20,20 +24,18 @@ public class MenuController {
 
     private final MenuService menuService;
 
-    @GetMapping("/{restaurant_id}")
-    ResponseEntity<MenuPageResponse> findMenusByRestaurant(@PathVariable(name = "restaurant_id") Long restaurantId,
-                                                           @RequestBody MenuPageRequest request) {
-        log.info("find menus of restaurantId: {} with pagination", restaurantId);
+    @GetMapping("")
+    ResponseEntity<MenuPageResponse> findMenusByRestaurant(@RequestBody MenuPageRequest request) {
+        log.info("find menus of restaurantId: {} with pagination", request);
 
         MenuPageResponse response = menuService.findMenus(request);
 
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/{restaurant_id}")
-    ResponseEntity<Long> register(@PathVariable(name = "restaurant_id") Long restaurantId,
-                                  @RequestBody MenuRequest request) {
-        log.info("Register menu of restaurant id: {}", restaurantId);
+    @PostMapping("")
+    ResponseEntity<Long> register(@RequestBody MenuRequest request) {
+        log.info("Register menu of restaurant id: {}", request.getRestaurantId());
 
         Long menuId = menuService.register(request);
 
@@ -44,8 +46,8 @@ public class MenuController {
     ResponseEntity<Long> delete(@PathVariable(name = "menu_id") Long menuId) {
         log.info("delete menu");
 
-        menuService.delete(menuId);
+        Long deletedId = menuService.delete(menuId);
 
-        return ResponseEntity.ok(menuId);
+        return ResponseEntity.ok(deletedId);
     }
 }
