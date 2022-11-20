@@ -59,4 +59,8 @@ public class Restaurant extends BaseEntity {
         this.menus = menus;
         this.notifications = notifications;
     }
+
+    public Restaurant(Long id) {
+        this.id=id;
+    }
 }
