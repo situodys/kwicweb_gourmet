@@ -17,6 +17,11 @@ public class LikesRequest {
     @NotNull
     private Long memberId;
 
+    public LikesRequest(Long restaurantId, Long memberId) {
+        this.restaurantId = restaurantId;
+        this.memberId = memberId;
+    }
+
     public Likes toLikes() {
         return Likes.builder()
                 .member(new Member(this.memberId))

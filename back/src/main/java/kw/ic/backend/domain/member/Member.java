@@ -1,7 +1,7 @@
 package kw.ic.backend.domain.member;
 
 
-import kw.ic.backend.domain.member.embbed.Authority;
+import kw.ic.backend.domain.member.dto.embbed.Authority;
 import kw.ic.backend.global.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
