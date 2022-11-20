@@ -1,8 +1,11 @@
 package kw.ic.backend.domain.likes.controller;
 
 import kw.ic.backend.domain.likes.dto.LikesRequest;
+import kw.ic.backend.domain.likes.service.LikesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,23 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/likes")
 public class LikesController {
 
-    private final LikesSerivce likesSerivce;
+    private final LikesService likesService;
 
     @PostMapping("/add")
     ResponseEntity<Long> add(@RequestBody LikesRequest likesRequest) {
         log.info("memberId {} like to restaurantId {}");
 
-        Long likesId = likesSerivce.add(likesRequest);
+        Long likesId = likesService.add(likesRequest);
 
-        ResponseEntity.ok(likesId);
+        return ResponseEntity.ok(likesId);
     }
 
     @PostMapping("/cancel")
-    ResponseEntity<Long> cancel(@RequestBody LikesRequest likesRequest) {
+    ResponseEntity<Void> cancel(@RequestBody LikesRequest likesRequest) {
         log.info("memberId {} cancel like to restaurantId {}");
 
-        Long canceled = likesSerivce.cancel(likesRequest);
+        likesService.cancel(likesRequest);
 
-        ResponseEntity.ok(canceled);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
