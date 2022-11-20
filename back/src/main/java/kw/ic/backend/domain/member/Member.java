@@ -36,4 +36,8 @@ public class Member extends BaseEntity {
         this.password=password;
         this.authority = authority;
     }
+
+    public Member(Long id) {
+        this.id = id;
+    }
 }

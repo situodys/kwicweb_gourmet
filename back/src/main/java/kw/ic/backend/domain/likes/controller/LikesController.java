@@ -1,5 +1,6 @@
 package kw.ic.backend.domain.likes.controller;
 
+import kw.ic.backend.domain.likes.dto.LikesRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
