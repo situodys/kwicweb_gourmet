@@ -1,7 +1,7 @@
 package kw.ic.backend.domain.likes;
 
-import kw.ic.backend.domain.restaurant.core.Restaurant;
 import kw.ic.backend.domain.member.Member;
+import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

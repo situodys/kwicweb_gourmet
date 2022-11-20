@@ -1,8 +1,8 @@
 package kw.ic.backend.domain.proposal;
 
-import kw.ic.backend.domain.restaurant.core.Restaurant;
 import kw.ic.backend.domain.proposal.embbed.Category;
 import kw.ic.backend.domain.member.Member;
+import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.global.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
