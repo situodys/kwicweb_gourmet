@@ -2,7 +2,7 @@ package kw.ic.backend.domain.restaurant.dto.response;
 
 import java.util.ArrayList;
 import java.util.List;
-import kw.ic.backend.domain.menu.MenuResponse;
+import kw.ic.backend.domain.menu.dto.response.MenuResponse;
 import kw.ic.backend.domain.restaurant.dto.embbed.Address;
 import kw.ic.backend.domain.restaurant.dto.embbed.RestaurantType;
 import kw.ic.backend.domain.restaurant.dto.embbed.RunningTime;

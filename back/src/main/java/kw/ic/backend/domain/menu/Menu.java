@@ -1,6 +1,6 @@
 package kw.ic.backend.domain.menu;
 
-import java.util.List;
+import kw.ic.backend.domain.menu.dto.response.MenuResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.global.BaseEntity;
 import lombok.AccessLevel;

@@ -3,7 +3,7 @@ package kw.ic.backend.domain.restaurant.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 import kw.ic.backend.domain.menu.Menu;
-import kw.ic.backend.domain.menu.MenuResponse;
+import kw.ic.backend.domain.menu.dto.response.MenuResponse;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
 import kw.ic.backend.domain.notification.Notification;
