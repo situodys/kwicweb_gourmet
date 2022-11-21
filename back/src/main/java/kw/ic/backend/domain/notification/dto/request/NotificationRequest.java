@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NotificationRequest {
 
-    private Long notificationId;
-
     private String previousContent;
 
     @NotNull
