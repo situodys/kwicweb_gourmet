@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.menu.dto.response.MenuResponse;
+import kw.ic.backend.domain.notification.Notification;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
-import kw.ic.backend.domain.notification.Notification;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +16,10 @@ public class RestaurantResponseAssembler {
 
     public RestaurantResponse restaurantResponse(Restaurant restaurant) {
         return RestaurantResponse.builder().
-                id(restaurant.getId()).
-                type(restaurant.getType())
+                restaurantId(restaurant.getId())
+                .name(restaurant.getName())
+                .description(restaurant.getDescription())
+                .type(restaurant.getType())
                 .address(restaurant.getAddress())
                 .runningTime(restaurant.getRunningTime())
                 .menus(menuResponses(restaurant.getMenus()))

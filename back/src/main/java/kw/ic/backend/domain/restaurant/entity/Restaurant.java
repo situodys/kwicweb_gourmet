@@ -33,7 +33,13 @@ public class Restaurant extends BaseEntity {
     @Column(name = "restaurant_id")
     private Long id;
 
-    @Column(name="type", nullable = false)
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
     private RestaurantType type;
 
@@ -50,10 +56,13 @@ public class Restaurant extends BaseEntity {
     private List<Notification> notifications = new ArrayList<>();
 
     @Builder
-    public Restaurant(RestaurantType type, Address address, RunningTime runningTime,List<Menu> menus, List<Notification> notifications) {
+    public Restaurant(String name, String description, RestaurantType type, Address address, RunningTime runningTime,
+                      List<Menu> menus, List<Notification> notifications) {
         Assert.notNull(type, "Restaurant type must not be empty");
 
-        this.type=type;
+        this.name = name;
+        this.description = description;
+        this.type = type;
         this.address = address;
         this.runningTime = runningTime;
         this.menus = menus;
@@ -61,6 +70,6 @@ public class Restaurant extends BaseEntity {
     }
 
     public Restaurant(Long id) {
-        this.id=id;
+        this.id = id;
     }
 }
