@@ -1,4 +1,4 @@
-package kw.ic.backend.domain.restaurant.core.embbed;
+package kw.ic.backend.domain.restaurant.dto.embbed;
 
 import lombok.*;
 

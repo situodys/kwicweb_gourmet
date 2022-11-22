@@ -1,6 +1,8 @@
-package kw.ic.backend.domain.restaurant.notification;
+package kw.ic.backend.domain.notification;
 
-import kw.ic.backend.domain.restaurant.core.Restaurant;
+import kw.ic.backend.domain.menu.Menu;
+import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
+import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.global.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -39,5 +41,14 @@ public class Notification extends BaseEntity {
         this.previousContent = previousContent;
         this.updatedContent = updatedContent;
         this.restaurant = restaurant;
+    }
+
+    public NotificationResponse toResponse() {
+        return NotificationResponse.builder()
+                .id(this.id)
+                .previousContent(this.previousContent)
+                .updatedContent(this.updatedContent)
+                .restaurant_id(this.restaurant.getId())
+                .build();
     }
 }

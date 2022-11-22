@@ -1,6 +1,7 @@
 package kw.ic.backend.domain.menu;
 
-import kw.ic.backend.domain.restaurant.core.Restaurant;
+import java.util.List;
+import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.global.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -44,5 +45,15 @@ public class Menu extends BaseEntity {
         this.price=price;
         this.description = description;
         this.restaurant = restaurant;
+    }
+
+    public MenuResponse toResponse() {
+        return MenuResponse.builder()
+                .id(this.id)
+                .menuName(this.menuName)
+                .price(this.price)
+                .description(this.description)
+                .restaurant_id(this.restaurant.getId())
+                .build();
     }
 }
