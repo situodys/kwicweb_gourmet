@@ -3,7 +3,9 @@ server:
 
 spring:
   config:
-    import: application-mysql.yml
+    import:
+    - classpath:application-mysql.yml
+    - classpath:application-mail.yml
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -14,3 +16,9 @@ spring:
     properties:
       hibernate.format_sql: true
       database: mysql
+
+security:
+  jwt:
+    secret-key: NTRsc1JIZnVQWnVxTklJMWlzVDljdXNtc3lETE5LWGRHSGJvbGs4Rnp4QnR1OEliQW5iN1JuV2VSdVFIZDF2aw==
+    access-expiration-time: 7200000
+    refresh-expiration-time: 1209600000
