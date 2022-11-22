@@ -7,6 +7,7 @@ import kw.ic.backend.domain.menu.dto.response.MenuResponse;
 import kw.ic.backend.domain.notification.Notification;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
+import kw.ic.backend.domain.restaurant.dto.response.SimpleRestaurantResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,14 @@ public class RestaurantResponseAssembler {
                 .runningTime(restaurant.getRunningTime())
                 .menus(menuResponses(restaurant.getMenus()))
                 .notifications(notificationResponses(restaurant.getNotifications()))
+                .build();
+    }
+    public SimpleRestaurantResponse simpleRestaurantResponse(Restaurant restaurant) {
+        return SimpleRestaurantResponse.builder()
+                .restaurantId(restaurant.getId())
+                .name(restaurant.getName())
+                .address(restaurant.getAddress())
+                .runningTime(restaurant.getRunningTime())
                 .build();
     }
 
