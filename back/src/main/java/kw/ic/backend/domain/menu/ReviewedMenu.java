@@ -21,6 +21,9 @@ public class ReviewedMenu {
     @Column(name = "reviewed_menu_id")
     private Long id;
 
+    @Column(name="menu_name")
+    private String menuName;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id")
     private Review review;
@@ -31,7 +34,8 @@ public class ReviewedMenu {
     private Menu menu;
 
     @Builder
-    public ReviewedMenu(Review review, Menu menu) {
+    public ReviewedMenu(String menuName, Review review, Menu menu) {
+        this.menuName = menuName;
         this.review=review;
         this.menu = menu;
     }
