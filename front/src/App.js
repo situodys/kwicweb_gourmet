@@ -4,9 +4,10 @@ import Main from "./view/Main";
 
 import NavBar from "./component/NavBar";
 import Header from "./component/Header";
+import Login from "./component/Login";
+import Register from "./component/Register";
+
 import Example from "./view/Example";
-import Login from "./view/Login";
-import Register from "./view/Register";
 
 function App() {
   return (
