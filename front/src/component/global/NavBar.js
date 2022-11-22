@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import userImage from "../view/images/user.png";
+import userImage from "../../assets/images/user.png";
 // import ManagerImage Later
 
 const NavBar = (props) => {

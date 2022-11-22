@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import resturantImage from "../view/images/Restaurant.jpg";
-import { ReactComponent as Heart } from "../view/images/heart-fill.svg";
+import resturantImage from "../../assets/images/Restaurant.jpg";
+import { ReactComponent as Heart } from "../../assets/images/heart-fill.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import "./restaurantCard.scss";
 
-const ResturantCard = (props) => {
+const RestaurantCard = (props) => {
   useEffect(() => {
     // 👇 add class to body element
     document.body.classList.add("Login-body");
@@ -159,4 +159,4 @@ const ResturantCard = (props) => {
   );
 };
 
-export default ResturantCard;
+export default RestaurantCard;
