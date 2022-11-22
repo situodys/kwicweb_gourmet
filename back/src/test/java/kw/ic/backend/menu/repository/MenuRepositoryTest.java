@@ -3,12 +3,15 @@ package kw.ic.backend.menu.repository;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.menu.dto.request.MenuRequest;
 import kw.ic.backend.domain.menu.repository.MenuRepository;
+import kw.ic.backend.domain.restaurant.dto.embbed.Address;
 import kw.ic.backend.domain.restaurant.dto.embbed.RestaurantType;
+import kw.ic.backend.domain.restaurant.dto.embbed.RunningTime;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.domain.restaurant.repository.RestaurantRepository;
 import kw.ic.backend.global.config.JpaConfig;
@@ -36,8 +39,12 @@ public class MenuRepositoryTest {
 
     @BeforeAll
     private void init() {
-        Restaurant restaurant = Restaurant.builder()
+        Restaurant  restaurant = Restaurant.builder()
+                .name("name")
+                .description("description")
                 .type(RestaurantType.KOREAN)
+                .address(new Address("city1", "street1", "zipcode"))
+                .runningTime(new RunningTime(LocalDateTime.now(), LocalDateTime.now()))
                 .build();
         restaurantRepository.save(restaurant);
 
@@ -50,7 +57,8 @@ public class MenuRepositoryTest {
                             1L
                     );
 
-                    menuRepository.save(request.toMenu());
+                    Menu menu = menuRepository.save(request.toMenu());
+                    System.out.println(menu.getMenuName());
                 });
     }
 
@@ -62,7 +70,9 @@ public class MenuRepositoryTest {
         //when
         menuRepository.deleteById(targetMenuId);
         Optional<Menu> targetMenu = menuRepository.findById(targetMenuId);
+        Optional<Menu> res = menuRepository.findById(3L);
         //then
         assertThat(targetMenu.isPresent()).isEqualTo(false);
+        System.out.println(res.get().getMenuName());
     }
 }
