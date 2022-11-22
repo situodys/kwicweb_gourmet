@@ -14,14 +14,14 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.util.Assert;
 
-@Entity(name = "announcement")
+@Entity(name = "notification")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Notification extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "announcement_id")
+    @Column(name = "notification_id")
     private Long id;
 
     @Column(name = "previous_content")
