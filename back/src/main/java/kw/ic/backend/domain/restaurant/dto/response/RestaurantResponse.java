@@ -2,7 +2,8 @@ package kw.ic.backend.domain.restaurant.dto.response;
 
 import java.util.ArrayList;
 import java.util.List;
-import kw.ic.backend.domain.menu.MenuResponse;
+import javax.validation.constraints.NotNull;
+import kw.ic.backend.domain.menu.dto.response.MenuResponse;
 import kw.ic.backend.domain.restaurant.dto.embbed.Address;
 import kw.ic.backend.domain.restaurant.dto.embbed.RestaurantType;
 import kw.ic.backend.domain.restaurant.dto.embbed.RunningTime;
@@ -14,12 +15,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RestaurantResponse {
 
-    private Long id;
+    @NotNull
+    private Long restaurantId;
 
+    @NotNull
+    private String name;
+
+    private String description;
+
+    @NotNull
     private RestaurantType type;
 
+    @NotNull
     private Address address;
 
+    @NotNull
     private RunningTime runningTime;
 
     private List<MenuResponse> menus = new ArrayList<>();
@@ -27,9 +37,11 @@ public class RestaurantResponse {
     private List<NotificationResponse> notifications = new ArrayList<>();
 
     @Builder
-    public RestaurantResponse(Long id, RestaurantType type, Address address, RunningTime runningTime, List<MenuResponse> menus,
+    public RestaurantResponse(Long restaurantId, String name, String description, RestaurantType type, Address address, RunningTime runningTime, List<MenuResponse> menus,
                               List<NotificationResponse> notifications) {
-        this.id = id;
+        this.restaurantId = restaurantId;
+        this.name = name;
+        this.description = description;
         this.type = type;
         this.address = address;
         this.runningTime = runningTime;

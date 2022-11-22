@@ -1,8 +1,8 @@
 package kw.ic.backend.domain.review.entity;
 
 import kw.ic.backend.domain.menu.ReviewedMenu;
-import kw.ic.backend.domain.restaurant.core.Restaurant;
 import kw.ic.backend.domain.member.Member;
+import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.global.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;

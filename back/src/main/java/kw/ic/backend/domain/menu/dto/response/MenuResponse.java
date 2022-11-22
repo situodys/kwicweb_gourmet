@@ -1,4 +1,4 @@
-package kw.ic.backend.domain.menu;
+package kw.ic.backend.domain.menu.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
