@@ -3,7 +3,9 @@ import NotFound from "./view/NotFound";
 import Main from "./view/Main";
 import Header from "./component/Header";
 import Example from "./view/Example";
+import Login from "./view/Login";
 import Register from "./view/Register";
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
         {/* <Header /> */}
         <Routes>
           <Route path={"/"} element={<Main />} exact={true}></Route>
+          <Route path={"/login"} element={<Login />}></Route>
           <Route path={"/register"} element={<Register />}></Route>
           <Route path={"/example/*"} element={<Example />}></Route>
           <Route path={"*"} element={<NotFound />}></Route>
