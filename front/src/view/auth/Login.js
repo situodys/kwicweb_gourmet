@@ -1,8 +1,72 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "../../component/auth/css/login.css";
 import CustomInput from "../../component/auth/CustomInput";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const Login = (props) => {
+
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isLogin, setIsLogin] = useState(false);
+
+    const [IdMessage, setIdMessage] = useState("");
+    const [pwMessage, setPwMessage] = useState("");
+
+
+    const checkLogin = () => {
+        const tk = window.sessionStorage.getItem("jwt");
+        if (tk) {
+            window.alert("로그인 되어 있는 상태입니다.")
+            navigate("/home");
+        }
+        setIsLogin(true);
+    }
+
+    useEffect(() => {
+        if (!isLogin) {
+            checkLogin();
+        }
+    }, [])
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+        setIdMessage(" ");
+        console.log(email);
+    }
+    const handlePassword = (e) => {
+        setPassword(e.target.value);
+        setPwMessage(" ");
+
+    }
+    const toData = () => {
+        const data = {};
+        data['email'] = email;
+        data['password'] = Buffer.from(password).toString('base64');
+        return data;
+    }
+
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, toData());
+            if (response.status == 200) {
+                window.alert("로그인 성공");
+                window.sessionStorage.setItem("jwt", response.data);
+                navigate("/home");
+            }
+        } catch (err) {
+            if (err) {
+                if (err.response.data['message'].includes("아이디")) {
+                    setIdMessage(err.response.data['message']);
+                    setPwMessage("");
+                }
+                if (err.response.data['message'].includes("비밀번호")) {
+                    setPwMessage(err.response.data['message']);
+                }
+            }
+        }
+    }
 
     return (
         <>
@@ -22,13 +86,23 @@ const Login = (props) => {
                                         </p>
 
                                         <CustomInput type={"email"}
-                                                     placeHolder={"Email"}></CustomInput>
+                                                     placeHolder={"Email"}
+                                                     handleInput={handleEmail}></CustomInput>
+                                        <div className="text-danger" style={{height: "20px"}}>
+                                            {IdMessage}
+                                        </div>
+
                                         <CustomInput type={"password"}
-                                                     placeHolder={"Password"}></CustomInput>
+                                                     placeHolder={"Password"}
+                                                     handleInput={handlePassword}></CustomInput>
+                                        <div className="text-danger" style={{height: "20px"}}>
+                                            {pwMessage}
+                                        </div>
 
                                         <button
                                             className="btn btn-outline-light btn-lg px-5"
                                             type="submit"
+                                            onSubmit={handleSubmit}
                                         >
                                             Login
                                         </button>
@@ -37,7 +111,7 @@ const Login = (props) => {
                                     <div>
                                         <p className="mb-0">
                                             Don't have an account?{" "}
-                                            <a href="src/view/auth/Login#!" className="text-white-50 fw-bold">
+                                            <a href="/register" className="text-white-50 fw-bold">
                                                 Sign Up
                                             </a>
                                         </p>
