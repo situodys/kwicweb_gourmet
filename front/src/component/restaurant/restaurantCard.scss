@@ -1,0 +1,17 @@
+/* import the Bootstrap */
+@import "/node_modules/bootstrap";
+
+/* ------- customize primary button color -------- */   
+$mynewcolor:#F65390;
+
+.btn-heart {
+    @include button-variant($mynewcolor, darken($mynewcolor, 7.5%), lighten($mynewcolor, 100%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+}
+
+.btn-outline-heart {
+    @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+}
+
+.star-checked {
+    color: orange;
+}
