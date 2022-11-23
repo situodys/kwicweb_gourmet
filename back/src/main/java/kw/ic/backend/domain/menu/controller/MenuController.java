@@ -25,7 +25,7 @@ public class MenuController {
     private final MenuService menuService;
 
     @GetMapping("")
-    ResponseEntity<MenuPageResponse> findMenusByRestaurant(@RequestBody MenuPageRequest request) {
+    ResponseEntity<MenuPageResponse> findMenusByRestaurant(MenuPageRequest request) {
         log.info("find menus of restaurantId: {} with pagination", request);
 
         MenuPageResponse response = menuService.findMenus(request);
