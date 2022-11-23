@@ -52,7 +52,8 @@ const Login = (props) => {
             const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, toData());
             if (response.status == 200) {
                 window.alert("로그인 성공");
-                window.sessionStorage.setItem("jwt", response.data);
+                window.localStorage.setItem("accessToken", response.data.accessToken);
+                window.localStorage.setItem("refreshToken", response.data.refreshToken);
                 navigate("/home");
             }
         } catch (err) {
