@@ -7,27 +7,27 @@ const NavBar = (props) => {
     <>
       <nav className="navbar navbar-dark bg-dark" style={{ height: "4rem" }}>
         <span class="navbar-brand mb-1 h1">
-          <Link to="/Register">GOURMET</Link>
+          <Link to="/main">GOURMET</Link>
         </span>
 
         <ul class="nav justify-content-end px-4 ">
           <li className="nav-item nav-link active mx-2">
-            <Link to="/Main" className="">
+            <Link to="/register" className="">
               ABOUT US
             </Link>
           </li>
           <li className="nav-item nav-link active mx-2">
-            <Link to="/resturants" className="">
+            <Link to="/restaurants" className="">
               RESTURANTS
             </Link>
           </li>
           <li className="nav-item nav-link active mx-2">
-            <Link to="/Main" className="">
+            <Link to="/main" className="">
               REVIEWS
             </Link>
           </li>
           <li className="nav-item nav-link active mx-2">
-            <Link to="/Main" className="">
+            <Link to="/main" className="">
               PROPOSALS
             </Link>
           </li>
