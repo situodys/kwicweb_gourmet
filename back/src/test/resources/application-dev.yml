@@ -1,6 +1,6 @@
 server:
   port: 8090
-
+spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -14,7 +14,7 @@ server:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     properties:
       hibernate.format_sql: true
       database: mysql

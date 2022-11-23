@@ -1,12 +1,11 @@
 package kw.ic.backend.menu.repository;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.stream.IntStream;
 import kw.ic.backend.domain.menu.Menu;
+import kw.ic.backend.domain.menu.dto.request.MenuPageRequest;
 import kw.ic.backend.domain.menu.dto.request.MenuRequest;
 import kw.ic.backend.domain.menu.repository.MenuRepository;
 import kw.ic.backend.domain.restaurant.dto.embbed.Address;
@@ -15,21 +14,22 @@ import kw.ic.backend.domain.restaurant.dto.embbed.RunningTime;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.domain.restaurant.repository.RestaurantRepository;
 import kw.ic.backend.global.config.JpaConfig;
+import kw.ic.backend.global.config.QueryDSLConfig;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
 import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
 @ActiveProfiles("test")
-@Import(JpaConfig.class)
+@Import({JpaConfig.class,QueryDSLConfig.class})
 @TestInstance(Lifecycle.PER_CLASS)
-public class MenuRepositoryTest {
+public class MenuRepositoryDSLTest {
 
     @Autowired
     private MenuRepository menuRepository;
@@ -38,7 +38,7 @@ public class MenuRepositoryTest {
 
     @BeforeAll
     private void init() {
-        Restaurant  restaurant = Restaurant.builder()
+        Restaurant restaurant = Restaurant.builder()
                 .name("name")
                 .description("description")
                 .type(RestaurantType.KOREAN)
@@ -47,7 +47,7 @@ public class MenuRepositoryTest {
                 .build();
         restaurantRepository.save(restaurant);
 
-        IntStream.rangeClosed(1,5)
+        IntStream.rangeClosed(1,17)
                 .forEach(idx ->{
                     MenuRequest request = new MenuRequest(
                             "menuName"+idx,
@@ -62,16 +62,15 @@ public class MenuRepositoryTest {
     }
 
     @Test
-    @DisplayName("메뉴 정상 삭제 확인")
-    public void delete() throws Exception{
+    public void findMenusWithPaginationTest() throws Exception{
         //given
-        Long targetMenuId = 2L;
+        MenuPageRequest request = MenuPageRequest.builder().restaurantId(1L).price(10).build();
+
         //when
-        menuRepository.deleteById(targetMenuId);
-        Optional<Menu> targetMenu = menuRepository.findById(targetMenuId);
-        Optional<Menu> res = menuRepository.findById(3L);
+        Page<Menu> result = menuRepository.findMenusWithPagination(request);
+
         //then
-        assertThat(targetMenu.isPresent()).isEqualTo(false);
-        System.out.println(res.get().getMenuName());
+
+        assertThat(result.getTotalElements()).isEqualTo(10);
     }
 }
