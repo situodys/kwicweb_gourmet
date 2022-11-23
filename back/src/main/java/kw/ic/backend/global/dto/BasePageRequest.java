@@ -32,7 +32,7 @@ public class BasePageRequest {
     }
 
     public Integer getSize() {
-        return size == null ? 1 : size;
+        return size == null ? 10 : size;
     }
 
     public List<String> getSorts() {
