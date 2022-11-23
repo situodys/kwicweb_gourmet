@@ -46,14 +46,4 @@ public class Menu extends BaseEntity {
         this.description = description;
         this.restaurant = restaurant;
     }
-
-    public MenuResponse toResponse() {
-        return MenuResponse.builder()
-                .id(this.id)
-                .menuName(this.menuName)
-                .price(this.price)
-                .description(this.description)
-                .restaurant_id(this.restaurant.getId())
-                .build();
-    }
 }

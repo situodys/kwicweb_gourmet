@@ -3,17 +3,22 @@ package kw.ic.backend.domain.restaurant.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 import kw.ic.backend.domain.menu.Menu;
+import kw.ic.backend.domain.menu.dto.MenuResponseAssembler;
 import kw.ic.backend.domain.menu.dto.response.MenuResponse;
 import kw.ic.backend.domain.notification.Notification;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
 import kw.ic.backend.domain.restaurant.dto.response.SimpleRestaurantResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
 @Component
+@RequiredArgsConstructor
 public class RestaurantResponseAssembler {
+
+    private final MenuResponseAssembler menuResponseAssembler;
 
     public RestaurantResponse restaurantResponse(Restaurant restaurant) {
         return RestaurantResponse.builder().
@@ -41,7 +46,7 @@ public class RestaurantResponseAssembler {
             return List.of();
         }
         return menus.stream()
-                .map(Menu::toResponse)
+                .map(menu -> menuResponseAssembler.menuResponse(menu))
                 .collect(Collectors.toList());
     }
 
