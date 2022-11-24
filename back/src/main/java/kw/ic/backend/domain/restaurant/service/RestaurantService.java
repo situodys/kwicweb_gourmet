@@ -1,11 +1,16 @@
 package kw.ic.backend.domain.restaurant.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import kw.ic.backend.domain.restaurant.dto.RestaurantResponseAssembler;
+import kw.ic.backend.domain.restaurant.dto.projection.RestaurantStatic;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantPageRequest;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantRequest;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantPageResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantStaticResponse;
+import kw.ic.backend.domain.restaurant.dto.response.SimpleRestaurantResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.domain.restaurant.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +28,13 @@ public class RestaurantService {
     private final RestaurantResponseAssembler responseAssembler;
 
     public RestaurantPageResponse findRestaurants(RestaurantPageRequest request) {
-        return null;
+
+        List<RestaurantStaticResponse> result = restaurantRepository.findRestaurantsWithPagination(request)
+                .stream()
+                .map(restaurantStatic -> responseAssembler.restaurantStaticResponse(restaurantStatic))
+                .collect(Collectors.toUnmodifiableList());
+
+        return responseAssembler.restaurantPageResponse(result);
     }
 
     public RestaurantResponse findById(Long id) {
