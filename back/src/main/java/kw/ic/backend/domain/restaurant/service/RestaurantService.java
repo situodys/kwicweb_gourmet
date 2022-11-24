@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import kw.ic.backend.domain.restaurant.dto.RestaurantResponseAssembler;
-import kw.ic.backend.domain.restaurant.dto.projection.RestaurantStatic;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantPageRequest;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantRequest;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantLikesResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantPageResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantReviewRatingResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantStaticResponse;
 import kw.ic.backend.domain.restaurant.dto.response.SimpleRestaurantResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
@@ -35,6 +36,24 @@ public class RestaurantService {
                 .collect(Collectors.toUnmodifiableList());
 
         return responseAssembler.restaurantPageResponse(result);
+    }
+
+    public List<RestaurantLikesResponse> findRestaurantsByMostLikesLimit5() {
+        List<RestaurantLikesResponse> result = restaurantRepository.findRestaurantsByMostLikesLimit5()
+                .stream()
+                .map(restaurantStatic -> responseAssembler.restaurantLikesResponse(restaurantStatic))
+                .collect(Collectors.toUnmodifiableList());
+
+        return result;
+    }
+
+    public List<RestaurantReviewRatingResponse> findRestaurantsByMostMostReviewRatingLimit5() {
+        List<RestaurantReviewRatingResponse> result = restaurantRepository.findRestaurantsByMostMostReviewRatingLimit5()
+                .stream()
+                .map(restaurantReviewRating -> responseAssembler.restaurantReviewRatingResponse(restaurantReviewRating))
+                .collect(Collectors.toUnmodifiableList());
+
+        return result;
     }
 
     public RestaurantResponse findById(Long id) {

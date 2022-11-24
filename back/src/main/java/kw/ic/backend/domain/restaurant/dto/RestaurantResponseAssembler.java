@@ -6,10 +6,14 @@ import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.menu.dto.MenuResponseAssembler;
 import kw.ic.backend.domain.menu.dto.response.MenuResponse;
 import kw.ic.backend.domain.notification.Notification;
+import kw.ic.backend.domain.restaurant.dto.projection.RestaurantLikes;
+import kw.ic.backend.domain.restaurant.dto.projection.RestaurantReviewRating;
 import kw.ic.backend.domain.restaurant.dto.projection.RestaurantStatic;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantLikesResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantPageResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantReviewRatingResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantStaticResponse;
 import kw.ic.backend.domain.restaurant.dto.response.SimpleRestaurantResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
@@ -51,6 +55,22 @@ public class RestaurantResponseAssembler {
                 .likeCount(restaurantStatic.getLikeCount())
                 .rating(restaurantStatic.getRating())
                 .reviewCount(restaurantStatic.getReviewCount())
+                .build();
+    }
+
+    public RestaurantLikesResponse restaurantLikesResponse(RestaurantLikes restaurantLikes) {
+        return RestaurantLikesResponse.builder()
+                .simpleRestaurantResponse(simpleRestaurantResponse(restaurantLikes.getRestaurant()))
+                .likeCount(restaurantLikes.getLikeCount())
+                .build();
+    }
+
+    public RestaurantReviewRatingResponse restaurantReviewRatingResponse(
+            RestaurantReviewRating restaurantReviewRating) {
+        return RestaurantReviewRatingResponse.builder()
+                .simpleRestaurantResponse(simpleRestaurantResponse(restaurantReviewRating.getRestaurant()))
+                .rating(restaurantReviewRating.getRating())
+                .reviewCount(restaurantReviewRating.getReviewCount())
                 .build();
     }
 

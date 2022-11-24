@@ -11,8 +11,12 @@ import com.querydsl.core.util.StringUtils;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import kw.ic.backend.domain.restaurant.dto.embbed.RestaurantType;
+import kw.ic.backend.domain.restaurant.dto.projection.RestaurantLikes;
+import kw.ic.backend.domain.restaurant.dto.projection.RestaurantReviewRating;
 import kw.ic.backend.domain.restaurant.dto.projection.RestaurantStatic;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantPageRequest;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantLikesResponse;
+import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -47,6 +51,41 @@ public class RestaurantRepositoryDSLImpl implements RestaurantRepositoryDSL {
 
         return result;
     }
+
+    public List<RestaurantLikes> findRestaurantsByMostLikesLimit5() {
+        List<RestaurantLikes> result = jpaQueryFactory.select(Projections.constructor(
+                        RestaurantLikes.class,
+                        restaurant,
+                        likes.countDistinct()
+                ))
+                .from(restaurant)
+                .leftJoin(likes).on(likes.restaurant.eq(restaurant))
+                .orderBy(likes.countDistinct().desc())
+                .limit(5)
+                .groupBy(restaurant)
+                .fetch();
+
+        return result;
+    }
+
+    public List<RestaurantReviewRating> findRestaurantsByMostMostReviewRatingLimit5() {
+        List<RestaurantReviewRating> result = jpaQueryFactory.select(Projections.constructor(
+                        RestaurantReviewRating.class,
+                        restaurant,
+                        review.rating.avg().coalesce(0.0),
+                        review.countDistinct()
+                ))
+                .from(restaurant)
+                .leftJoin(review).on(review.restaurant.eq(restaurant))
+                .having(review.countDistinct().goe(10))
+                .orderBy(review.rating.avg().coalesce(0.0).desc())
+                .limit(5)
+                .groupBy(restaurant)
+                .fetch();
+
+        return result;
+    }
+
 
     private BooleanExpression ltRestaurantId(Long lastId) {
         if (lastId == null) {
