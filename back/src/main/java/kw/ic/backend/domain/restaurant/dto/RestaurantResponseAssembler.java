@@ -6,8 +6,11 @@ import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.menu.dto.MenuResponseAssembler;
 import kw.ic.backend.domain.menu.dto.response.MenuResponse;
 import kw.ic.backend.domain.notification.Notification;
+import kw.ic.backend.domain.restaurant.dto.projection.RestaurantStatic;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantPageResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantStaticResponse;
 import kw.ic.backend.domain.restaurant.dto.response.SimpleRestaurantResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +35,7 @@ public class RestaurantResponseAssembler {
                 .notifications(notificationResponses(restaurant.getNotifications()))
                 .build();
     }
+
     public SimpleRestaurantResponse simpleRestaurantResponse(Restaurant restaurant) {
         return SimpleRestaurantResponse.builder()
                 .restaurantId(restaurant.getId())
@@ -39,6 +43,23 @@ public class RestaurantResponseAssembler {
                 .address(restaurant.getAddress())
                 .runningTime(restaurant.getRunningTime())
                 .build();
+    }
+
+    public RestaurantStaticResponse restaurantStaticResponse(RestaurantStatic restaurantStatic) {
+        return RestaurantStaticResponse.builder()
+                .simpleRestaurantResponse(simpleRestaurantResponse(restaurantStatic.getRestaurant()))
+                .likeCount(restaurantStatic.getLikeCount())
+                .rating(restaurantStatic.getRating())
+                .reviewCount(restaurantStatic.getReviewCount())
+                .build();
+    }
+
+    public RestaurantPageResponse restaurantPageResponse(List<RestaurantStaticResponse> responses) {
+        if (responses.size() == 0) {
+            return new RestaurantPageResponse(responses,0L);
+        }
+        return new RestaurantPageResponse(responses,
+                responses.get(responses.size() - 1).getSimpleRestaurantResponse().getRestaurantId());
     }
 
     private List<MenuResponse> menuResponses(List<Menu> menus) {
