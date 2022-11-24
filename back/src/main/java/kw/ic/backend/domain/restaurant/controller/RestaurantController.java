@@ -1,9 +1,11 @@
 package kw.ic.backend.domain.restaurant.controller;
 
+import java.util.List;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantPageRequest;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantRequest;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantPageResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
+import kw.ic.backend.domain.restaurant.dto.response.RestaurantStaticResponse;
 import kw.ic.backend.domain.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +27,9 @@ public class RestaurantController {
 
     private final RestaurantService restaurantService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<RestaurantPageResponse> findRestaurants(
-            @Validated RestaurantPageRequest request) {
+            RestaurantPageRequest request) {
         RestaurantPageResponse response = restaurantService.findRestaurants(request);
 
         return ResponseEntity.ok(response);
