@@ -1,5 +1,6 @@
 package kw.ic.backend.domain.restaurant.dto.embbed;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.Embeddable;
@@ -10,8 +11,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RunningTime {
 
-    LocalDateTime openAt;
-    LocalDateTime closeAt;
+    @JsonFormat(pattern = "HH:mm", timezone = "Asia/Seoul")
+    private LocalDateTime openAt;
+    @JsonFormat(pattern = "HH:mm", timezone = "Asia/Seoul")
+    private LocalDateTime closeAt;
 
     @Builder
     public RunningTime(LocalDateTime openAt, LocalDateTime closeAt) {
