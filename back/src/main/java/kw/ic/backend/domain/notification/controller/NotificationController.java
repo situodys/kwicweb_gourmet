@@ -26,7 +26,7 @@ public class NotificationController {
 
     @GetMapping("")
     public ResponseEntity<NotificationPageResponse> findNotificationsByRestaurant(
-            @RequestBody NotificationPageRequest request) {
+            NotificationPageRequest request) {
         log.info("find notifications of restaurantId: {} with pagination", request);
 
         NotificationPageResponse notificationPageResponse = notificationService.findNotifications(request);

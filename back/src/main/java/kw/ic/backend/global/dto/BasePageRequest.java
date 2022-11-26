@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 @Setter
 @AllArgsConstructor
@@ -19,12 +21,12 @@ public class BasePageRequest {
     @Min(value = 1L)
     private Integer size;
 
-    private List<String> sorts;
+    private Sort sort;
 
     private Long totalCount;
 
     public PageRequest getPageRequest() {
-        return PageRequest.of(getPage(), getSize());
+        return PageRequest.of(getPage(), getSize(),getSort());
     }
 
     public Integer getPage() {
@@ -35,8 +37,8 @@ public class BasePageRequest {
         return size == null ? 10 : size;
     }
 
-    public List<String> getSorts() {
-        return this.sorts;
+    public Sort getSort() {
+        return sort == null ? Sort.by(Direction.DESC,"id") : this.sort;
     }
 
     public Long getTotalCount() {

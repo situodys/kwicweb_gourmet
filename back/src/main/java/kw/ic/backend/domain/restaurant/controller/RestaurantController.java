@@ -32,6 +32,8 @@ public class RestaurantController {
     @GetMapping("")
     public ResponseEntity<RestaurantPageResponse> findRestaurants(
             RestaurantPageRequest request) {
+
+        log.info("find restaurants: {}", request.getRestaurantType());
         RestaurantPageResponse response = restaurantService.findRestaurants(request);
 
         return ResponseEntity.ok(response);
