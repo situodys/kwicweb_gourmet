@@ -26,7 +26,7 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping("")
-    ResponseEntity<ReviewPageResponse> findReviews(@RequestBody @Validated ReviewPageRequest request) {
+    ResponseEntity<ReviewPageResponse> findReviews(ReviewPageRequest request) {
         log.info("find reviews of restaurantId: {} with pagination", request);
 
         ReviewPageResponse response = reviewService.findReviews(request);
@@ -34,8 +34,8 @@ public class ReviewController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{review_id")
-    ResponseEntity<ReviewResponse> findReview(@PathVariable Long reviewId) {
+    @GetMapping("/{review_id}")
+    ResponseEntity<ReviewResponse> findReview(@PathVariable(name="review_id") Long reviewId) {
         log.info("find review by id: {}", reviewId);
 
         ReviewResponse response = reviewService.findReview(reviewId);
@@ -43,7 +43,7 @@ public class ReviewController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     ResponseEntity<Long> register(@RequestBody ReviewRequest request) {
         log.info("register review of restaurantId: {}", request);
 
@@ -52,7 +52,7 @@ public class ReviewController {
         return ResponseEntity.ok(reviewId);
     }
 
-    @DeleteMapping("/{review_id")
+    @DeleteMapping("/{review_id}")
     ResponseEntity<Long> delete(@PathVariable(name = "review_id") Long reviewId) {
         log.info("delete reviewId: {}",reviewId);
 
