@@ -8,16 +8,6 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import "./restaurantCard.scss";
 
 const RestaurantCard = (props) => {
-  useEffect(() => {
-    // 👇 add class to body element
-    document.body.classList.add("Login-body");
-
-    return () => {
-      // 👇️ optionally remove styles when component unmounts
-      document.body.style.backgroundColor = null;
-      document.body.classList.remove("Login-body");
-    };
-  }, []);
   return (
     <>
       <div
