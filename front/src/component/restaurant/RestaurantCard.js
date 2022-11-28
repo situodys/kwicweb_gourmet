@@ -1,13 +1,27 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useState } from "react";
 import resturantImage from "../../assets/images/Restaurant.jpg";
 import { ReactComponent as Heart } from "../../assets/images/heart-fill.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
+import FilterModal from "./FilterModal";
+
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import Badge from "react-bootstrap/Badge";
+
 import "./restaurantCard.scss";
 
 const RestaurantCard = (props) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true);
+  };
+
   return (
     <>
       <div
@@ -23,38 +37,28 @@ const RestaurantCard = (props) => {
             }}
           >
             <div>
-              <span
-                class="badge badge-dark mr-2"
-                style={{ borderRadius: "12px", fontSize: "12px" }}
-              >
-                Florida
-              </span>
-              <span
-                class="badge badge-info mr-2"
-                style={{ borderRadius: "12px", fontSize: "12px" }}
-              >
-                Western Cusine
-              </span>
-
-              <span
-                class="badge badge-danger mr-2"
-                style={{ borderRadius: "12px", fontSize: "12px" }}
-              >
+              <Badge pill bg="primary">
+                Success
+              </Badge>{" "}
+              <Badge pill bg="info">
+                Western
+              </Badge>{" "}
+              <Badge pill bg="danger">
                 Non-deliverable
+              </Badge>{" "}
+              <span
+                class="badge badge-success mr-2"
+                onClick={handleShow}
+                style={{
+                  borderRadius: "12px",
+                  fontSize: "12px",
+                  float: "right",
+                  cursor: "pointer",
+                }}
+              >
+                Add filter +
               </span>
-
-              <Link to="/main">
-                <span
-                  class="badge badge-success mr-2"
-                  style={{
-                    borderRadius: "12px",
-                    fontSize: "12px",
-                    float: "right",
-                  }}
-                >
-                  Add filter +
-                </span>
-              </Link>
+              <FilterModal show={show} handleClose={handleClose} />
             </div>
             <hr className="my-2"></hr>
             <div className="row">
