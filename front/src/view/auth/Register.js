@@ -3,7 +3,7 @@ import "../../component/auth/css/register.css";
 import CustomInput from "../../component/auth/CustomInput";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import {Buffer} from 'buffer'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
@@ -16,6 +16,7 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [authCode, setAuthCode] = useState("");
+  const [userAuthCodeInput, setUserAuthCodeInput] = useState("");
 
   const [isAuthenticatedEmail, setIsAuthenticatedEmail] = useState(false);
   const [isDuplicatedEmail, setIsDuplicatedEmail] = useState(false);
@@ -28,7 +29,7 @@ const Register = (props) => {
   const [duplicateIdMessage, setDuplicateIdMessage] = useState("");
 
   const checkLogin = () => {
-    const tk = window.sessionStorage.getItem("jwt");
+    const tk = window.localStorage.getItem("atk");
     if (tk) {
       navigate("/home");
     }
@@ -65,7 +66,7 @@ const Register = (props) => {
   const handleEmailSend = async (e) => {
     setIsEmailSent(true);
     try {
-      if (await isAlreadySignup(e)) {
+      if (await isAlreadySignup()) {
         return;
       }
       await sendEmail();
@@ -75,9 +76,8 @@ const Register = (props) => {
   };
 
   const isAlreadySignup = async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/member/${email}`
-    );
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/auth/email/health`,{email: `${email}`});
     if (response.data && response.data === true) {
       setDuplicateIdMessage("등록된 이메일입니다.");
       setIsDuplicatedEmail(true);
@@ -90,22 +90,20 @@ const Register = (props) => {
   const sendEmail = async () => {
     window.alert("이메일을 확인해주세요!");
     setIsEmailSent(true);
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/email/auth/${email}`
-    );
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/auth/email`,{email: `${email}`});
+    console.log(response.data);
+    setAuthCode(response.data);
   };
 
-  const handleAuthCode = (e) => {
+  const handleUserAuthCodeInput = (e) => {
     e.preventDefault();
-    setAuthCode(e.target.value);
+    setUserAuthCodeInput(e.target.value);
     setIsAuthenticatedEmail(false);
   };
 
-  const handleEmailAuthSubmit = async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/email/auth/${email}/code`
-    );
-    if (response.data && response.data === authCode) {
+  const handleEmailAuthSubmit =  () => {
+    if (userAuthCodeInput === authCode) {
       setIsAuthenticatedEmail(true);
       return;
     }
@@ -182,7 +180,7 @@ const Register = (props) => {
                             <CustomInput
                               type={"text"}
                               placeHolder={"auth code"}
-                              handleInput={handleAuthCode}
+                              handleInput={handleUserAuthCodeInput}
                             ></CustomInput>
                           </div>
                           <div className="col-3 mt-2">
@@ -197,7 +195,7 @@ const Register = (props) => {
                         <button
                           className="btn btn-outline-light btn-lg col-12"
                           type="submit"
-                          onSubmit={handleEmailAuthSubmit}
+                          onClick={handleEmailAuthSubmit}
                         >
                           Check
                         </button>

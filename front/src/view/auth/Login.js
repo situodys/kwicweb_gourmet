@@ -3,6 +3,7 @@ import "../../component/auth/css/login.css";
 import CustomInput from "../../component/auth/CustomInput";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {Buffer} from 'buffer'
 
 const Login = (props) => {
 
@@ -16,10 +17,10 @@ const Login = (props) => {
 
 
     const checkLogin = () => {
-        const tk = window.sessionStorage.getItem("jwt");
+        const tk = window.sessionStorage.getItem("atk");
         if (tk) {
             window.alert("로그인 되어 있는 상태입니다.")
-            navigate("/home");
+            navigate("/main");
         }
         setIsLogin(true);
     }
@@ -52,19 +53,20 @@ const Login = (props) => {
             const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, toData());
             if (response.status == 200) {
                 window.alert("로그인 성공");
-                window.localStorage.setItem("accessToken", response.data.accessToken);
-                window.localStorage.setItem("refreshToken", response.data.refreshToken);
-                navigate("/home");
+                window.localStorage.setItem("atk", response.data.atk);
+                window.localStorage.setItem("rtk", response.data.rtk);
+                navigate("/main");
             }
         } catch (err) {
             if (err) {
-                if (err.response.data['message'].includes("아이디")) {
+                if (err.response.data['message'].includes("이메일")) {
                     setIdMessage(err.response.data['message']);
                     setPwMessage("");
                 }
                 if (err.response.data['message'].includes("비밀번호")) {
                     setPwMessage(err.response.data['message']);
                 }
+                console.log(err);
             }
         }
     }
