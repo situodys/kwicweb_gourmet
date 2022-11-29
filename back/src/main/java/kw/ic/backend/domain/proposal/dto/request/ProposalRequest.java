@@ -14,6 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProposalRequest {
 
+    private Long proposalId;
+
+    private String title;
+
     private Category category;
 
     @NotNull
@@ -25,10 +29,15 @@ public class ProposalRequest {
     @NotNull
     private Long memberId;
 
+    @NotNull
+    private Long menuId;
+
     public Proposal toProposal(Restaurant restaurant, Member member) {
         return Proposal.builder()
+                .title(this.title)
                 .category(this.category)
                 .content(this.content)
+                .status("wait")
                 .restaurant(restaurant)
                 .member(member)
                 .build();
