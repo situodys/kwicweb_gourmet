@@ -1,5 +1,6 @@
 package kw.ic.backend.global;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,6 +18,7 @@ public abstract class BaseEntity {
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 
     @LastModifiedDate

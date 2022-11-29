@@ -1,5 +1,6 @@
 package kw.ic.backend;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -24,12 +25,15 @@ import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.domain.restaurant.repository.RestaurantRepository;
 import kw.ic.backend.domain.review.entity.Review;
 import kw.ic.backend.domain.review.repository.ReviewRepository;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -141,6 +145,8 @@ public class Dummies {
     @Transactional
     @Commit
     public void insertMembers() throws Exception {
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         IntStream.rangeClosed(1, 50)
                 .forEach(idx -> {
                     Member member = Member.builder()
@@ -152,8 +158,8 @@ public class Dummies {
                     memberRepository.save(member);
                 });
         Member member = Member.builder()
-                .email("email" + 51)
-                .password("password" + 51)
+                .email("admin")
+                .password(passwordEncoder.encode(Base64.encodeBase64String("admin".getBytes(StandardCharsets.UTF_8))))
                 .authority(Authority.ROLE_ADMIN)
                 .build();
         memberRepository.save(member);
@@ -200,29 +206,29 @@ public class Dummies {
         }
     }
 
+//    @Test
+//    @Order(6)
+//    @Transactional
+//    @Commit
+//    public void insertNotifications() throws Exception {
+//
+//        int idx = 1;
+//
+//        for (long restaurantId = 1; restaurantId <= 50; restaurantId++) {
+//            for (long i = 1; i <= 25; i++) {
+//                Notification notification = Notification.builder()
+//                        .updatedContent("updatedContent" + idx)
+//                        .previousContent("previousContent" + idx)
+//                        .restaurant(restaurantRepository.getReferenceById((long) restaurantId))
+//                        .build();
+//                notificationRepository.save(notification);
+//                idx++;
+//            }
+//        }
+//    }
+
     @Test
     @Order(6)
-    @Transactional
-    @Commit
-    public void insertNotifications() throws Exception {
-
-        int idx = 1;
-
-        for (long restaurantId = 1; restaurantId <= 50; restaurantId++) {
-            for (long i = 1; i <= 25; i++) {
-                Notification notification = Notification.builder()
-                        .updatedContent("updatedContent" + idx)
-                        .previousContent("previousContent" + idx)
-                        .restaurant(restaurantRepository.getReferenceById((long) restaurantId))
-                        .build();
-                notificationRepository.save(notification);
-                idx++;
-            }
-        }
-    }
-
-    @Test
-    @Order(7)
     @Transactional
     @Commit
     public void insertProposal() throws Exception {
@@ -233,8 +239,10 @@ public class Dummies {
             for (long restaurantId = 1; restaurantId <= memberId; restaurantId++) {
 
                 Proposal proposal = Proposal.builder()
+                        .title("title"+idx)
                         .content("content" + idx)
                         .category(pickCategory())
+                        .status("wait")
                         .restaurant(restaurantRepository.getReferenceById(restaurantId))
                         .member(memberRepository.getReferenceById(memberId))
                         .build();
@@ -246,7 +254,7 @@ public class Dummies {
     }
 
     @Test
-    @Order(8)
+    @Order(7)
     @Transactional
     @Commit
     public void insertReviewedMenus() throws Exception {
