@@ -1,6 +1,7 @@
 package kw.ic.backend.domain.notification;
 
 import kw.ic.backend.domain.menu.Menu;
+import kw.ic.backend.domain.proposal.dto.embbed.Category;
 import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.global.BaseEntity;
@@ -24,6 +25,9 @@ public class Notification extends BaseEntity {
     @Column(name = "notification_id")
     private Long id;
 
+    @Column
+    private Category category;
+
     @Column(name = "previous_content")
     private String previousContent;
 
@@ -35,9 +39,10 @@ public class Notification extends BaseEntity {
     private Restaurant restaurant;
 
     @Builder
-    public Notification(String previousContent, String updatedContent, Restaurant restaurant) {
+    public Notification(Category category, String previousContent, String updatedContent, Restaurant restaurant) {
         Assert.hasText(updatedContent,"updated content must not be empty");
 
+        this.category = category;
         this.previousContent = previousContent;
         this.updatedContent = updatedContent;
         this.restaurant = restaurant;
@@ -46,6 +51,7 @@ public class Notification extends BaseEntity {
     public NotificationResponse toResponse() {
         return NotificationResponse.builder()
                 .id(this.id)
+                .category(this.category)
                 .previousContent(this.previousContent)
                 .updatedContent(this.updatedContent)
                 .restaurant_id(this.restaurant.getId())
