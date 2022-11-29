@@ -6,58 +6,52 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import FilterModal from "./FilterModal";
-
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
 
-import "./restaurantCard.scss";
+import "./styles.scss";
 
 const RestaurantCard = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true);
-  };
+  const handleShow = () => setShow(true);
 
   return (
     <>
       <div
-        className="card shadow"
-        style={{ width: "75rem", borderRadius: "14px" }}
+        className="card"
+        style={{
+          minWidth: "60rem",
+          width: "70rem",
+          border: "0px",
+          borderRadius: "20px",
+          boxShadow: "0px 10px 10px 0px rgba(50,50,50,0.4)",
+        }}
       >
-        <div class="card-body p-3 mb-3 p-5">
+        <div class="card-body mb-4 py-5">
           <div
             style={{
               paddingRight: "7rem",
               paddingLeft: "7rem",
-              marginBottom: "1rem",
             }}
           >
-            <div>
-              <Badge pill bg="primary">
-                Success
-              </Badge>{" "}
-              <Badge pill bg="info">
+            <div className="d-flex">
+              <Badge pill bg="info" className="mr-2">
                 Western
               </Badge>{" "}
-              <Badge pill bg="danger">
+              <Badge pill bg="danger" className="mr-2">
                 Non-deliverable
               </Badge>{" "}
-              <span
-                class="badge badge-success mr-2"
+              <Badge
+                pill
                 onClick={handleShow}
+                className="filter-badge ml-auto"
                 style={{
-                  borderRadius: "12px",
-                  fontSize: "12px",
-                  float: "right",
                   cursor: "pointer",
                 }}
               >
                 Add filter +
-              </span>
+              </Badge>{" "}
               <FilterModal show={show} handleClose={handleClose} />
             </div>
             <hr className="my-2"></hr>
@@ -66,15 +60,15 @@ const RestaurantCard = (props) => {
                 <Link to="/Main" className="navbar-brand ">
                   <img
                     src={resturantImage}
-                    className="rounded"
-                    width="200"
+                    style={{ borderRadius: "20px" }}
+                    width="100%"
                     alt="resturant"
                   ></img>
                 </Link>
               </div>
               <div className="col-6">
                 <div class="d-flex flex-column h-100">
-                  <div class="p-2">
+                  <div>
                     <h4 class="card-title mb-0">
                       <strong>Very-Very Delicious Resturant</strong>
                     </h4>
@@ -109,7 +103,7 @@ const RestaurantCard = (props) => {
                     <p class="card-text mt-3 mb-0 fs-4">OPEN</p>
                     <p class="card-text">OPENS AT 10:30 / CLOSES AT 17:30</p>
                   </div>
-                  <div class="mt-auto p-2">
+                  <div class="mt-auto">
                     <p class="card-text" style={{ width: "160px" }}>
                       (727) 772-5780 2606 Brinley Dr New Port Richey,
                       Florida(FL), 34655
@@ -122,13 +116,12 @@ const RestaurantCard = (props) => {
                 <div class="d-flex align-items-end flex-column h-100">
                   <div class="p-2">
                     <Link to="/main">
-                      <button
-                        type="button"
+                      <Button
                         className="btn btn-heart btn-lg px-5"
                         style={{ borderRadius: "27px" }}
                       >
                         <Heart /> 1235
-                      </button>
+                      </Button>{" "}
                     </Link>
                   </div>
 

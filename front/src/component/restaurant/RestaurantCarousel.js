@@ -10,7 +10,7 @@ const RestaurantCarousel = (props) => {
           data-ride="carousel"
           data-interval="false"
         >
-          <div className="carousel-inner">
+          <div className="carousel-inner p-4">
             <div className="carousel-item active">
               <div class="d-flex justify-content-center">
                 <RestaurantCard />

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useEffect } from "react";
 import RestaurantCarousel from "../component/restaurant/RestaurantCarousel";
-import RestaurantCard from "../component/restaurant/RestaurantCard";
+import Reviews from "../component/Reviews";
 import "../component/auth/css/login.css";
 
 const Restaurant = (props) => {
@@ -18,8 +18,9 @@ const Restaurant = (props) => {
   }, []);
   return (
     <>
-      <div class="container-fluid d-flex py-4 justify-content-center">
+      <div class="w-100">
         <RestaurantCarousel />
+        <Reviews />
       </div>
     </>
   );

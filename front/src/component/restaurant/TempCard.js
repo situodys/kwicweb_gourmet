@@ -5,7 +5,7 @@ import { ReactComponent as Heart } from "../../assets/images/heart-fill.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-import "./restaurantCard.scss";
+import "./styles.scss";
 
 export const TempCard = ({ owner, imageUrl }) => {
   return (

@@ -3,6 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
+import "./styles.scss";
+
 const FilterModal = ({ show, handleClose }) => {
   const [cuisines, setCuisines] = useState([
     "Chinese",
@@ -12,6 +14,9 @@ const FilterModal = ({ show, handleClose }) => {
     "Street",
     "Fusion",
   ]);
+
+  const [checked, setChecked] = useState(false);
+  const [radioValue, setRadioValue] = useState("1");
 
   return (
     <>
@@ -28,6 +33,7 @@ const FilterModal = ({ show, handleClose }) => {
         <Modal.Body>
           <p className="mb-1">Cuisines</p>
           <hr className="mt-0" />
+
           <Form>
             {cuisines.map((cuisine) => (
               <>
