@@ -46,4 +46,12 @@ public class Menu extends BaseEntity {
         this.description = description;
         this.restaurant = restaurant;
     }
+
+    public void changeMenuName(String menuName){
+        this.menuName = menuName;
+    }
+
+    public void changePrice(String price) {
+        this.price = Integer.parseInt(price);
+    }
 }
