@@ -24,19 +24,26 @@ public class ProposalResponse {
 
     private Long proposalId;
 
+    private String title;
+
     private Category category;
 
     private String content;
+
+    private String status;
 
     private Long restaurantId;
 
     private Long memberId;
 
     @Builder
-    public ProposalResponse(Long proposalId, Category category, String content, Long restaurantId, Long memberId) {
+    public ProposalResponse(Long proposalId, String title, Category category, String content, String status,
+                            Long restaurantId, Long memberId) {
         this.proposalId = proposalId;
+        this.title = title;
         this.category = category;
         this.content = content;
+        this.status = status;
         this.restaurantId = restaurantId;
         this.memberId = memberId;
     }
