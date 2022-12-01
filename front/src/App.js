@@ -7,7 +7,7 @@ import Login from "./view/auth/Login";
 import Register from "./view/auth/Register";
 
 import Main from "./view/Main";
-import Restaurants from "./view/Restaurants";
+import Restaurant from "./view/Restaurant";
 import Example from "./view/Example";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
           <Route path={"/main"} element={<Main />}></Route>
           <Route path={"/register"} element={<Register />}></Route>
           <Route path={"/example/*"} element={<Example />}></Route>
-          <Route path={"/restaurants"} element={<Restaurants />}></Route>
+          <Route path={"/restaurants"} element={<Restaurant />}></Route>
           <Route path={"*"} element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
