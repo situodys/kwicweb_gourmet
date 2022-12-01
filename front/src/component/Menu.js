@@ -1,13 +1,8 @@
-import { Review } from "./Review";
+import { MenuList } from "./MenuList";
 import { useState } from "react";
 
-const Reviews = (props) => {
-  const [reviews, setReviews] = useState([
-    { 1: 1 },
-    { 1: 1 },
-    { 1: 1 },
-    { 1: 1 },
-  ]);
+const Menu = (props) => {
+  const [menuList, setMenuList] = useState([]);
 
   return (
     <>
@@ -17,13 +12,11 @@ const Reviews = (props) => {
           <p>Total: 12</p>
           <hr></hr>
           <div class="row">
-            {reviews.map((review) => (
-              <Review review={review}></Review>
-            ))}
+            <MenuList menuList={menuList}></MenuList>
           </div>
         </div>
       </div>
     </>
   );
 };
-export default Reviews;
+export default Menu;
