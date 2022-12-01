@@ -17,7 +17,7 @@ export const Review = ({ review }) => {
           }}
           className="mb-4"
         >
-          <Card.Body style={{ minHeight: "30rem" }}>
+          <Card.Body style={{ minHeight: "240px" }}>
             <div>
               <h4 className="m-0">
                 <strong>Card Title</strong>
