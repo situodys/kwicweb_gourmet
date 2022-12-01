@@ -6,53 +6,65 @@ import Col from "react-bootstrap/Col";
 import Stack from "react-bootstrap/Stack";
 
 export const MenuList = ({ menuList }) => {
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await menuList;
+      setList(response);
+    })();
+  }, [menuList]);
+
   return (
     <>
-      {menuList && (
-        <Card
-          style={{
-            border: "0px",
-            boxShadow: "0px 2px 2px 0px rgba(50,50,50,0.4)",
-          }}
-          className="mb-4"
-        >
-          <Card.Body style={{ minHeight: "360px", overflow: "auto" }}>
-            <Container>
-              <Row>
-                <Col className="col-3">
-                  <div>
-                    <h4 className="m-0">
-                      <strong>F</strong>
-                    </h4>
-                  </div>
-                  <Card.Text
-                    style={{
-                      color: "#7F7F7F",
-                      fontSize: "10pt",
-                      lineHeight: "1.3rem",
-                    }}
-                  >
-                    10000
-                  </Card.Text>
-                </Col>
-                <Col className="col-6">
-                  <Card.Text
-                    style={{
-                      color: "#7F7F7F",
-                      fontSize: "11pt",
-                      lineHeight: "1.3rem",
-                    }}
-                  >
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </Card.Text>
-                </Col>
-              </Row>
-            </Container>
-          </Card.Body>
-        </Card>
-      )}
+      <Card
+        style={{
+          border: "0px",
+          boxShadow: "0px 2px 2px 0px rgba(50,50,50,0.4)",
+        }}
+        className="mb-4"
+      >
+        <Card.Body style={{ minHeight: "360px", overflow: "auto" }}>
+          <Container>
+            {menuList.length !== 0 && (
+              <>
+                {list.map((element) => (
+                  <Row>
+                    {}
+                    <Col className="col-3">
+                      <div>
+                        <h4 className="m-0">
+                          <strong>{element.menuName}</strong>
+                        </h4>
+                      </div>
+                      <Card.Text
+                        style={{
+                          color: "#7F7F7F",
+                          fontSize: "10pt",
+                          lineHeight: "1.3rem",
+                        }}
+                      >
+                        {element.price}
+                      </Card.Text>
+                    </Col>
+                    <Col className="col-6">
+                      <Card.Text
+                        style={{
+                          color: "#7F7F7F",
+                          fontSize: "11pt",
+                          lineHeight: "1.3rem",
+                        }}
+                      >
+                        {element.description}
+                      </Card.Text>
+                    </Col>
+                  </Row>
+                ))}
+              </>
+            )}
+          </Container>
+        </Card.Body>
+      </Card>
     </>
   );
 };
