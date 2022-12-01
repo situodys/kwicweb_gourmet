@@ -35,7 +35,6 @@ export const RestaurantList = () => {
         className="p-3"
         style={{
           width: "100%",
-          minWidth: "830px",
           height: "93%",
           overflow: "auto",
           backgroundColor: "rgba(255, 0, 0, 0.1)",

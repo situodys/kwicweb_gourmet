@@ -4,6 +4,7 @@ import { Map } from "../component/main/Map";
 import { useEffect, useState } from "react";
 import customAxios from "../api/customAxios";
 import Stack from "react-bootstrap/Stack";
+import Container from "react-bootstrap/esm/Container";
 
 export default function Main(props) {
   const [topLikes, setTopLikes] = useState([]);
@@ -40,38 +41,41 @@ export default function Main(props) {
         className="d-flex Login-body justify-content-center"
         style={{ height: "93vh", overflow: "hidden" }}
       >
-        <div
-          className="row h-100"
-          style={{ maxWidth: "90rem", padding: "4vh" }}
-        >
-          <div className="col-4 h-100">
-            <div className="container-fluid h-100">
-              <div className="row">
-                <Map />
-              </div>
-              <div className="row">
-                <RestaurantRecommendation
-                  topLikes={topLikes}
-                  topRatings={topRatings}
-                />
+        <Container fluid style={{ maxWidth: "90rem", padding: "4vh" }}>
+          <div className="row h-100">
+            <div className="col-4">
+              <div className="container-fluid h-100">
+                <div className="row mb-4">
+                  <Map />
+                </div>
+                <div className="row">
+                  <RestaurantRecommendation
+                    topLikes={topLikes}
+                    topRatings={topRatings}
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="col-8 h-100">
-            <div className="input-group mb-3 cshadow-lg">
-              <input type="search" class="form-control" placeholder=""></input>
-              <button
-                class="btn btn btn-primary"
-                type="button"
-                id="button-addon2"
-              >
-                Search
-              </button>
+            <div className="col-8 h-100">
+              <div className="input-group mb-3 cshadow-lg">
+                <input
+                  type="search"
+                  class="form-control"
+                  placeholder=""
+                ></input>
+                <button
+                  class="btn btn btn-primary"
+                  type="button"
+                  id="button-addon2"
+                >
+                  Search
+                </button>
+              </div>
+              <RestaurantList />
             </div>
-            <RestaurantList />
           </div>
-        </div>
+        </Container>
       </div>
     </>
   );
