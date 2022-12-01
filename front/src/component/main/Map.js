@@ -22,11 +22,11 @@ export const Map = () => {
   }, []);
 
   return (
-    <div>
+    <div className="w-100">
       <div
         id="map"
-        className="rounded shadow-lg"
-        style={{ width: "100%", aspectRatio: "1/1" }}
+        className="shadow-lg"
+        style={{ maxheight: "100%", aspectRatio: "1/1", borderRadius: "12px" }}
       ></div>
     </div>
   );

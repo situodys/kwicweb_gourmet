@@ -5,7 +5,7 @@ import userImage from "../../assets/images/user.png";
 const NavBar = (props) => {
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark" style={{ height: "4rem" }}>
+      <nav className="navbar navbar-dark bg-dark" style={{ height: "7vh" }}>
         <span class="navbar-brand mb-1 h1">
           <Link to="/main">GOURMET</Link>
         </span>

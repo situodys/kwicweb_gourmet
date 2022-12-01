@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import useLazyLoad from "./useLazyLoad";
-import { TempCard } from "./TempCard";
+import { RestaurantSmallCard } from "./RestaurantSmallCard";
 import { LoadingPosts } from "./LoadingPosts";
-import posts from "./data.json";
+import posts from "../restaurant/data.json";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -31,31 +31,34 @@ export const RestaurantList = () => {
 
   return (
     <>
-      {/* <div
-        className="d-grid gap-3 p-5"
+      <Container
+        className="p-3"
         style={{
           width: "100%",
-          height: "1000px",
-          overflow: "scroll",
+          height: "93%",
+          overflow: "auto",
           backgroundColor: "rgba(255, 0, 0, 0.1)",
+          borderRadius: "25px",
         }}
-      > */}
-      {/* <div className="grid grid-cols-3 gap-4 content-start"> */}
-      <Container>
+      >
         <Row>
           {data.map((image) => {
             return (
-              <TempCard owner={image["owner"]} imageUrl={image["imageUrl"]} />
+              <RestaurantSmallCard
+                owner={image["owner"]}
+                imageUrl={image["imageUrl"]}
+              />
             );
           })}
         </Row>
+
+        <div
+          ref={triggerRef}
+          className={`trigger ${loading ? "visible" : null})`}
+        >
+          <LoadingPosts />
+        </div>
       </Container>
-      <div
-        ref={triggerRef}
-        className={`trigger ${loading ? "visible" : null})`}
-      >
-        <LoadingPosts />
-      </div>
     </>
   );
 };
