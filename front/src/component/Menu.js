@@ -1,18 +1,38 @@
 import { MenuList } from "./MenuList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import customAxios from "../api/customAxios";
 
 const Menu = (props) => {
   const [menuList, setMenuList] = useState([]);
+
+  const handleMenuList = async () => {
+    try {
+      const response = await customAxios.get("/menus?restaurantId=2");
+      if (response.status === 200) {
+        return response.data;
+      }
+    } catch (err) {
+      if (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  useEffect(() => {
+    //setMenuList(handleMenuList());
+  }, [menuList]);
 
   return (
     <>
       <div class="album py-5" style={{ backgroundColor: "#fff7ec" }}>
         <div class="container">
-          <h1 className="">Reviews</h1>
-          <p>Total: 12</p>
+          <h1 className="">Menu</h1>
+          <p>Last modified: 20/11/12</p>
+
           <hr></hr>
           <div class="row">
-            <MenuList menuList={menuList}></MenuList>
+            <MenuList></MenuList>
           </div>
         </div>
       </div>

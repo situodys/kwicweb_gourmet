@@ -3,7 +3,6 @@ import { Map } from "../component/main/Map";
 import { useEffect } from "react";
 
 export default function Main(props) {
-
   return (
     <>
       <div className="container-fluid Login-body">

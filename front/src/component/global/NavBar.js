@@ -37,26 +37,6 @@ const NavBar = (props) => {
             </Link>
           </li>
         </ul>
-
-        {/* <div className="col-4">
-            <div className="row">
-              <div className="col">
-                <Link to="/Main" className="">
-                  Rei
-                </Link>
-              </div>
-              <div className="col">
-                <Link to="/Main">Rei</Link>
-              </div>
-              <div className="col">
-                <Link to="/Main">Rei</Link>
-              </div>
-              <div className="col">
-                <Link to="/Main">Rei</Link>
-              </div>
-              <img src={userImage} alt="user" width="36" height="36"></img>
-            </div>
-          </div>*/}
       </nav>
     </>
   );
