@@ -17,7 +17,7 @@ const NavBar = (props) => {
             </Link>
           </li>
           <li className="nav-item nav-link active mx-2">
-            <Link to="/restaurants" className="">
+            <Link to="/restaurant" className="">
               RESTURANTS
             </Link>
           </li>

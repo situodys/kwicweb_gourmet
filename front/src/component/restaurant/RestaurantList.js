@@ -24,6 +24,7 @@ export const RestaurantList = () => {
     });
   };
   const { data, loading } = useLazyLoad({ triggerRef, onGrabData });
+
   return (
     <>
       <div

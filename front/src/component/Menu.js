@@ -20,7 +20,7 @@ const Menu = (props) => {
   };
 
   useEffect(() => {
-    //setMenuList(handleMenuList());
+    setMenuList(handleMenuList());
   }, [menuList]);
 
   return (
