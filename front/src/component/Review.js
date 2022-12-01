@@ -17,7 +17,7 @@ export const Review = ({ review }) => {
           }}
           className="mb-4"
         >
-          <Card.Body>
+          <Card.Body style={{ minHeight: "30rem" }}>
             <div>
               <h4 className="m-0">
                 <strong>Card Title</strong>
@@ -60,12 +60,13 @@ export const Review = ({ review }) => {
               lead-in to additional content. This content is a little bit
               longer.
             </Card.Text>
-            <hr className="mb-1"></hr>
+          </Card.Body>
+          <Card.Footer>
             <small class="text-muted">abcde@gmail.com</small>
             <small class="text-muted" style={{ float: "right" }}>
               9 mins
             </small>
-          </Card.Body>
+          </Card.Footer>
         </Card>
       </Col>
     </>
