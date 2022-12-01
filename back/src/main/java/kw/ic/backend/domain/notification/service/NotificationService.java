@@ -27,8 +27,10 @@ public class NotificationService {
         return new NotificationPageResponse(result, result.getContent().stream()
                 .map(notification -> NotificationResponse.builder()
                         .id(notification.getId())
+                        .category(notification.getCategory())
                         .updatedContent(notification.getUpdatedContent())
                         .previousContent(notification.getPreviousContent())
+                        .createdAt(notification.getCreatedAt())
                         .build())
                 .collect(Collectors.toUnmodifiableList()));
     }

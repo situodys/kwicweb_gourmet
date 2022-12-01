@@ -1,5 +1,7 @@
 package kw.ic.backend.domain.restaurant.entity;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -71,5 +73,19 @@ public class Restaurant extends BaseEntity {
 
     public Restaurant(Long id) {
         this.id = id;
+    }
+
+    public void changeOpenAt(String[] hourAndMinute) {
+        LocalDateTime updatedOpenAt = LocalDateTime.now()
+                .withHour(Integer.parseInt(hourAndMinute[0]))
+                .withMinute(Integer.parseInt(hourAndMinute[1]));
+        this.runningTime.changeOpenAt(updatedOpenAt);
+    }
+
+    public void changeCloseAt(String[] hourAndMinute) {
+        LocalDateTime updatedCloseAt = LocalDateTime.now()
+                .withHour(Integer.parseInt(hourAndMinute[0]))
+                .withMinute(Integer.parseInt(hourAndMinute[1]));
+        this.runningTime.changeCloseAt(updatedCloseAt);
     }
 }
