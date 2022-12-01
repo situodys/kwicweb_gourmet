@@ -27,7 +27,7 @@ export const RestaurantList = () => {
 
   return (
     <>
-      <div
+      {/* <div
         className="d-grid gap-3 p-5"
         style={{
           width: "100%",
@@ -35,7 +35,8 @@ export const RestaurantList = () => {
           overflow: "scroll",
           backgroundColor: "rgba(255, 0, 0, 0.1)",
         }}
-      >
+      > */}
+      <div className="grid grid-cols-3 gap-4 content-start">
         {data.map((image) => {
           return (
             <TempCard owner={image["owner"]} imageUrl={image["imageUrl"]} />

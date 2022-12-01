@@ -10,6 +10,7 @@ const Menu = (props) => {
     try {
       const response = await customAxios.get("/menus?restaurantId=2");
       if (response.status === 200) {
+        console.log(response.data);
         return response.data;
       }
     } catch (err) {
@@ -21,7 +22,7 @@ const Menu = (props) => {
 
   useEffect(() => {
     setMenuList(handleMenuList());
-  }, [menuList]);
+  }, []);
 
   return (
     <>
