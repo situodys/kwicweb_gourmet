@@ -4,6 +4,10 @@ import { TempCard } from "./TempCard";
 import { LoadingPosts } from "./LoadingPosts";
 import posts from "./data.json";
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 const NUM_PER_PAGE = 6;
 const TOTAL_PAGES = 3;
 
@@ -36,19 +40,21 @@ export const RestaurantList = () => {
           backgroundColor: "rgba(255, 0, 0, 0.1)",
         }}
       > */}
-      <div className="grid grid-cols-3 gap-4 content-start">
-        {data.map((image) => {
-          return (
-            <TempCard owner={image["owner"]} imageUrl={image["imageUrl"]} />
-          );
-        })}
-
-        <div
-          ref={triggerRef}
-          className={`trigger ${loading ? "visible" : null})`}
-        >
-          <LoadingPosts />
-        </div>
+      {/* <div className="grid grid-cols-3 gap-4 content-start"> */}
+      <Container>
+        <Row>
+          {data.map((image) => {
+            return (
+              <TempCard owner={image["owner"]} imageUrl={image["imageUrl"]} />
+            );
+          })}
+        </Row>
+      </Container>
+      <div
+        ref={triggerRef}
+        className={`trigger ${loading ? "visible" : null})`}
+      >
+        <LoadingPosts />
       </div>
     </>
   );

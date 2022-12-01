@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 
 import customAxios from "../api/customAxios";
 
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+
 const Menu = (props) => {
   const [menuList, setMenuList] = useState([]);
 
@@ -10,7 +13,6 @@ const Menu = (props) => {
     try {
       const response = await customAxios.get("/menus?restaurantId=2");
       if (response.status === 200) {
-        console.log(response.data);
         return response.data;
       }
     } catch (err) {
@@ -30,10 +32,14 @@ const Menu = (props) => {
         <div class="container">
           <h1 className="">Menu</h1>
           <p>Last modified: 20/11/12</p>
-
           <hr></hr>
           <div class="row">
-            <MenuList></MenuList>
+            <Col className="col-6">
+              <MenuList menuList={menuList}></MenuList>
+            </Col>
+            <Col className="col-6">
+              <MenuList menuList={menuList}></MenuList>
+            </Col>
           </div>
         </div>
       </div>

@@ -7,8 +7,8 @@ export default function Main(props) {
     <>
       <div className="container-fluid Login-body">
         <div className="row p-5">
-          <div className="col-6">
-            <div class="input-group mb-3 shadow-lg">
+          <div className="col-4">
+            <div className="input-group mb-3 shadow-lg">
               <input type="search" class="form-control" placeholder=""></input>
               <button
                 class="btn btn btn-primary"
@@ -22,7 +22,7 @@ export default function Main(props) {
             <Map />
           </div>
 
-          <div className="col-6">
+          <div className="col-8">
             <RestaurantList />
           </div>
         </div>
