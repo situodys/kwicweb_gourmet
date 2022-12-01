@@ -1,5 +1,7 @@
 package kw.ic.backend.domain.restaurant.dto.response;
 
+import java.time.LocalDateTime;
+import kw.ic.backend.domain.proposal.dto.embbed.Category;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,19 +14,25 @@ public class NotificationResponse {
 
     private Long id;
 
+    private Category category;
+
     private String previousContent;
 
     private String updatedContent;
 
+    private LocalDateTime createdAt;
+
     private Long restaurant_id;
 
     @Builder
-    public NotificationResponse(Long id,String previousContent, String updatedContent, Long restaurant_id) {
+    public NotificationResponse(Long id, Category category ,String previousContent, String updatedContent, LocalDateTime createdAt, Long restaurant_id) {
         Assert.hasText(updatedContent,"updated content must not be empty");
 
         this.id = id;
+        this.category = category;
         this.previousContent = previousContent;
         this.updatedContent = updatedContent;
+        this.createdAt = createdAt;
         this.restaurant_id = restaurant_id;
     }
 }
