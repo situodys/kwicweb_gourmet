@@ -3,7 +3,7 @@ import "../../component/auth/css/register.css";
 import CustomInput from "../../component/auth/CustomInput";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {Buffer} from 'buffer'
+import { Buffer } from "buffer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
@@ -31,7 +31,7 @@ const Register = (props) => {
   const checkLogin = () => {
     const tk = window.localStorage.getItem("atk");
     if (tk) {
-      navigate("/home");
+      navigate("/main");
     }
     setIsLogin(true);
   };
@@ -77,7 +77,9 @@ const Register = (props) => {
 
   const isAlreadySignup = async () => {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/auth/email/health`,{email: `${email}`});
+      `${process.env.REACT_APP_API_BASE_URL}/auth/email/health`,
+      { email: `${email}` }
+    );
     if (response.data && response.data === true) {
       setDuplicateIdMessage("등록된 이메일입니다.");
       setIsDuplicatedEmail(true);
@@ -91,7 +93,9 @@ const Register = (props) => {
     window.alert("이메일을 확인해주세요!");
     setIsEmailSent(true);
     const response = await axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/auth/email`,{email: `${email}`});
+      `${process.env.REACT_APP_API_BASE_URL}/auth/email`,
+      { email: `${email}` }
+    );
     console.log(response.data);
     setAuthCode(response.data);
   };
@@ -102,7 +106,7 @@ const Register = (props) => {
     setIsAuthenticatedEmail(false);
   };
 
-  const handleEmailAuthSubmit =  () => {
+  const handleEmailAuthSubmit = () => {
     if (userAuthCodeInput === authCode) {
       setIsAuthenticatedEmail(true);
       return;
@@ -183,13 +187,23 @@ const Register = (props) => {
                               handleInput={handleUserAuthCodeInput}
                             ></CustomInput>
                           </div>
-                          <div className="col-3 mt-2">
-                            <FontAwesomeIcon
-                              icon={faCircleCheck}
-                              size="2xl"
-                              color="#7CFC00"
-                            />
-                          </div>
+                          {isAuthenticatedEmail === true ? (
+                            <div className="col-3 mt-2">
+                              <FontAwesomeIcon
+                                icon={faCircleCheck}
+                                size="2xl"
+                                color="#7CFC00"
+                              />
+                            </div>
+                          ) : (
+                            <div className="col-3 mt-2">
+                              <FontAwesomeIcon
+                                icon={faCircleXmark}
+                                size="2xl"
+                                color="red"
+                              />
+                            </div>
+                          )}
                         </div>
 
                         <button
