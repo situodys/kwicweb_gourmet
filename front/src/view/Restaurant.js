@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 
 import { useEffect } from "react";
 import RestaurantCarousel from "../component/restaurant/RestaurantCarousel";
+
 import Reviews from "../component/Reviews";
 import Menu from "../component/Menu";
+import Proposal from "../component/Proposal";
 
 import "../component/auth/css/login.css";
 
@@ -23,7 +25,8 @@ const Restaurant = (props) => {
       <div class="w-100">
         <RestaurantCarousel />
         {/* <Reviews /> */}
-        <Menu />
+        <Proposal />
+        {/* <Menu /> */}
       </div>
     </>
   );
