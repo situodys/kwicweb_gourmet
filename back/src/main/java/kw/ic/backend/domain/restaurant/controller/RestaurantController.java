@@ -1,5 +1,6 @@
 package kw.ic.backend.domain.restaurant.controller;
 
+import java.security.Principal;
 import java.util.List;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantPageRequest;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantRequest;
@@ -7,8 +8,6 @@ import kw.ic.backend.domain.restaurant.dto.response.RestaurantLikesResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantPageResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantReviewRatingResponse;
-import kw.ic.backend.domain.restaurant.dto.response.RestaurantStaticResponse;
-import kw.ic.backend.domain.restaurant.dto.response.SimpleRestaurantResponse;
 import kw.ic.backend.domain.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,10 +53,12 @@ public class RestaurantController {
     }
 
     @GetMapping("/{restaurant_id}")
-    public ResponseEntity<RestaurantResponse> findRestaurant(@PathVariable(name = "restaurant_id") Long id) {
+    public ResponseEntity<RestaurantResponse> findRestaurant(@PathVariable(name = "restaurant_id") Long restaurantId,
+                                                             Principal principal) {
         log.info("find restaurant");
+        Long memberId= Long.parseLong(principal.getName());
 
-        RestaurantResponse response = restaurantService.findById(id);
+        RestaurantResponse response = restaurantService.findRestaurantByIdAndCheckIsLike(restaurantId,memberId);
 
         return ResponseEntity.ok(response);
     }
