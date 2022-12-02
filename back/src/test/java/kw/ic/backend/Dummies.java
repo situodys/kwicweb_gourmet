@@ -237,16 +237,29 @@ public class Dummies {
 
         for (long memberId = 1; memberId <= 50; memberId++) {
             for (long restaurantId = 1; restaurantId <= memberId; restaurantId++) {
-
-                Proposal proposal = Proposal.builder()
-                        .title("title"+idx)
-                        .content("content" + idx)
-                        .category(pickCategory())
-                        .status("wait")
-                        .restaurant(restaurantRepository.getReferenceById(restaurantId))
-                        .member(memberRepository.getReferenceById(memberId))
-                        .build();
-
+                Category category = pickCategory();
+                Proposal proposal;
+                if(category.equals(Category.MENU_NAME) || category.equals(Category.PRICE)){
+                     proposal = Proposal.builder()
+                            .title("title"+idx)
+                            .content("content" + idx)
+                            .category(category)
+                            .status("wait")
+                            .restaurant(restaurantRepository.getReferenceById(restaurantId))
+                            .member(memberRepository.getReferenceById(memberId))
+                            .menu(menuRepository.getReferenceById((long)random.nextInt(1000)+1))
+                            .build();
+                }else{
+                     proposal = Proposal.builder()
+                            .title("title"+idx)
+                            .content("content" + idx)
+                            .category(category)
+                            .status("wait")
+                            .restaurant(restaurantRepository.getReferenceById(restaurantId))
+                            .member(memberRepository.getReferenceById(memberId))
+                            .menu(null)
+                            .build();
+                }
                 proposalRepository.save(proposal);
                 idx++;
             }
