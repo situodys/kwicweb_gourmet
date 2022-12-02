@@ -2,6 +2,7 @@ package kw.ic.backend.domain.proposal.dto.request;
 
 import javax.validation.constraints.NotNull;
 import kw.ic.backend.domain.member.Member;
+import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.proposal.Proposal;
 import kw.ic.backend.domain.proposal.dto.embbed.Category;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
@@ -29,10 +30,9 @@ public class ProposalRequest {
     @NotNull
     private Long memberId;
 
-    @NotNull
     private Long menuId;
 
-    public Proposal toProposal(Restaurant restaurant, Member member) {
+    public Proposal toProposal(Restaurant restaurant, Member member, Menu menu) {
         return Proposal.builder()
                 .title(this.title)
                 .category(this.category)
@@ -40,6 +40,7 @@ public class ProposalRequest {
                 .status("wait")
                 .restaurant(restaurant)
                 .member(member)
+                .menu(menu)
                 .build();
     }
 }

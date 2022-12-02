@@ -36,9 +36,11 @@ public class ProposalResponse {
 
     private Long memberId;
 
+    private Long menuId;
+
     @Builder
     public ProposalResponse(Long proposalId, String title, Category category, String content, String status,
-                            Long restaurantId, Long memberId) {
+                            Long restaurantId, Long memberId, Long menuId) {
         this.proposalId = proposalId;
         this.title = title;
         this.category = category;
@@ -46,5 +48,6 @@ public class ProposalResponse {
         this.status = status;
         this.restaurantId = restaurantId;
         this.memberId = memberId;
+        this.menuId = menuId;
     }
 }
