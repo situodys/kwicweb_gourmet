@@ -9,6 +9,7 @@ import Register from "./view/auth/Register";
 import Main from "./view/Main";
 import Restaurants from "./view/Restaurants";
 import Example from "./view/Example";
+import Admin from "./view/Admin";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path={"/register"} element={<Register />}></Route>
           <Route path={"/example/*"} element={<Example />}></Route>
           <Route path={"/restaurants"} element={<Restaurants />}></Route>
+          <Route path={"/admin"} element={<Admin />}></Route>
           <Route path={"*"} element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
