@@ -1,6 +1,7 @@
 package kw.ic.backend.domain.proposal.repository;
 
 import static kw.ic.backend.domain.member.QMember.member;
+import static kw.ic.backend.domain.menu.QMenu.menu;
 import static kw.ic.backend.domain.proposal.QProposal.proposal;
 import static kw.ic.backend.domain.restaurant.entity.QRestaurant.restaurant;
 
@@ -34,9 +35,12 @@ public class ProposalRepositoryDSLImpl extends QuerydslRepositorySupport impleme
 
         JPAQuery<Proposal> query = jpaQueryFactory.select(proposal)
                 .from(proposal)
-                .leftJoin(proposal.restaurant,restaurant)
+                .leftJoin(proposal.restaurant, restaurant)
                 .fetchJoin().
-                leftJoin(proposal.member,member);
+                leftJoin(proposal.member, member)
+                .fetchJoin()
+                .leftJoin(proposal.menu, menu)
+                .fetchJoin();
 
         if (totalCount == NEED_CALCULATE) {
             totalCount = (long)query.fetch().size();

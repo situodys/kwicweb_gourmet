@@ -36,9 +36,11 @@ public class RestaurantResponse {
 
     private List<NotificationResponse> notifications = new ArrayList<>();
 
+    private Boolean isLike;
+
     @Builder
     public RestaurantResponse(Long restaurantId, String name, String description, RestaurantType type, Address address, RunningTime runningTime, List<MenuResponse> menus,
-                              List<NotificationResponse> notifications) {
+                              List<NotificationResponse> notifications, Boolean isLike) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.description = description;
@@ -47,5 +49,6 @@ public class RestaurantResponse {
         this.runningTime = runningTime;
         this.menus=menus;
         this.notifications = notifications;
+        this.isLike = isLike;
     }
 }

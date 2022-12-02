@@ -3,6 +3,7 @@ package kw.ic.backend.domain.restaurant.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
+import kw.ic.backend.domain.likes.repository.LikesRepository;
 import kw.ic.backend.domain.restaurant.dto.RestaurantResponseAssembler;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantPageRequest;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantRequest;
@@ -11,9 +12,10 @@ import kw.ic.backend.domain.restaurant.dto.response.RestaurantPageResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantReviewRatingResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantStaticResponse;
-import kw.ic.backend.domain.restaurant.dto.response.SimpleRestaurantResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.domain.restaurant.repository.RestaurantRepository;
+import kw.ic.backend.global.exception.CustomException;
+import kw.ic.backend.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+    private final LikesRepository likesRepository;
     private final RestaurantResponseAssembler responseAssembler;
 
     public RestaurantPageResponse findRestaurants(RestaurantPageRequest request) {
@@ -56,11 +59,12 @@ public class RestaurantService {
         return result;
     }
 
-    public RestaurantResponse findById(Long id) {
-        Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+    public RestaurantResponse findRestaurantByIdAndCheckIsLike(Long restaurantId,Long memberId) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(()->new CustomException(ErrorCode.ENTITY_NOT_FOUND));
+        boolean isLike = likesRepository.existsByMemberIdAndRestaurantId(memberId, restaurantId);
 
-        return responseAssembler.restaurantResponse(restaurant);
+        return responseAssembler.restaurantResponse(restaurant,isLike);
     }
 
     public Long register(RestaurantRequest request) {

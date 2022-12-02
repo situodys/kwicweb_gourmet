@@ -36,7 +36,7 @@ public class BasePageResponse<EN> {
         this.curPage=pageable.getPageNumber()+1;
         this.pageSize = pageable.getPageSize();
 
-        int tempEnd=(int)(Math.ceil(pageSize/10.0))*10;
+        int tempEnd=(int)(Math.ceil(curPage/10.0))*10;
 
         startIndex= tempEnd-9;
 

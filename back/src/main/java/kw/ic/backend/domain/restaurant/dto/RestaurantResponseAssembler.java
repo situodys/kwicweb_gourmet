@@ -27,7 +27,7 @@ public class RestaurantResponseAssembler {
 
     private final MenuResponseAssembler menuResponseAssembler;
 
-    public RestaurantResponse restaurantResponse(Restaurant restaurant) {
+    public RestaurantResponse restaurantResponse(Restaurant restaurant,boolean isLike) {
         return RestaurantResponse.builder().
                 restaurantId(restaurant.getId())
                 .name(restaurant.getName())
@@ -37,6 +37,7 @@ public class RestaurantResponseAssembler {
                 .runningTime(restaurant.getRunningTime())
                 .menus(menuResponses(restaurant.getMenus()))
                 .notifications(notificationResponses(restaurant.getNotifications()))
+                .isLike(isLike)
                 .build();
     }
 
