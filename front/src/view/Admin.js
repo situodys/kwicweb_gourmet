@@ -39,12 +39,12 @@ export default function Admin() {
     }
 
     const updatePageList = () =>{
-        const {startIndex, endIndex, curPage} = proposalResponse;
+        let {startIndex, endIndex, curPage} = proposalResponse;
         let pageLists = [];
         if (proposalResponse.prev) {
-            pageLists.push(<Pagination.Prev onClick={handlePage}/>)
+            pageLists.push(<Pagination.Prev onClick={e=>handlePage(e,startIndex-2)}/>)
         }
-        for (let idx = startIndex; idx < endIndex; idx++) {
+        for (let idx = startIndex; idx <= endIndex; idx++) {
             pageLists.push(<Pagination.Item onClick={e=>handlePage(e,idx-1)} key={idx} active={idx===curPage} >{idx}</Pagination.Item>)
         }
         if (proposalResponse.next) {
@@ -60,8 +60,9 @@ export default function Admin() {
 
     const handleButton = async (postData, status) => {
         try {
-            await customAxios.post(`/admin/proposal/apply/${status}`,
+            let response = await customAxios.post(`/admin/proposal/${status}`,
                 postData);
+
         } catch (err) {
             console.log(err);
         }
@@ -70,7 +71,7 @@ export default function Admin() {
 
 
     return (
-        <Container>
+        <Container className={"align-items-center"} style={{marginTop: '10vh'}}>
             <Table striped bordered hover>
                 <thead>
                 <tr>
@@ -89,7 +90,7 @@ export default function Admin() {
                 </tbody>
             </Table>
 
-            <Pagination>{pageList}</Pagination>
+            <Pagination className={"justify-content-center"}>{pageList}</Pagination>
         </Container>
     )
 }

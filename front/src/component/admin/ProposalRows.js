@@ -11,15 +11,32 @@ export default function ProposalRows(props) {
         "status",
     ]
 
+    const toEnum = (category) =>{
+        if (category === "menuName") {
+            return "MENU_NAME";
+        }
+        if (category === "price") {
+            return "PRICE";
+        }
+        if (category === "menuName") {
+            return "OPEN_TIME";
+        }
+        if (category === "menuName") {
+            return "CLOSE_TIME";
+        }
+    }
+
     const toPostData = () =>{
         let postData = {};
-        postData.category = proposal.category;
+        postData.category = toEnum(proposal.category);
         postData.content = proposal.content;
         postData.memberId = proposal.memberId;
         postData.menuId = proposal.menuId;
         postData.proposalId = proposal.proposalId;
         postData.restaurantId = proposal.restaurantId;
         postData.title = proposal.title;
+
+        console.log(postData);
     }
 
     return (
