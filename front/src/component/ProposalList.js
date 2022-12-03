@@ -28,38 +28,38 @@ export const ProposalList = ({ proposalList }) => {
           <Container>
             {proposalList.length !== 0 && (
               <>
-                {list.map((element) => (
-                  <Row>
-                    {}
-                    <Col className="col-3">
-                      <div>
-                        <h4 className="m-0">
-                          <strong>{element.menuName}</strong>
-                        </h4>
-                      </div>
-                      <Card.Text
-                        style={{
-                          color: "#7F7F7F",
-                          fontSize: "10pt",
-                          lineHeight: "1.3rem",
-                        }}
-                      >
-                        {element.price}
-                      </Card.Text>
-                    </Col>
-                    <Col className="col-6">
-                      <Card.Text
-                        style={{
-                          color: "#7F7F7F",
-                          fontSize: "11pt",
-                          lineHeight: "1.3rem",
-                        }}
-                      >
-                        {element.description}
-                      </Card.Text>
-                    </Col>
-                  </Row>
-                ))}
+                {list &&
+                  list.map((element) => (
+                    <Row>
+                      <Col className="col-3">
+                        <div>
+                          <h4 className="m-0">
+                            <strong>{element.menuName}</strong>
+                          </h4>
+                        </div>
+                        <Card.Text
+                          style={{
+                            color: "#7F7F7F",
+                            fontSize: "10pt",
+                            lineHeight: "1.3rem",
+                          }}
+                        >
+                          {element.price}
+                        </Card.Text>
+                      </Col>
+                      <Col className="col-6">
+                        <Card.Text
+                          style={{
+                            color: "#7F7F7F",
+                            fontSize: "11pt",
+                            lineHeight: "1.3rem",
+                          }}
+                        >
+                          {element.description}
+                        </Card.Text>
+                      </Col>
+                    </Row>
+                  ))}
               </>
             )}
           </Container>

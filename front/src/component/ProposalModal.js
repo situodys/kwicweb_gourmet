@@ -8,11 +8,33 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
 const ProposalModal = ({ show, handleClose }) => {
-  const [menuList, setMenuList] = useState(["temp", "temp2"]);
-  const [selectedMenu, setSelectedMenu] = useState("f");
+  const [dropDownList, setDropDownList] = useState([
+    "close-time",
+    "open-time",
+    "price",
+    "menu",
+  ]);
+  const [menuList, setMenuList] = useState(["A", "B"]);
 
-  const changeStatus = (event, eventkey) => {
+  const [selectedMenu, setSelectedMenu] = useState("");
+  const [selectedDropDown, setSelectedDropDown] = useState("");
+
+  const [selectedTime, setSelectedTime] = useState({ hour: "0", minute: "0" });
+
+  const changeSelectedDropDown = (event, eventkey) => {
+    setSelectedDropDown(eventkey.target.innerText);
+  };
+
+  const changeSelectedMenu = (event, eventkey) => {
     setSelectedMenu(eventkey.target.innerText);
+  };
+
+  const changeSelectedTime = (event, eventkey, flag) => {
+    if (flag === "hour") {
+      setSelectedTime({ ...selectedTime, hour: eventkey.target.innerText });
+    } else if (flag === "minute") {
+      setSelectedTime({ ...selectedTime, minute: eventkey.target.innerText });
+    }
   };
 
   return (
@@ -37,22 +59,84 @@ const ProposalModal = ({ show, handleClose }) => {
           </div>
           <Form>
             <Stack gap={3}>
-              <DropdownButton
-                id="dropdown-menu-button"
-                title="Menu"
-                // onSelect={(e) => {
-                //   console.log("F", e);
-                //   setSelectedMenu(e);
-                // }}
-                onSelect={changeStatus}
-              >
-                {menuList.map((menu) => (
-                  <Dropdown.Item key={menu}>{menu}</Dropdown.Item>
-                ))}
-              </DropdownButton>
+              <div className="d-flex">
+                <Stack direction="horizontal" gap={3}>
+                  <Dropdown onSelect={changeSelectedDropDown}>
+                    <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                      Problem
+                    </Dropdown.Toggle>
 
+                    <Dropdown.Menu>
+                      {dropDownList.map((menu) => (
+                        <Dropdown.Item key={menu}>{menu}</Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  {menuList && selectedDropDown === "menu" && (
+                    <div>
+                      <Dropdown onSelect={changeSelectedMenu}>
+                        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                          Menu
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                          {menuList.map((menu) => (
+                            <Dropdown.Item key={menu}>{menu}</Dropdown.Item>
+                          ))}
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </div>
+                  )}
+
+                  {menuList &&
+                    (selectedDropDown === "close-time" ||
+                      selectedDropDown === "open-time") && (
+                      <Stack direction="horizontal" gap={3}>
+                        <Dropdown
+                          onSelect={(event, eventkey) => {
+                            changeSelectedTime(event, eventkey, "hour");
+                          }}
+                        >
+                          <Dropdown.Toggle
+                            variant="primary"
+                            id="dropdown-basic"
+                          >
+                            Hour
+                          </Dropdown.Toggle>
+
+                          <Dropdown.Menu>
+                            {[...Array(24).keys()].map((hour) => (
+                              <Dropdown.Item key={hour}>{hour}</Dropdown.Item>
+                            ))}
+                          </Dropdown.Menu>
+                        </Dropdown>
+
+                        <Dropdown
+                          onSelect={(event, eventkey) => {
+                            changeSelectedTime(event, eventkey, "minute");
+                          }}
+                        >
+                          <Dropdown.Toggle
+                            variant="primary"
+                            id="dropdown-basic"
+                          >
+                            Minutes
+                          </Dropdown.Toggle>
+
+                          <Dropdown.Menu>
+                            {[0, 15, 30, 45].map((minute) => (
+                              <Dropdown.Item key={minute}>
+                                {minute}
+                              </Dropdown.Item>
+                            ))}
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </Stack>
+                    )}
+                </Stack>
+              </div>
+              <hr className="mt-0"></hr>
               <Form.Control type="text" placeholder="Review title" />
-
               <Form.Control as="textarea" rows={12} />
               <div className="d-flex justify-content-center">
                 <Button className="col-6" onClick={handleClose}>
