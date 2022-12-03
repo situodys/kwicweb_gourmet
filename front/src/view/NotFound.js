@@ -5,7 +5,8 @@ const NotFound = () => {
     const test = async (e) => {
         e.preventDefault();
         try {
-            const response = await customAxios.get("/reviews?restaurantId=10");
+            const response = await customAxios.get("/proposals");
+            console.log(response.data);
         } catch (err){
             console.log(err);
         }
