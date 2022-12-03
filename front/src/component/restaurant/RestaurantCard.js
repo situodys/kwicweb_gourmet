@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import resturantImage from "../../assets/images/Restaurant.jpg";
 import { ReactComponent as Heart } from "../../assets/images/heart-fill.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,12 +11,40 @@ import ProposalModal from "../ProposalModal";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 
-import "./styles.scss";
+import "../styles.scss";
 
-const RestaurantCard = (props) => {
+const RestaurantCard = ({ tabKey }) => {
+  const [showFilter, setShowFilter] = useState(false);
+  const handleFilterClose = () => setShowFilter(false);
+  const handleFilterShow = () => setShowFilter(true);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [buttonText, setButtonText] = useState("Button");
+
+  const switchButtonText = () => {
+    switch (tabKey) {
+      case "review":
+        setButtonText("Write a reivew :)");
+        break;
+      case "menu":
+        setButtonText("Delivery :)");
+        break;
+      case "proposal":
+        setButtonText("Make a proposal :)");
+        break;
+      case "notification":
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    switchButtonText();
+  }, [tabKey]);
 
   return (
     <>
@@ -46,7 +74,7 @@ const RestaurantCard = (props) => {
               </Badge>{" "}
               <Badge
                 pill
-                onClick={handleShow}
+                onClick={handleFilterShow}
                 className="filter-badge ml-auto"
                 style={{
                   cursor: "pointer",
@@ -54,7 +82,7 @@ const RestaurantCard = (props) => {
               >
                 Add filter +
               </Badge>{" "}
-              <ProposalModal show={show} handleClose={handleClose} />
+              <FilterModal show={showFilter} handleClose={handleFilterClose} />
             </div>
             <hr className="my-2"></hr>
             <div className="row">
@@ -128,15 +156,25 @@ const RestaurantCard = (props) => {
                   </div>
 
                   <div class="mt-auto p-2">
-                    <Link to="/main">
-                      <button
-                        type="button"
-                        class="btn btn-primary btn-lg px-5"
-                        style={{ borderRadius: "27px" }}
-                      >
-                        DELIVERY :)
-                      </button>
-                    </Link>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-lg px-5"
+                      style={{ borderRadius: "27px" }}
+                      onClick={handleShow}
+                      disabled={
+                        tabKey === "review" || tabKey === "proposal"
+                          ? false
+                          : true
+                      }
+                    >
+                      {buttonText}
+                    </button>
+                    {tabKey === "review" && (
+                      <ReviewModal show={show} handleClose={handleClose} />
+                    )}
+                    {tabKey === "proposal" && (
+                      <ProposalModal show={show} handleClose={handleClose} />
+                    )}
                   </div>
                 </div>
               </div>
