@@ -7,6 +7,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import FilterModal from "./FilterModal";
 import ReviewModal from "../ReviewModal";
+import ProposalModal from "../ProposalModal";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 
@@ -53,7 +54,7 @@ const RestaurantCard = (props) => {
               >
                 Add filter +
               </Badge>{" "}
-              <ReviewModal show={show} handleClose={handleClose} />
+              <ProposalModal show={show} handleClose={handleClose} />
             </div>
             <hr className="my-2"></hr>
             <div className="row">
