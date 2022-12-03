@@ -42,9 +42,6 @@ const Menu = (props) => {
     <>
       <div class="album py-5" style={{ backgroundColor: "#fff7ec" }}>
         <div class="container">
-          <h1 className="">Menu</h1>
-          <p>Last modified: 20/11/12</p>
-
           <hr></hr>
           <div class="row">
             <Col className="col-6">

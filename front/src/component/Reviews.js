@@ -13,8 +13,6 @@ const Reviews = (props) => {
     <>
       <div class="album py-5" style={{ backgroundColor: "#fff7ec" }}>
         <div class="container">
-          <h1 className="">Reviews</h1>
-          <p>Total: 12</p>
           <hr></hr>
           <div class="row">
             {reviews.map((review) => (

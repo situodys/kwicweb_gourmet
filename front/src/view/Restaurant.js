@@ -1,32 +1,44 @@
-import { Link } from "react-router-dom";
-
-import { useEffect } from "react";
+import {useState} from "react";
 import RestaurantCarousel from "../component/restaurant/RestaurantCarousel";
 
 import Reviews from "../component/Reviews";
+
+import "../component/auth/css/login.css";
+import {Container, Tab, Tabs} from "react-bootstrap";
 import Menu from "../component/Menu";
 import Proposal from "../component/Proposal";
 
-import "../component/auth/css/login.css";
+function Notifications() {
+  return null;
+}
 
 const Restaurant = (props) => {
-  useEffect(() => {
-    // 👇 add class to body element
-    document.body.classList.add("Login-body");
 
-    return () => {
-      // 👇️ optionally remove styles when component unmounts
-      document.body.style.backgroundColor = null;
-      document.body.classList.remove("Login-body");
-    };
-  }, []);
+  const [tabKey, setTabKey] = useState("review");
+
   return (
     <>
-      <div class="w-100">
+      <div class="w-100 Login-body">
         <RestaurantCarousel />
-        {/* <Reviews /> */}
-        <Proposal />
-        {/* <Menu /> */}
+        <Container>
+          <Tabs style={{fontSize: '30px', backgroundColor: "#fff7ec", color: ''}} activeKey={tabKey} onSelect={(k) =>setTabKey(k)}>
+            <Tab eventKey={"review"} title={"리뷰"}>
+              {tabKey === "review" && <Reviews/>}
+            </Tab>
+
+            <Tab as={"h1"} eventKey={"menu"} title={"메뉴"}>
+              {tabKey === "menu" && <Menu/>}
+            </Tab>
+
+            <Tab eventKey={"proposal"} title={"요청사항"}>
+              {tabKey === "proposal" && <Proposal/>}
+            </Tab>
+
+            <Tab eventKey={"notification"} title={"변동사항"}>
+              {tabKey==="notification" && <Notifications/>}
+            </Tab>
+          </Tabs>
+        </Container>
       </div>
     </>
   );

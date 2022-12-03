@@ -30,8 +30,6 @@ const Proposal = (props) => {
     <>
       <div class="album py-5" style={{ backgroundColor: "#fff7ec" }}>
         <div class="container">
-          <h1 className="">Proposal</h1>
-          <p>Total: 2012</p>
           <hr></hr>
           <div class="row">
             <Col className="col-12">
