@@ -1,9 +1,8 @@
 import {RestaurantList} from "../component/main/RestaurantList";
 import {RestaurantRecommendation} from "../component/main/RestaurantRecommendation";
 import {Map} from "../component/main/Map";
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import customAxios from "../api/customAxios";
-import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/esm/Container";
 import {useInView} from "react-intersection-observer";
 
@@ -13,6 +12,8 @@ export default function Main() {
     const [restaurants, setRestaurants] = useState([]);
     const [lastId, setLastId] = useState();
     const [ref, inView] = useInView();
+    const [searchInput, setSearchInput] = useState("");
+    const [didSearchOccur, setDidSearchOccur] = useState(false);
 
     const init = async () => {
         try {
@@ -30,10 +31,13 @@ export default function Main() {
         }
     };
 
-    const fetch = async () => {
+    const fetch = async (isSearch) => {
         try {
-            if (!lastId) return;
-            const response = await customAxios.get(`/restaurants?lastId=${lastId}`);
+            let response;
+            if(isSearch){
+                response= await customAxios.get(`/restaurants?lastId=&name=${searchInput}`);
+            }
+            else response= await customAxios.get(`/restaurants?lastId=${lastId}&name=${searchInput}`);
             setRestaurants((prevRestaurants) => [...prevRestaurants, ...response.data.data]);
             setLastId(response.data.lastId);
         } catch (err) {
@@ -46,10 +50,22 @@ export default function Main() {
     }, []);
 
     useEffect(() => {
-        if(inView && lastId !==0){
-            fetch();
+        if (lastId && inView && lastId !== 0) {
+            void fetch();
         }
-    }, [inView])
+    }, [inView]);
+
+    const handleInput = (e) =>{
+        e.preventDefault();
+        setSearchInput(e.target.value);
+    }
+
+    const handleSearchButton = (e) =>{
+        e.preventDefault();
+        setLastId(null);
+        setRestaurants([]);
+        void fetch(true);
+    }
 
     return (
         <div
@@ -78,11 +94,13 @@ export default function Main() {
                                 type="search"
                                 class="form-control"
                                 placeholder=""
+                                onChange={handleInput}
                             ></input>
                             <button
                                 class="btn btn btn-primary"
                                 type="button"
                                 id="button-addon2"
+                                onClick={handleSearchButton}
                             >
                                 Search
                             </button>
