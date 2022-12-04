@@ -3,7 +3,6 @@ import { useState } from "react";
 
 const RestaurantCarousel = ({ tabKey }) => {
   //const [] = useState([]);
-
   return (
     <>
       <div className="w-100">

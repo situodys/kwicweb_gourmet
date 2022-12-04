@@ -51,13 +51,12 @@ export const RestaurantList = () => {
             );
           })}
         </Row>
-
-        <div
+        <Row
           ref={triggerRef}
           className={`trigger ${loading ? "visible" : null})`}
         >
           <LoadingPosts />
-        </div>
+        </Row>
       </Container>
     </>
   );
