@@ -11,6 +11,8 @@ import ProposalModal from "../ProposalModal";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 
+import axios from "axios";
+
 import "../styles.scss";
 
 const RestaurantCard = ({ tabKey }) => {
@@ -87,14 +89,12 @@ const RestaurantCard = ({ tabKey }) => {
             <hr className="my-2"></hr>
             <div className="row">
               <div className="col-3">
-                <Link to="/Main" className="navbar-brand ">
-                  <img
-                    src={resturantImage}
-                    style={{ borderRadius: "20px" }}
-                    width="100%"
-                    alt="resturant"
-                  ></img>
-                </Link>
+                <img
+                  src={resturantImage}
+                  style={{ borderRadius: "20px" }}
+                  width="100%"
+                  alt="resturant"
+                ></img>
               </div>
               <div className="col-6">
                 <div class="d-flex flex-column h-100">
@@ -145,14 +145,12 @@ const RestaurantCard = ({ tabKey }) => {
               <div className="col-3">
                 <div class="d-flex align-items-end flex-column h-100">
                   <div class="p-2">
-                    <Link to="/main">
-                      <Button
-                        className="btn btn-heart btn-lg px-5"
-                        style={{ borderRadius: "27px" }}
-                      >
-                        <Heart /> 1235
-                      </Button>{" "}
-                    </Link>
+                    <Button
+                      className="btn btn-heart btn-lg px-5"
+                      style={{ borderRadius: "27px" }}
+                    >
+                      <Heart /> 1235
+                    </Button>
                   </div>
 
                   <div class="mt-auto p-2">

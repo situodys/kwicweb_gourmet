@@ -8,6 +8,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import axios from "axios";
+
 const NUM_PER_PAGE = 6;
 const TOTAL_PAGES = 3;
 
@@ -24,7 +26,7 @@ export const RestaurantList = () => {
         );
         console.log(data);
         resolve(data);
-      }, 3000);
+      }, 1000);
     });
   };
   const { data, loading } = useLazyLoad({ triggerRef, onGrabData });
