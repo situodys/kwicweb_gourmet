@@ -56,7 +56,10 @@ public class RestaurantController {
     public ResponseEntity<RestaurantResponse> findRestaurant(@PathVariable(name = "restaurant_id") Long restaurantId,
                                                              Principal principal) {
         log.info("find restaurant");
-        Long memberId= Long.parseLong(principal.getName());
+        Long memberId = null;
+        if(principal != null){
+            memberId= Long.parseLong(principal.getName());
+        }
 
         RestaurantResponse response = restaurantService.findRestaurantByIdAndCheckIsLike(restaurantId,memberId);
 

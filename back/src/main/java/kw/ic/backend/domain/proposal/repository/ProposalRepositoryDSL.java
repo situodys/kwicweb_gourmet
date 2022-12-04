@@ -8,5 +8,6 @@ import org.springframework.data.domain.Pageable;
 public interface ProposalRepositoryDSL {
 
     Page<Proposal> findProposals(ProposalPageRequest request);
+    Page<Proposal> findProposalsByRestaurantId(Long restaurantId, ProposalPageRequest request);
 
 }

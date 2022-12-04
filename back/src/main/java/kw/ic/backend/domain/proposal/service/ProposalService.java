@@ -75,4 +75,28 @@ public class ProposalService {
 
         return proposalId;
     }
+
+    public ProposalPageResponse findProposalsByRestaurantId(Long restaurantId, ProposalPageRequest request) {
+        Page<ProposalResponse> result = proposalRepository.findProposalsByRestaurantId(restaurantId, request)
+                .map(proposal -> {
+                            Menu menu = proposal.getMenu();
+                            Long menuId = null;
+                            if (menu != null) {
+                                menuId = menu.getId();
+                            }
+                            return ProposalResponse.builder()
+                                    .proposalId(proposal.getId())
+                                    .title(proposal.getTitle())
+                                    .category(proposal.getCategory())
+                                    .content(proposal.getContent())
+                                    .status(proposal.getStatus())
+                                    .memberId(proposal.getMember().getId())
+                                    .restaurantId(proposal.getRestaurant().getId())
+                                    .menuId(menuId)
+                                    .build();
+                        }
+                );
+
+        return new ProposalPageResponse(result);
+    }
 }

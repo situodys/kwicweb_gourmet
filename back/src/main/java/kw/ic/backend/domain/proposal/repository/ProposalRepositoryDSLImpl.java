@@ -49,4 +49,29 @@ public class ProposalRepositoryDSLImpl extends QuerydslRepositorySupport impleme
         List<Proposal> proposals = this.getQuerydsl().applyPagination(request.getPageRequest(), query).fetch();
         return new PageImpl<>(proposals, request.getPageRequest(), totalCount);
     }
+
+    @Override
+    public Page<Proposal> findProposalsByRestaurantId(Long restaurantId, ProposalPageRequest request) {
+
+        Long totalCount=request.getTotalCount();
+
+        JPAQuery<Proposal> query = jpaQueryFactory.select(proposal)
+                .from(proposal)
+                .leftJoin(proposal.restaurant, restaurant)
+                .fetchJoin().
+                leftJoin(proposal.member, member)
+                .fetchJoin()
+                .leftJoin(proposal.menu, menu)
+                .fetchJoin()
+                .where(
+                        proposal.restaurant.id.eq(restaurantId)
+                );
+
+        if (totalCount == NEED_CALCULATE) {
+            totalCount = (long)query.fetch().size();
+        }
+
+        List<Proposal> proposals = this.getQuerydsl().applyPagination(request.getPageRequest(), query).fetch();
+        return new PageImpl<>(proposals, request.getPageRequest(), totalCount);
+    }
 }
