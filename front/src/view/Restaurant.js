@@ -30,6 +30,7 @@ const Restaurant = (props) => {
               style={{
                 fontSize: "30px",
                 backgroundColor: "#fff7ec",
+                minWidth: "80rem",
                 color: "",
               }}
               activeKey={tabKey}
