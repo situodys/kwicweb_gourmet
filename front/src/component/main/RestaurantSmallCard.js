@@ -1,16 +1,31 @@
-import { Link } from "react-router-dom";
-import { ReactComponent as Heart } from "../../assets/images/heart-fill.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 import Badge from "react-bootstrap/Badge";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import Star from "./Star";
 
-export const RestaurantSmallCard = ({ owner, imageUrl }) => {
+export const RestaurantSmallCard = (props) => {
+    const {restaurant,imgURL} = props;
+
+    const convertRateToStar = (rate) =>{
+        let stars = [];
+        for(let i=0; i<5;i++){
+            if (i <= rate) {
+                stars.push(<Star className={"star-checked"}/>);
+                continue;
+            }
+            stars.push(<Star className={""}/>)
+        }
+        return stars
+    }
+
+    const fullAddress = restaurant.simpleRestaurantResponse.address.city +" "+
+        restaurant.simpleRestaurantResponse.address.street +" "+
+        restaurant.simpleRestaurantResponse.address.zipcode;
+
   return (
-    <>
       <Col className="col-4 mb-3">
         <Link
           to="/restaurant"
@@ -35,17 +50,14 @@ export const RestaurantSmallCard = ({ owner, imageUrl }) => {
               >
                 <div className="d-flex">
                   <Badge pill bg="info" className="mr-2">
-                    Western
-                  </Badge>
-                  <Badge pill bg="danger" className="mr-2">
-                    Non-deliverable
+                      {restaurant.simpleRestaurantResponse.restaurantType}
                   </Badge>
                 </div>
                 <hr className="my-2"></hr>
                 <div className="row">
                   <div className="col-12">
                     <img
-                      src={imageUrl}
+                      src={imgURL}
                       style={{
                         borderRadius: "20px",
                         objectFit: "cover",
@@ -58,38 +70,17 @@ export const RestaurantSmallCard = ({ owner, imageUrl }) => {
                   <div className="col-12">
                     <div class="d-flex flex-column h-100 pt-2">
                       <div style={{ fontSize: "16px", lineHeight: "20px" }}>
-                        <strong>Very-Very Delicious Resturant</strong>
+                        <strong>{restaurant.simpleRestaurantResponse.name}</strong>
                       </div>
                       <span className="mr-2">
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          size="xs"
-                          className="star-checked"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          size="xs"
-                          className="star-checked"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          size="xs"
-                          className="star-checked"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          size="xs"
-                          className="star-checked"
-                        />
-                        <FontAwesomeIcon icon={faStar} size="xs" />
+                        {convertRateToStar(restaurant.rating)}
                       </span>
                       <div class="pt-1">
                         <h6
                           class="card-text"
                           style={{ fontSize: "10px", width: "80%" }}
                         >
-                          (727) 772-5780 2606 Brinley Dr New Port Richey,
-                          Florida(FL), 34655
+                            {fullAddress}
                         </h6>
                       </div>
                     </div>
@@ -131,7 +122,7 @@ export const RestaurantSmallCard = ({ owner, imageUrl }) => {
                             size="sm"
                             className="mr-2"
                           />{" "}
-                          1235
+                            {restaurant.likeCount}
                         </div>
                       </div>
                     </div>
@@ -142,6 +133,5 @@ export const RestaurantSmallCard = ({ owner, imageUrl }) => {
           </div>
         </Link>
       </Col>
-    </>
   );
 };
