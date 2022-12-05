@@ -27,14 +27,17 @@ public class RestaurantResponseAssembler {
 
     private final MenuResponseAssembler menuResponseAssembler;
 
-    public RestaurantResponse restaurantResponse(Restaurant restaurant,Boolean isLike) {
+    public RestaurantResponse restaurantResponse(RestaurantStatic restaurantStatic,Boolean isLike) {
         return RestaurantResponse.builder().
-                restaurantId(restaurant.getId())
-                .name(restaurant.getName())
-                .description(restaurant.getDescription())
-                .type(restaurant.getType())
-                .address(restaurant.getAddress())
-                .runningTime(restaurant.getRunningTime())
+                restaurantId(restaurantStatic.getRestaurant().getId())
+                .name(restaurantStatic.getRestaurant().getName())
+                .description(restaurantStatic.getRestaurant().getDescription())
+                .type(restaurantStatic.getRestaurant().getType())
+                .address(restaurantStatic.getRestaurant().getAddress())
+                .runningTime(restaurantStatic.getRestaurant().getRunningTime())
+                .likeCount(restaurantStatic.getLikeCount())
+                .rating(restaurantStatic.getRating())
+                .reviewCount(restaurantStatic.getReviewCount())
                 .isLike(isLike)
                 .build();
     }
