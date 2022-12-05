@@ -6,7 +6,7 @@ const NavBar = (props) => {
   return (
     <>
       <nav className="navbar navbar-dark bg-dark" style={{ height: "7vh" }}>
-        <span class="navbar-brand mb-1 h1">
+        <span class="navbar-brand mb-1 h1 mx-4">
           <Link to="/main">GOURMET</Link>
         </span>
 

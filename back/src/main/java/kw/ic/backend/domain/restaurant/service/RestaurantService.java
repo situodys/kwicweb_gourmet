@@ -62,7 +62,10 @@ public class RestaurantService {
     public RestaurantResponse findRestaurantByIdAndCheckIsLike(Long restaurantId,Long memberId) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(()->new CustomException(ErrorCode.ENTITY_NOT_FOUND));
-        boolean isLike = likesRepository.existsByMemberIdAndRestaurantId(memberId, restaurantId);
+        Boolean isLike = null;
+        if (memberId != null) {
+            isLike= likesRepository.existsByMemberIdAndRestaurantId(memberId, restaurantId);
+        }
 
         return responseAssembler.restaurantResponse(restaurant,isLike);
     }

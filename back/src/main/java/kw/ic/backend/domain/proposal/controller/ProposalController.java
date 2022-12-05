@@ -37,6 +37,14 @@ public class ProposalController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/restaurant/{restaurant_id}")
+    public ResponseEntity<ProposalPageResponse> findProposalsByRestaurantId(
+            @PathVariable(name = "restaurant_id") Long restaurantId, ProposalPageRequest request) {
+
+        ProposalPageResponse response = proposalService.findProposalsByRestaurantId(restaurantId, request);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("")
     public ResponseEntity<Long> register(@RequestBody ProposalRequest proposalRequest) {
         log.info("register proposal");
