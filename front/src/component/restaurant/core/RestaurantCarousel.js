@@ -1,8 +1,10 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState } from "react";
 
-const RestaurantCarousel = ({ tabKey }) => {
-  //const [] = useState([]);
+const RestaurantCarousel = (props) => {
+
+  const {restaurant} = props;
+
   return (
     <>
       <div className="w-100">
@@ -15,7 +17,7 @@ const RestaurantCarousel = ({ tabKey }) => {
           <div className="carousel-inner p-4">
             <div className="carousel-item active">
               <div class="d-flex justify-content-center">
-                <RestaurantCard tabKey={tabKey} />
+                <RestaurantCard restaurant={restaurant}/>
               </div>
             </div>
           </div>

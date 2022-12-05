@@ -15,6 +15,7 @@ const ReviewModal = ({ show, handleClose }) => {
 
   const changeRating = (newRating) => {
     setRating(newRating);
+    console.log(rating);
   };
 
   const changeStatus = (event, eventkey) => {
