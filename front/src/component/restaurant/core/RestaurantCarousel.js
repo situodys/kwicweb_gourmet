@@ -21,7 +21,7 @@ const RestaurantCarousel = ({ tabKey }) => {
           </div>
           <a
             className="carousel-control-prev"
-            href="#carouselExampleControls"
+            href="src/component/restaurant/core/RestaurantCarousel#carouselExampleControls"
             role="button"
             data-slide="prev"
           >
@@ -33,7 +33,7 @@ const RestaurantCarousel = ({ tabKey }) => {
           </a>
           <a
             className="carousel-control-next"
-            href="#carouselExampleControls"
+            href="src/component/restaurant/core/RestaurantCarousel#carouselExampleControls"
             role="button"
             data-slide="next"
           >

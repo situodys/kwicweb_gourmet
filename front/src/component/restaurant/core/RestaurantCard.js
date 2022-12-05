@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import resturantImage from "../../assets/images/Restaurant.jpg";
-import { ReactComponent as Heart } from "../../assets/images/heart-fill.svg";
+import resturantImage from "../../../assets/images/Restaurant.jpg";
+import { ReactComponent as Heart } from "../../../assets/images/heart-fill.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-import FilterModal from "./FilterModal";
-import ReviewModal from "../ReviewModal";
-import ProposalModal from "../ProposalModal";
+import FilterModal from "../../main/FilterModal";
+import ReviewModal from "../review/ReviewModal";
+import ProposalModal from "../proposal/ProposalModal";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 
 import axios from "axios";
 
-import "../styles.scss";
+import "../../../assets/styles.scss";
 
 const RestaurantCard = ({ tabKey }) => {
   const [showFilter, setShowFilter] = useState(false);

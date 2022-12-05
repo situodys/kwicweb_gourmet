@@ -2,7 +2,7 @@ import {RestaurantSmallCard} from "./RestaurantSmallCard";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import thumbnails from "../restaurant/data.json"
+import thumbnails from "../../assets/data.json"
 
 export const RestaurantList = (props) => {
 

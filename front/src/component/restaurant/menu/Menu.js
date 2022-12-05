@@ -1,7 +1,7 @@
 import { MenuList } from "./MenuList";
 import { useState, useEffect } from "react";
 
-import customAxios from "../api/customAxios";
+import customAxios from "../../../api/customAxios";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";

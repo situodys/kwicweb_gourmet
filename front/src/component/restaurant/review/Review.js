@@ -8,7 +8,6 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export const Review = ({ review }) => {
   return (
-    <>
       <Col className="col-4 md-4">
         <Card
           style={{
@@ -69,6 +68,5 @@ export const Review = ({ review }) => {
           </Card.Footer>
         </Card>
       </Col>
-    </>
   );
 };
