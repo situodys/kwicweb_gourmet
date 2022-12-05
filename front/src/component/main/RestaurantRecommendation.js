@@ -50,12 +50,14 @@ export const RestaurantRecommendation = (props) => {
                                     <hr className="my-2"></hr>
                                     {topLikesList.length !== 0 && topLikesList.map((element, idx) => (
                                         <Link style={{textDecoration: "none", color: "black"}}
-                                              to={`/restaurant/${element.simpleRestaurantResponse.restaurantId}`}
+                                              to={`/restaurant`}
+                                              state={{restaurantId: element.simpleRestaurantResponse.restaurantId}}
                                               className="d-flex" key={idx}>
                                             <div
                                                 className="card-text mr-2"
                                                 style={{fontSize: "16px"}}
                                             >
+                                                <b>{idx+1}. </b>
                                                 <b>{element.simpleRestaurantResponse.name}</b>
                                             </div>
                                             <div
@@ -99,13 +101,19 @@ export const RestaurantRecommendation = (props) => {
                                     {topRatingsList.length !== 0 && (
                                         <>
                                             <div className="">
-                                                {topRatingsList.map((element) => (
+                                                {topRatingsList.map((element,idx) => (
                                                     <>
-                                                        <div className="d-flex">
+                                                        <Link
+                                                            style={{textDecoration: "none", color: "black"}}
+                                                            to={`/restaurant`}
+                                                            state={{restaurantId: element.simpleRestaurantResponse.restaurantId}}
+                                                            className="d-flex">
                                                             <div
+                                                                key = {idx}
                                                                 className="card-text mr-2"
                                                                 style={{fontSize: "16px"}}
                                                             >
+                                                                <b>{idx+1}. </b>
                                                                 <b>{element.simpleRestaurantResponse.name}</b>
                                                             </div>
                                                             <div
@@ -119,7 +127,7 @@ export const RestaurantRecommendation = (props) => {
                                                             >
                                                                 {element.rating}
                                                             </div>
-                                                        </div>
+                                                        </Link>
                                                     </>
                                                 ))}
                                             </div>

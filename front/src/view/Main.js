@@ -13,7 +13,6 @@ export default function Main() {
     const [lastId, setLastId] = useState();
     const [ref, inView] = useInView();
     const [searchInput, setSearchInput] = useState("");
-    const [didSearchOccur, setDidSearchOccur] = useState(false);
 
     const init = async () => {
         try {

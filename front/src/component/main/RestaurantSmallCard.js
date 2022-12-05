@@ -29,6 +29,7 @@ export const RestaurantSmallCard = (props) => {
       <Col className="col-4 mb-3">
         <Link
           to="/restaurant"
+          state={{restaurantId: restaurant.simpleRestaurantResponse.restaurantId}}
           style={{ textDecoration: "none", color: "black" }}
         >
           <div
