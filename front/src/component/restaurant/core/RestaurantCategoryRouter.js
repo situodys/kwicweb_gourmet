@@ -5,7 +5,7 @@ import Proposal from "../proposal/Proposal";
 import Notification from "../notification/Notification";
 
 export default function RestaurantCategoryRouter(props) {
-    const {tabKey, setTabKey} = props;
+    const {restaurantId, tabKey, setTabKey} = props;
     return (
         <Container style={{backgroundColor: "#fff7ec"}}>
             <Tabs
@@ -17,20 +17,20 @@ export default function RestaurantCategoryRouter(props) {
                 activeKey={tabKey}
                 onSelect={(k) => setTabKey(k)}
             >
-                <Tab eventKey={"review"} title={"리뷰"}>
-                    {tabKey === "review" && <Reviews/>}
+                <Tab as={"h1"} eventKey={"menu"} title={"메뉴"}>
+                    {tabKey === "menu" && <Menu restaurantId={restaurantId}/>}
                 </Tab>
 
-                <Tab as={"h1"} eventKey={"menu"} title={"메뉴"}>
-                    {tabKey === "menu" && <Menu/>}
+                <Tab eventKey={"review"} title={"리뷰"}>
+                    {tabKey === "review" && <Reviews restaurantId={restaurantId}/>}
                 </Tab>
 
                 <Tab eventKey={"proposal"} title={"요청사항"}>
-                    {tabKey === "proposal" && <Proposal/>}
+                    {tabKey === "proposal" && <Proposal restaurantId={restaurantId}/>}
                 </Tab>
 
                 <Tab eventKey={"notification"} title={"변동사항"}>
-                    {tabKey === "notification" && <Notification/>}
+                    {tabKey === "notification" && <Notification restaurantId={restaurantId}/>}
                 </Tab>
             </Tabs>
         </Container>

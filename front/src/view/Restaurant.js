@@ -14,7 +14,7 @@ import RestaurantCategoryRouter from "../component/restaurant/core/RestaurantCat
 export default function Restaurant() {
     const location = useLocation();
     const restaurantId = location.state.restaurantId;
-    const [tabKey, setTabKey] = useState("review");
+    const [tabKey, setTabKey] = useState("menu");
     const [restaurant, setRestaurant] = useState();
 
     const init = async () => {

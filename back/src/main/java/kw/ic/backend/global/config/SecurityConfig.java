@@ -53,7 +53,8 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers(
-                        "/api/restaurants/**"
+                        "/api/restaurants/**",
+                        "/api/menus/**"
                 ).permitAll()
                 .antMatchers("/api/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()

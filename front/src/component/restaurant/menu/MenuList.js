@@ -24,14 +24,14 @@ export const MenuList = ({ menuList }) => {
         }}
         className="mb-4"
       >
-        <Card.Body style={{ minHeight: "360px", overflow: "auto" }}>
+        <Card.Body style={{ minHeight: "490px", overflow: "auto" }}>
           <Container>
             {menuList.length !== 0 && (
               <>
                 {list.map((element) => (
                   <Row>
                     {}
-                    <Col className="col-3">
+                    <Col className="col-6" style={{marginTop: '2rem'}}>
                       <div>
                         <h4 className="m-0">
                           <strong>{element.menuName}</strong>
@@ -44,18 +44,17 @@ export const MenuList = ({ menuList }) => {
                           lineHeight: "1.3rem",
                         }}
                       >
-                        {element.price}
+                        {element.description}
                       </Card.Text>
                     </Col>
-                    <Col className="col-6">
+                    <Col className="col-6" style={{marginTop: '2rem'}}>
                       <Card.Text
                         style={{
-                          color: "#7F7F7F",
                           fontSize: "11pt",
                           lineHeight: "1.3rem",
                         }}
                       >
-                        {element.description}
+                        {element.price.toLocaleString('ko-KR')}원
                       </Card.Text>
                     </Col>
                   </Row>
