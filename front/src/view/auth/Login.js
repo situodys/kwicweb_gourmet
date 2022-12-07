@@ -4,6 +4,7 @@ import CustomInput from "../../component/auth/CustomInput";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Buffer} from 'buffer'
+import jwt_decode from "jwt-decode";
 
 const Login = (props) => {
 
@@ -17,9 +18,15 @@ const Login = (props) => {
 
 
     const checkLogin = () => {
-        const tk = window.sessionStorage.getItem("atk");
+        const tk = window.localStorage.getItem("atk");
+        let jwtDecode = jwt_decode(tk);
+        console.log(jwtDecode);
+        if (jwtDecode.exp * 1000 <= Date.now()) {
+            window.localStorage.clear();
+            return;
+        }
         if (tk) {
-            window.alert("로그인 되어 있는 상태입니다.")
+            window.alert("로그인 되어 있는 상태입니다.");
             navigate("/main");
         }
         setIsLogin(true);
