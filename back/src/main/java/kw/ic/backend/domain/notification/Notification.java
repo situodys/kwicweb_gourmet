@@ -1,8 +1,7 @@
 package kw.ic.backend.domain.notification;
 
-import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.proposal.dto.embbed.Category;
-import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
+import kw.ic.backend.domain.notification.dto.response.NotificationResponse;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
 import kw.ic.backend.global.BaseEntity;
 import lombok.AccessLevel;

@@ -1,4 +1,4 @@
-package kw.ic.backend.domain.restaurant.dto.response;
+package kw.ic.backend.domain.notification.dto.response;
 
 import java.time.LocalDateTime;
 import kw.ic.backend.domain.proposal.dto.embbed.Category;

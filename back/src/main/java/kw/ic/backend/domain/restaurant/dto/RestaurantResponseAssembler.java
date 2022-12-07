@@ -9,7 +9,7 @@ import kw.ic.backend.domain.notification.Notification;
 import kw.ic.backend.domain.restaurant.dto.projection.RestaurantLikes;
 import kw.ic.backend.domain.restaurant.dto.projection.RestaurantReviewRating;
 import kw.ic.backend.domain.restaurant.dto.projection.RestaurantStatic;
-import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
+import kw.ic.backend.domain.notification.dto.response.NotificationResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantLikesResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantPageResponse;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantResponse;

@@ -6,7 +6,7 @@ import kw.ic.backend.domain.notification.dto.request.NotificationPageRequest;
 import kw.ic.backend.domain.notification.dto.request.NotificationRequest;
 import kw.ic.backend.domain.notification.dto.response.NotificationPageResponse;
 import kw.ic.backend.domain.notification.repository.NotificationRepository;
-import kw.ic.backend.domain.restaurant.dto.response.NotificationResponse;
+import kw.ic.backend.domain.notification.dto.response.NotificationResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
