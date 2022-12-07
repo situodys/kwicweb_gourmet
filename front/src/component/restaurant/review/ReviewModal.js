@@ -118,7 +118,7 @@ const ReviewModal = (props) => {
                         <Container className={"align-items-center"}>
                             <div>리뷰할 메뉴를 선택해주세요!</div>
                             {menus.map((menu, idx) =>
-                                <Badge key={idx} onClick={(e) => handleSelectMenu(e, idx)} pill
+                                <Badge key={idx} as={"button"} style={{margin: '0.125rem'}} onClick={(e) => handleSelectMenu(e, idx)} pill
                                        bg={handleMenuColor(menu)} text={"dark"} className="mr-2">
                                     {menu?.menuName}
                                 </Badge>)
