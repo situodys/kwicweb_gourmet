@@ -34,10 +34,13 @@ public class ReviewRepositoryDSLImpl extends QuerydslRepositorySupport implement
     @Override
     public List<Review> findReviewsWithPagination(ReviewPageRequest request) {
 
-        JPAQuery<Long> idQuery = jpaQueryFactory.select(review.id)
+        JPAQuery<Long> idQuery = jpaQueryFactory.selectDistinct(review.id)
                 .from(review)
+                .leftJoin(review.reviewedMenus,reviewedMenu)
                 .where(
-                        ltReviewId(request.getLastId())
+                        ltReviewId(request.getLastId()),
+                        review.restaurant.id.eq(request.getRestaurantId()),
+                        isMenuReviewed(request.getMenuIds())
                 )
                 .limit(request.getSize());
 
@@ -68,5 +71,12 @@ public class ReviewRepositoryDSLImpl extends QuerydslRepositorySupport implement
         }
 
         return review.id.lt(lastId);
+    }
+
+    private BooleanExpression isMenuReviewed(List<Long> menuIds) {
+        if (menuIds == null) {
+            return null;
+        }
+        return reviewedMenu.menu.id.in(menuIds);
     }
 }

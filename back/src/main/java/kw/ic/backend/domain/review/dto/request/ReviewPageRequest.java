@@ -14,15 +14,15 @@ public class ReviewPageRequest {
 
     private Sort sort;
 
-    private List<Long> reviewedMenuIds;
+    private List<Long> menuIds;
 
     private Long lastId;
 
-    public ReviewPageRequest(Long restaurantId, Integer size, Sort sort, List<Long> reviewedMenuIds, Long lastId) {
+    public ReviewPageRequest(Long restaurantId, Integer size, Sort sort, List<Long> menuIds, Long lastId) {
         this.restaurantId = restaurantId;
         this.size = size;
         this.sort = sort;
-        this.reviewedMenuIds = reviewedMenuIds;
+        this.menuIds = menuIds;
         this.lastId = lastId;
     }
 
@@ -39,8 +39,8 @@ public class ReviewPageRequest {
         return sort ==null ? Sort.by(Direction.DESC, "id") : sort;
     }
 
-    public List<Long> getReviewedMenuIds() {
-        return reviewedMenuIds;
+    public List<Long> getMenuIds() {
+        return menuIds;
     }
 
     public Long getLastId() {

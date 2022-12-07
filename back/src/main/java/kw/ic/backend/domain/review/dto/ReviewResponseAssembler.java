@@ -41,6 +41,7 @@ public class ReviewResponseAssembler {
                 .content(review.getContent())
                 .rating(review.getRating())
                 .emailPrefix(review.getMember().getEmail().substring(GRADE_START_INDEX, GRADE_END_INDEX))
+                .createdAt(review.getCreatedAt())
                 .menus(review.getReviewedMenus()
                         .stream()
                         .map(ReviewedMenu::getMenuName)
