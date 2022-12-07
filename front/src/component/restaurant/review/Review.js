@@ -1,72 +1,59 @@
-import { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Stack from "react-bootstrap/Stack";
+import star from "../../common/star";
+import Badge from "react-bootstrap/Badge";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+export const Review = (props) => {
 
-export const Review = ({ review }) => {
-  return (
-      <Col className="col-4 md-4">
-        <Card
-          style={{
-            border: "0px",
-            boxShadow: "0px 2px 2px 0px rgba(50,50,50,0.4)",
-          }}
-          className="mb-4"
-        >
-          <Card.Body style={{ minHeight: "240px" }}>
-            <div>
-              <h4 className="m-0">
-                <strong>Card Title</strong>
-              </h4>
-            </div>
-            <span>
-              <Stack direction="horizontal" gap={1} className="mt-2 mb-3">
-                <FontAwesomeIcon
-                  icon={faStar}
-                  size="sm"
-                  className="star-checked"
-                />
-                <FontAwesomeIcon
-                  icon={faStar}
-                  size="sm"
-                  className="star-checked"
-                />
-                <FontAwesomeIcon
-                  icon={faStar}
-                  size="sm"
-                  className="star-checked"
-                />
-                <FontAwesomeIcon
-                  icon={faStar}
-                  size="sm"
-                  className="star-checked"
-                />
-                <FontAwesomeIcon icon={faStar} size="sm" />
-              </Stack>
-            </span>
+    const {review} = props;
 
-            <Card.Text
-              style={{
-                color: "#7F7F7F",
-                fontSize: "11pt",
-                lineHeight: "1.3rem",
-              }}
+    return (
+        <Col className="col-4 md-4">
+            <Card
+                style={{
+                    border: "0px",
+                    boxShadow: "0px 2px 2px 0px rgba(50,50,50,0.4)",
+                }}
+                className="mb-4"
             >
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </Card.Text>
-          </Card.Body>
-          <Card.Footer>
-            <small class="text-muted">abcde@gmail.com</small>
-            <small class="text-muted" style={{ float: "right" }}>
-              9 mins
-            </small>
-          </Card.Footer>
-        </Card>
-      </Col>
-  );
+                <Card.Body style={{minHeight: "240px"}}>
+                    <div>
+                        <h4 className="m-0">
+                            <strong>{review.title}</strong>
+                        </h4>
+                    </div>
+                    <span>
+                        <Stack direction="horizontal" gap={1} className="mt-2 mb-3">
+                            {star(review.rating, "sm")}
+                        </Stack>
+                    </span>
+                    <span>
+                        {review.menus.map((menu, idx) =>
+                            <Badge pill bg="secondary" className="mr-2">
+                                {menu}
+                            </Badge>)
+                        }
+                    </span>
+                    <br/>
+                    <br/>
+
+                    <Card.Text
+                        style={{
+                            fontSize: "11pt",
+                            lineHeight: "1.3rem",
+                        }}
+                    >
+                        {review.content}
+                    </Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                    <small class="text-muted">학번: {review.emailPrefix}</small>
+                    <small class="text-muted" style={{float: "right"}}>
+                        {review.createdAt}
+                    </small>
+                </Card.Footer>
+            </Card>
+        </Col>
+    );
 };
