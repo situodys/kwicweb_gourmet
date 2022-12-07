@@ -1,5 +1,7 @@
 package kw.ic.backend.domain.menu.controller;
 
+import java.util.List;
+import kw.ic.backend.domain.menu.dto.SimpleMenu;
 import kw.ic.backend.domain.menu.dto.request.MenuPageRequest;
 import kw.ic.backend.domain.menu.dto.request.MenuRequest;
 import kw.ic.backend.domain.menu.dto.response.MenuPageResponse;
@@ -29,6 +31,13 @@ public class MenuController {
         log.info("find menus of restaurantId: {} with pagination", request);
 
         MenuPageResponse response = menuService.findMenus(request);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/all")
+    ResponseEntity<List<SimpleMenu>> findMenusByRestaurantId(Long restaurantId) {
+        List<SimpleMenu> response = menuService.findAllMenusByRestaurantId(restaurantId);
 
         return ResponseEntity.ok(response);
     }
