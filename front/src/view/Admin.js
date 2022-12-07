@@ -76,6 +76,7 @@ export default function Admin() {
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>restaurantId</th>
                     <th>title</th>
                     <th>category</th>
                     <th>request content</th>
