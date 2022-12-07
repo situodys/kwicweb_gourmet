@@ -2,8 +2,11 @@ package kw.ic.backend;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import kw.ic.backend.domain.likes.Likes;
 import kw.ic.backend.domain.likes.repository.LikesRepository;
 import kw.ic.backend.domain.member.Member;
@@ -11,8 +14,10 @@ import kw.ic.backend.domain.member.dto.embbed.Authority;
 import kw.ic.backend.domain.member.repository.MemberRepository;
 import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.menu.ReviewedMenu;
+import kw.ic.backend.domain.menu.dto.SimpleMenu;
 import kw.ic.backend.domain.menu.repository.MenuRepository;
 import kw.ic.backend.domain.menu.repository.ReviewedMenuRepository;
+import kw.ic.backend.domain.menu.service.ReviewedMenuService;
 import kw.ic.backend.domain.notification.Notification;
 import kw.ic.backend.domain.notification.repository.NotificationRepository;
 import kw.ic.backend.domain.proposal.Proposal;
@@ -61,6 +66,8 @@ public class Dummies {
     ProposalRepository proposalRepository;
     @Autowired
     ReviewedMenuRepository reviewedMenuRepository;
+    @Autowired
+    ReviewedMenuService reviewedMenuService;
 
     private RestaurantType pickType() {
         int rn = random.nextInt(3);
@@ -186,12 +193,20 @@ public class Dummies {
     @Order(5)
     @Transactional
     @Commit
-    public void insertReviews() throws Exception {
+    public void insertReviewsAndReviewedMenus() throws Exception {
 
         int idx = 1;
 
-        for (long memberId = 1; memberId <= 50; memberId++) {
-            for (long restaurantId = 1; restaurantId <= memberId; restaurantId++) {
+        for (long restaurantId = 1; restaurantId <= 50; restaurantId++) {
+            for (long memberId = 1; memberId <= 20; memberId++) {
+                List<SimpleMenu> simpleMenus = new ArrayList<>();
+                Long menuStartIdx = (restaurantId - 1) * 21 + 1;
+                Long menuEndIdx = menuStartIdx + memberId;
+                LongStream.rangeClosed(menuStartIdx, menuEndIdx)
+                        .forEach(menuId -> {
+                            simpleMenus.add(new SimpleMenu(menuId, "menuName" + menuId));
+                        });
+
                 Review review = Review.builder()
                         .title("title" + idx)
                         .rating(random.nextInt(5))
@@ -201,6 +216,7 @@ public class Dummies {
                         .build();
 
                 reviewRepository.save(review);
+                reviewedMenuService.registerAll(simpleMenus, review);
                 idx++;
             }
         }
@@ -239,19 +255,19 @@ public class Dummies {
             for (long restaurantId = 1; restaurantId <= memberId; restaurantId++) {
                 Category category = pickCategory();
                 Proposal proposal;
-                if(category.equals(Category.MENU_NAME) || category.equals(Category.PRICE)){
-                     proposal = Proposal.builder()
-                            .title("title"+idx)
+                if (category.equals(Category.MENU_NAME) || category.equals(Category.PRICE)) {
+                    proposal = Proposal.builder()
+                            .title("title" + idx)
                             .content("content" + idx)
                             .category(category)
                             .status("wait")
                             .restaurant(restaurantRepository.getReferenceById(restaurantId))
                             .member(memberRepository.getReferenceById(memberId))
-                            .menu(menuRepository.getReferenceById((long)random.nextInt(1000)+1))
+                            .menu(menuRepository.getReferenceById((long) random.nextInt(1000) + 1))
                             .build();
-                }else{
-                     proposal = Proposal.builder()
-                            .title("title"+idx)
+                } else {
+                    proposal = Proposal.builder()
+                            .title("title" + idx)
                             .content("content" + idx)
                             .category(category)
                             .status("wait")
@@ -266,24 +282,24 @@ public class Dummies {
         }
     }
 
-    @Test
-    @Order(7)
-    @Transactional
-    @Commit
-    public void insertReviewedMenus() throws Exception {
-
-        String[] menuNames = new String[]{"김치찌개", "피자", "치킨"};
-
-        for (long reviewId = 1; reviewId <= 100; reviewId++) {
-            for (int i = 0; i <= reviewId % 3; i++) {
-                ReviewedMenu reviewedMenu = ReviewedMenu.builder()
-                        .review(reviewRepository.getReferenceById(reviewId))
-                        .menu(menuRepository.getReferenceById((long) i+1))
-                        .menuName(menuNames[i])
-                        .build();
-
-                reviewedMenuRepository.save(reviewedMenu);
-            }
-        }
-    }
+//    @Test
+//    @Order(7)
+//    @Transactional
+//    @Commit
+//    public void insertReviewedMenus() throws Exception {
+//
+//        String[] menuNames = new String[]{"김치찌개", "피자", "치킨"};
+//
+//        for (long reviewId = 1; reviewId <= 100; reviewId++) {
+//            for (int i = 0; i <= reviewId % 3; i++) {
+//                ReviewedMenu reviewedMenu = ReviewedMenu.builder()
+//                        .review(reviewRepository.getReferenceById(reviewId))
+//                        .menu(menuRepository.getReferenceById((long) i + 1))
+//                        .menuName(menuNames[i])
+//                        .build();
+//
+//                reviewedMenuRepository.save(reviewedMenu);
+//            }
+//        }
+//    }
 }
