@@ -19,6 +19,7 @@ const Login = (props) => {
 
     const checkLogin = () => {
         const tk = window.localStorage.getItem("atk");
+        if(!tk)return;
         let jwtDecode = jwt_decode(tk);
         console.log(jwtDecode);
         if (jwtDecode.exp * 1000 <= Date.now()) {
