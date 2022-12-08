@@ -26,6 +26,10 @@ public class RestaurantResponse {
     @NotNull
     private RestaurantType type;
 
+    private Long likeCount;
+    private Double rating;
+    private Long reviewCount;
+
     @NotNull
     private Address address;
 
@@ -35,11 +39,14 @@ public class RestaurantResponse {
     private Boolean isLike;
 
     @Builder
-    public RestaurantResponse(Long restaurantId, String name, String description, RestaurantType type, Address address, RunningTime runningTime, Boolean isLike) {
+    public RestaurantResponse(Long restaurantId, String name, String description, RestaurantType type, Long likeCount, Double rating, Long reviewCount, Address address, RunningTime runningTime, Boolean isLike) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.description = description;
         this.type = type;
+        this.likeCount = likeCount;
+        this.rating = rating;
+        this.reviewCount = reviewCount;
         this.address = address;
         this.runningTime = runningTime;
         this.isLike = isLike;

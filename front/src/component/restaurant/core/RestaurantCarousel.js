@@ -1,8 +1,10 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState } from "react";
 
-const RestaurantCarousel = ({ tabKey }) => {
-  //const [] = useState([]);
+const RestaurantCarousel = (props) => {
+
+  const {restaurant} = props;
+
   return (
     <>
       <div className="w-100">
@@ -15,13 +17,13 @@ const RestaurantCarousel = ({ tabKey }) => {
           <div className="carousel-inner p-4">
             <div className="carousel-item active">
               <div class="d-flex justify-content-center">
-                <RestaurantCard tabKey={tabKey} />
+                <RestaurantCard restaurant={restaurant}/>
               </div>
             </div>
           </div>
           <a
             className="carousel-control-prev"
-            href="#carouselExampleControls"
+            href="src/component/restaurant/core/RestaurantCarousel#carouselExampleControls"
             role="button"
             data-slide="prev"
           >
@@ -33,7 +35,7 @@ const RestaurantCarousel = ({ tabKey }) => {
           </a>
           <a
             className="carousel-control-next"
-            href="#carouselExampleControls"
+            href="src/component/restaurant/core/RestaurantCarousel#carouselExampleControls"
             role="button"
             data-slide="next"
           >

@@ -4,22 +4,11 @@ import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 import Badge from "react-bootstrap/Badge";
 import Col from "react-bootstrap/Col";
-import Star from "./Star";
+import Star from "../common/star";
+import star from "../common/star";
 
 export const RestaurantSmallCard = (props) => {
     const {restaurant,imgURL} = props;
-
-    const convertRateToStar = (rate) =>{
-        let stars = [];
-        for(let i=0; i<5;i++){
-            if (i <= rate) {
-                stars.push(<Star className={"star-checked"}/>);
-                continue;
-            }
-            stars.push(<Star className={""}/>)
-        }
-        return stars
-    }
 
     const fullAddress = restaurant.simpleRestaurantResponse.address.city +" "+
         restaurant.simpleRestaurantResponse.address.street +" "+
@@ -74,7 +63,7 @@ export const RestaurantSmallCard = (props) => {
                         <strong>{restaurant.simpleRestaurantResponse.name}</strong>
                       </div>
                       <span className="mr-2">
-                        {convertRateToStar(restaurant.rating)}
+                        {star(restaurant.rating, "sm")}
                       </span>
                       <div class="pt-1">
                         <h6

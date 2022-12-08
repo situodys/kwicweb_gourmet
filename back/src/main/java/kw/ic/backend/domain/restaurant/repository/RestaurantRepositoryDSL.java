@@ -14,4 +14,8 @@ public interface RestaurantRepositoryDSL {
     List<RestaurantLikes> findRestaurantsByMostLikesLimit5();
 
     List<RestaurantReviewRating> findRestaurantsByMostMostReviewRatingLimit5();
+
+    RestaurantStatic findRestaurantByRestaurantId(Long restaurantId);
 }
+
+

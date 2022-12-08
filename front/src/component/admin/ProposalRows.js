@@ -4,6 +4,7 @@ export default function ProposalRows(props) {
     const {proposal, handleButton}  = props;
 
     const cols = [
+        "restaurantId",
         "proposalId",
         "title",
         "category",
@@ -18,10 +19,10 @@ export default function ProposalRows(props) {
         if (category === "price") {
             return "PRICE";
         }
-        if (category === "menuName") {
+        if (category === "openTime") {
             return "OPEN_TIME";
         }
-        if (category === "menuName") {
+        if (category === "closeTime") {
             return "CLOSE_TIME";
         }
     }
@@ -37,6 +38,8 @@ export default function ProposalRows(props) {
         postData.title = proposal.title;
 
         console.log(postData);
+
+        return postData;
     }
 
     return (

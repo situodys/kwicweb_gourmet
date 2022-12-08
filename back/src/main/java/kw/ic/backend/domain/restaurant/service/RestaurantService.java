@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import kw.ic.backend.domain.likes.repository.LikesRepository;
 import kw.ic.backend.domain.restaurant.dto.RestaurantResponseAssembler;
+import kw.ic.backend.domain.restaurant.dto.projection.RestaurantStatic;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantPageRequest;
 import kw.ic.backend.domain.restaurant.dto.request.RestaurantRequest;
 import kw.ic.backend.domain.restaurant.dto.response.RestaurantLikesResponse;
@@ -60,14 +61,13 @@ public class RestaurantService {
     }
 
     public RestaurantResponse findRestaurantByIdAndCheckIsLike(Long restaurantId,Long memberId) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(()->new CustomException(ErrorCode.ENTITY_NOT_FOUND));
+        RestaurantStatic result = restaurantRepository.findRestaurantByRestaurantId(restaurantId);
         Boolean isLike = null;
         if (memberId != null) {
             isLike= likesRepository.existsByMemberIdAndRestaurantId(memberId, restaurantId);
         }
 
-        return responseAssembler.restaurantResponse(restaurant,isLike);
+        return responseAssembler.restaurantResponse(result,isLike);
     }
 
     public Long register(RestaurantRequest request) {

@@ -1,5 +1,6 @@
-package kw.ic.backend.domain.restaurant.dto.response;
+package kw.ic.backend.domain.notification.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import kw.ic.backend.domain.proposal.dto.embbed.Category;
 import kw.ic.backend.domain.restaurant.entity.Restaurant;
@@ -20,6 +21,7 @@ public class NotificationResponse {
 
     private String updatedContent;
 
+    @JsonFormat(pattern = "YYYY-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 
     private Long restaurant_id;

@@ -1,7 +1,10 @@
 package kw.ic.backend.domain.menu.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import kw.ic.backend.domain.menu.Menu;
 import kw.ic.backend.domain.menu.dto.MenuResponseAssembler;
+import kw.ic.backend.domain.menu.dto.SimpleMenu;
 import kw.ic.backend.domain.menu.dto.request.MenuPageRequest;
 import kw.ic.backend.domain.menu.dto.request.MenuRequest;
 import kw.ic.backend.domain.menu.dto.response.MenuPageResponse;
@@ -26,6 +29,15 @@ public class MenuService {
                 .map(menu -> responseAssembler.menuResponse(menu));
 
         return new MenuPageResponse(result);
+    }
+
+    public List<SimpleMenu> findAllMenusByRestaurantId(Long restaurantId) {
+        List<SimpleMenu> result = menuRepository.findAllByRestaurantId(restaurantId)
+                .stream()
+                .map(menu -> new SimpleMenu(menu.getId(), menu.getMenuName()))
+                .collect(Collectors.toUnmodifiableList());
+
+        return result;
     }
 
     public Long register(MenuRequest request) {

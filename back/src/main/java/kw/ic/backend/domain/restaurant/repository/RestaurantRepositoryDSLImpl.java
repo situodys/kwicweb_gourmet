@@ -86,6 +86,25 @@ public class RestaurantRepositoryDSLImpl implements RestaurantRepositoryDSL {
         return result;
     }
 
+    public RestaurantStatic findRestaurantByRestaurantId(Long restaurantId) {
+        RestaurantStatic result = jpaQueryFactory.select(Projections.constructor(
+                        RestaurantStatic.class,
+                        restaurant,
+                        likes.countDistinct(),
+                        review.rating.avg().coalesce(0.0),
+                        review.countDistinct()
+                ))
+                .from(restaurant)
+                .leftJoin(likes).on(likes.restaurant.eq(restaurant))
+                .leftJoin(review).on(review.restaurant.eq(restaurant))
+                .where(
+                        restaurant.id.eq(restaurantId)
+                )
+                .groupBy(restaurant)
+                .fetchOne();
+        return result;
+    }
+
 
     private BooleanExpression ltRestaurantId(Long lastId) {
         if (lastId == null) {
