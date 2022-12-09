@@ -1,44 +1,78 @@
-import { ProposalList } from "./ProposalList";
-import { useState, useEffect } from "react";
+import {ProposalList} from "./ProposalList";
+import {useEffect, useState} from "react";
 
 import customAxios from "../../../api/customAxios";
 
 import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import {Container, Pagination} from "react-bootstrap";
 
 const Proposal = (props) => {
-  const [proposalList, setProposalList] = useState([]);
 
-  const handleProposalList = async () => {
-    try {
-      const response = await customAxios.get("/menus?restaurantId=2");
-      if (response.status === 200) {
-        return response.data.menus;
-      }
-    } catch (err) {
-      if (err) {
-        console.log(err);
-      }
+    const {restaurantId} = props;
+    const [proposalResponse, setProposalResponse] = useState({});
+
+    const [pageList, setPageList] = useState([]);
+
+
+    const init = async () => {
+        try {
+            const response = await customAxios.get(`/proposals/restaurant/${restaurantId}`);
+            setProposalResponse(response.data);
+            console.log(response.data);
+        } catch (err) {
+            if (err) {
+                console.log(err);
+            }
+        }
+    };
+
+    useEffect(() => {
+        void init();
+    }, []);
+
+    useEffect(() => {
+        updatePageList();
+    }, [proposalResponse]);
+
+    const loadProposals = async (page, size, totalCount) => {
+        try {
+            let response = await customAxios.get(`/proposals/restaurant/${restaurantId}?page=${page}&size=10&totalCount=${totalCount}`);
+            setProposalResponse(response.data);
+            console.log(response.data);
+        } catch (err) {
+            console.log(err);
+        }
     }
-  };
 
-  useEffect(() => {
-    setProposalList(handleProposalList());
-  }, []);
+    const updatePageList = () => {
+        if (!proposalResponse) return;
+        let {startIndex, endIndex, curPage, prev, next} = proposalResponse;
+        let pageLists = [];
+        if (prev) {
+            pageLists.push(<Pagination.Prev onClick={e => handlePage(e, startIndex - 2)}/>)
+        }
+        for (let idx = startIndex; idx <= endIndex; idx++) {
+            pageLists.push(<Pagination.Item onClick={e => handlePage(e, idx - 1)} key={idx}
+                                            active={idx === curPage}>{idx}</Pagination.Item>)
+        }
+        if (next) {
+            pageLists.push(<Pagination.Next onClick={e => handlePage(e, endIndex)}/>)
+        }
+        setPageList(pageLists);
+    }
 
-  return (
-    <>
-      <div class="album py-5" style={{ backgroundColor: "#fff7ec" }}>
-        <div class="container">
-          <hr></hr>
-          <div class="row">
-            <Col className="col-12">
-              <ProposalList proposalList={proposalList}></ProposalList>
-            </Col>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+    const handlePage = async (e, nextPage) => {
+        e.preventDefault();
+        await loadProposals(nextPage, 10, proposalResponse.totalCount);
+    }
+
+    return (
+        <div class="album py-5" style={{backgroundColor: "#fff7ec"}}>
+            <Container>
+                <hr/>
+                <ProposalList proposals={proposalResponse?.data}></ProposalList>
+                <Pagination className={"justify-content-center"}>{pageList}</Pagination>
+            </Container>
+        </div>);
 };
 export default Proposal;
