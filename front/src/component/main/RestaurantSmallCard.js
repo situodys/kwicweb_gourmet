@@ -16,7 +16,7 @@ export const RestaurantSmallCard = (props) => {
     const url = `/restaurant/${restaurant.simpleRestaurantResponse.restaurantId}`;
 
   return (
-      <Col className="col-4 mb-3">
+      <Col className="col-xl-4 mb-3">
         <Link
           to={url}
           state={{restaurantId: restaurant.simpleRestaurantResponse.restaurantId}}

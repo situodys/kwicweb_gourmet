@@ -3,6 +3,7 @@ import {RestaurantSmallCard} from "./RestaurantSmallCard";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import thumbnails from "../../assets/data.json"
+import "./asset/CardListScroll.css"
 
 export const RestaurantList = (props) => {
 
@@ -12,12 +13,11 @@ export const RestaurantList = (props) => {
 
     return (
         <Container
-            className="p-3"
+            className="p-3 customScrollBar"
             style={{
                 width: "100%",
                 height: "93%",
                 overflow: "auto",
-                backgroundColor: "rgba(255, 0, 0, 0.1)",
                 borderRadius: "25px",
             }}
         >

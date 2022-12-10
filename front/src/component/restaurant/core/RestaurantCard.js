@@ -21,7 +21,6 @@ const RestaurantCard = (props) => {
         <div
             className="card"
             style={{
-                minWidth: "60rem",
                 width: "70rem",
                 border: "0px",
                 borderRadius: "20px",
