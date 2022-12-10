@@ -4,6 +4,7 @@ import {useInView} from "react-intersection-observer";
 import CustomAxios from "../../../api/customAxios";
 import {Container} from "react-bootstrap";
 import ReviewModal from "./ReviewModal";
+import SkeletonReviews from "./SkeletonReviews";
 
 const Reviews = (props) => {
 
@@ -92,7 +93,8 @@ const Reviews = (props) => {
                     <div ref={ref}></div>
                 </Container>
                 :
-                <div>로그인 후에 확인하실 수 있습니다.</div>}
+                <SkeletonReviews/>
+            }
         </div>
     );
 };

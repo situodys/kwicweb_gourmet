@@ -9,13 +9,14 @@ export const Review = (props) => {
     const {review} = props;
 
     return (
-        <Col className="col-4 md-4">
+        <Col className="col-lg-4 mb-4">
             <Card
                 style={{
                     border: "0px",
                     boxShadow: "0px 2px 2px 0px rgba(50,50,50,0.4)",
+                    minWidth: '250px'
                 }}
-                className="mb-4"
+                className="mb-3"
             >
                 <Card.Body style={{minHeight: "240px"}}>
                     <div>
