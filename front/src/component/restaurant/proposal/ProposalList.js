@@ -29,6 +29,20 @@ export const ProposalList = (props) => {
         }
     }
 
+    const statusStyle = (col,status) =>{
+        if(col !== "status") return;
+        if(status==="apply"){
+            return {
+            color: "#3cb371",
+            }
+        }
+        if (status === "refuse") {
+            return {
+                color: "#ee4a5d"
+            }
+        }
+    }
+
     return (
         <>
             <Card
@@ -53,7 +67,7 @@ export const ProposalList = (props) => {
                             <tr key={outerKey}>
                                 {
                                     cols.map((keyValue, idx) =>
-                                        <td key={idx}>{toPrintForm(keyValue, element[keyValue])} </td>
+                                        <td style={statusStyle(keyValue,element[keyValue])} key={idx}>{toPrintForm(keyValue, element[keyValue])} </td>
                                     )
                                 }
                             </tr>

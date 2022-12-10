@@ -2,16 +2,19 @@ import {ProposalList} from "./ProposalList";
 import {useEffect, useState} from "react";
 
 import customAxios from "../../../api/customAxios";
-
-import Col from "react-bootstrap/Col";
 import {Container, Pagination} from "react-bootstrap";
+import ProposalModal from "./ProposalModal";
 
 const Proposal = (props) => {
 
     const {restaurantId} = props;
     const [proposalResponse, setProposalResponse] = useState({});
 
+    const [showRegister, setShowRegister] = useState(false);
     const [pageList, setPageList] = useState([]);
+
+    const [registerFlag, setRegisterFlag] = useState(false);
+
 
 
     const init = async () => {
@@ -28,7 +31,7 @@ const Proposal = (props) => {
 
     useEffect(() => {
         void init();
-    }, []);
+    }, [registerFlag]);
 
     useEffect(() => {
         updatePageList();
@@ -66,9 +69,25 @@ const Proposal = (props) => {
         await loadProposals(nextPage, 10, proposalResponse.totalCount);
     }
 
+    const handleRegisterButton = () =>{
+        setShowRegister(!showRegister);
+    }
+
+    const handleRegisterFlag = () =>{
+        setRegisterFlag(!registerFlag);
+    }
+
     return (
         <div class="album py-5" style={{backgroundColor: "#fff7ec"}}>
             <Container>
+                <button
+                    onClick={handleRegisterButton}
+                    type="button"
+                    className="btn btn-primary btn-lg px-5"
+                    style={{borderRadius: "27px"}}
+                >등록하기
+                </button>
+               {showRegister && <ProposalModal handleRegisterFlag={handleRegisterFlag} restaurantId={restaurantId} show={showRegister} handleClose={handleRegisterButton}/>}
                 <hr/>
                 <ProposalList proposals={proposalResponse?.data}></ProposalList>
                 <Pagination className={"justify-content-center"}>{pageList}</Pagination>
