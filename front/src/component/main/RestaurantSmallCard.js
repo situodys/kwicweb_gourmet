@@ -4,7 +4,6 @@ import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 import Badge from "react-bootstrap/Badge";
 import Col from "react-bootstrap/Col";
-import Star from "../common/star";
 import star from "../common/star";
 
 export const RestaurantSmallCard = (props) => {
@@ -14,10 +13,12 @@ export const RestaurantSmallCard = (props) => {
         restaurant.simpleRestaurantResponse.address.street +" "+
         restaurant.simpleRestaurantResponse.address.zipcode;
 
+    const url = `/restaurant/${restaurant.simpleRestaurantResponse.restaurantId}`;
+
   return (
       <Col className="col-4 mb-3">
         <Link
-          to="/restaurant"
+          to={url}
           state={{restaurantId: restaurant.simpleRestaurantResponse.restaurantId}}
           style={{ textDecoration: "none", color: "black" }}
         >

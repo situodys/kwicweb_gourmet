@@ -1,22 +1,19 @@
 import customAxios from "../api/customAxios";
+import {useNavigate} from "react-router-dom";
 
 const NotFound = () => {
 
-    const test = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await customAxios.get("/proposals");
-            console.log(response.data);
-        } catch (err){
-            console.log(err);
-        }
+    const navigate = useNavigate();
 
+    const handleNavigate = async (e) => {
+        e.preventDefault();
+        navigate("/main");
     };
 
     return (
         <div>
-            잘못된 경로의 접근입니다.
-            <button onClick={test}>클ㄹ리리리릭</button>
+            <h1>잘못된 경로의 접근입니다.</h1>
+            <button onClick={handleNavigate}>메인으로 돌아가기</button>
         </div>
     );
 };

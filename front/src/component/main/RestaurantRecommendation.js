@@ -48,31 +48,35 @@ export const RestaurantRecommendation = (props) => {
                                         </div>
                                     </div>
                                     <hr className="my-2"></hr>
-                                    {topLikesList.length !== 0 && topLikesList.map((element, idx) => (
-                                        <Link style={{textDecoration: "none", color: "black"}}
-                                              to={`/restaurant`}
-                                              state={{restaurantId: element.simpleRestaurantResponse.restaurantId}}
-                                              className="d-flex" key={idx}>
-                                            <div
-                                                className="card-text mr-2"
-                                                style={{fontSize: "16px"}}
-                                            >
-                                                <b>{idx+1}. </b>
-                                                <b>{element.simpleRestaurantResponse.name}</b>
-                                            </div>
-                                            <div
-                                                className="px-2 my-1"
-                                                style={{
-                                                    color: "white",
-                                                    borderRadius: "5px",
-                                                    backgroundColor: "#F65390",
-                                                    fontSize: "12px",
-                                                }}
-                                            >
-                                                {element.likeCount}
-                                            </div>
-                                        </Link>
-                                    ))
+                                    {topLikesList.length !== 0 && topLikesList.map((element, idx) => {
+                                        const url = `/restaurant/${element.simpleRestaurantResponse.restaurantId}`;
+
+                                        return (
+                                            <Link style={{textDecoration: "none", color: "black"}}
+                                                  to={url}
+                                                  state={{restaurantId: element.simpleRestaurantResponse.restaurantId}}
+                                                  className="d-flex" key={idx}>
+                                                <div
+                                                    className="card-text mr-2"
+                                                    style={{fontSize: "16px"}}
+                                                >
+                                                    <b>{idx + 1}. </b>
+                                                    <b>{element.simpleRestaurantResponse.name}</b>
+                                                </div>
+                                                <div
+                                                    className="px-2 my-1"
+                                                    style={{
+                                                        color: "white",
+                                                        borderRadius: "5px",
+                                                        backgroundColor: "#F65390",
+                                                        fontSize: "12px",
+                                                    }}
+                                                >
+                                                    {element.likeCount}
+                                                </div>
+                                            </Link>
+                                        )
+                                    })
                                     }
 
                                     <div className="w-100 mt-4">
@@ -101,19 +105,21 @@ export const RestaurantRecommendation = (props) => {
                                     {topRatingsList.length !== 0 && (
                                         <>
                                             <div className="">
-                                                {topRatingsList.map((element,idx) => (
-                                                    <>
+                                                {topRatingsList.map((element, idx) => {
+                                                    const url = `/restaurant/${element.simpleRestaurantResponse.restaurantId}`;
+
+                                                    return (
                                                         <Link
                                                             style={{textDecoration: "none", color: "black"}}
-                                                            to={`/restaurant`}
+                                                            to={url}
                                                             state={{restaurantId: element.simpleRestaurantResponse.restaurantId}}
                                                             className="d-flex">
                                                             <div
-                                                                key = {idx}
+                                                                key={idx}
                                                                 className="card-text mr-2"
                                                                 style={{fontSize: "16px"}}
                                                             >
-                                                                <b>{idx+1}. </b>
+                                                                <b>{idx + 1}. </b>
                                                                 <b>{element.simpleRestaurantResponse.name}</b>
                                                             </div>
                                                             <div
@@ -128,8 +134,8 @@ export const RestaurantRecommendation = (props) => {
                                                                 {element.rating}
                                                             </div>
                                                         </Link>
-                                                    </>
-                                                ))}
+                                                    )
+                                                })}
                                             </div>
                                         </>
                                     )}
