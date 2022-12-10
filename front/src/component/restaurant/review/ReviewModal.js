@@ -12,7 +12,7 @@ import jwt_decode from "jwt-decode";
 
 const ReviewModal = (props) => {
 
-    const {show, handleClose, menus,restaurantId} = props;
+    const {handleRegisterFlag, show, handleClose, menus,restaurantId} = props;
 
     const [rating, setRating] = useState(0);
     const [title, setTitle] = useState("");
@@ -73,10 +73,10 @@ const ReviewModal = (props) => {
         try{
             let response = await customAxios.post(`/reviews`, toPostData());
             console.log(response.data);
+            handleRegisterFlag();
             handleClose();
-            window.reload();
         }catch (err){
-            window.alert("잘못된 입력 형식이 있습니다");
+            console.log(err);
         }
 
     }

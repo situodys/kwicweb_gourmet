@@ -17,10 +17,11 @@ const Reviews = (props) => {
     const [ref, inView] = useInView();
 
     const [showRegister, setShowRegister] = useState(false);
+    const [registerFlag, setRegisterFlag] = useState(false);
 
     useEffect(() => {
         void init();
-    }, []);
+    }, [registerFlag]);
 
     useEffect(() => {
         if (lastId && inView) {
@@ -30,7 +31,7 @@ const Reviews = (props) => {
 
     const init = async () => {
         try {
-            await loadReviews();
+            await loadReviews("init");
             const response = await CustomAxios.get(`/menus/all?restaurantId=${restaurantId}`);
             setMenus(response.data);
             console.log(response.data);
@@ -39,9 +40,15 @@ const Reviews = (props) => {
         }
     }
 
-    const loadReviews = async () => {
+    const loadReviews = async (flag) => {
         try {
-            const response = await CustomAxios.get(`/reviews?restaurantId=${restaurantId}` + toQueryString());
+            let queryString;
+            if(flag==="init"){
+                setReviews([]);
+                queryString = "";
+            }
+            else queryString = toQueryString();
+            const response = await CustomAxios.get(`/reviews?restaurantId=${restaurantId}` + queryString);
             setReviewsResponse(response.data);
             setReviews((prevReviews) => [...prevReviews, ...response.data.data]);
             setLastId(response?.data?.lastId);
@@ -61,6 +68,10 @@ const Reviews = (props) => {
         setShowRegister(!showRegister);
     }
 
+    const handleRegisterFlag =() =>{
+        setRegisterFlag(!registerFlag);
+    }
+
     return (
         <div class="album py-5" style={{backgroundColor: "#fff7ec"}}>
             {isAuthenticated ?
@@ -70,8 +81,8 @@ const Reviews = (props) => {
                         type="button"
                         class="btn btn-primary btn-lg px-5"
                         style={{ borderRadius: "27px" }}
-                    >리뷰 등록하기</button>
-                    {showRegister && <ReviewModal restaurantId={restaurantId} menus = {menus} show={showRegister} handleClose={handleRegisterButton}/>}
+                    >등록하기</button>
+                    {showRegister && <ReviewModal handleRegisterFlag={handleRegisterFlag} restaurantId={restaurantId} menus = {menus} show={showRegister} handleClose={handleRegisterButton}/>}
                     <hr/>
                     <div class="row" style={{marginBottom: '16px'}}>
                         {reviews?.map((review) => (
