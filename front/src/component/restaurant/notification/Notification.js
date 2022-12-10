@@ -2,6 +2,7 @@ import {Container, Pagination, Table} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import customAxios from "../../../api/customAxios";
 import NotificationRow from "./NotificationRow";
+import Card from "react-bootstrap/Card";
 
 export default function Notification(props) {
 
@@ -52,25 +53,35 @@ export default function Notification(props) {
         <div className="album py-5" style={{backgroundColor: "#fff7ec"}}>
             <Container className={"text-center align-items-center"}>
                 <hr/>
-                <Table bordered style={{minHeight: '490px', backgroundColor: '#ffffff'}}>
-                    <thead>
-                    <tr>
-                        <th>카테고리</th>
-                        <th>참고</th>
-                        <th>변경 전</th>
-                        <th>변경 후</th>
-                        <th>등록 시간</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {notificationResponse?.notifications?.map((notification, idx) =>
-                        <NotificationRow key={idx} notification={notification}/>
-                    )}
-                    </tbody>
-                </Table>
-
+                <Card
+                    style={{
+                        border: "0px",
+                        boxShadow: "0px 2px 2px 0px rgba(50,50,50,0.4)",
+                    }}
+                    className="mb-4"
+                >
+                    <Card.Body style={{minHeight: "490px", overflow: "auto"}}>
+                        <Table className={"text-center"}>
+                            <thead>
+                            <tr>
+                                <th>카테고리</th>
+                                <th>참고</th>
+                                <th>변경 전</th>
+                                <th>변경 후</th>
+                                <th>등록 시간</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {notificationResponse?.notifications?.map((notification, idx) =>
+                                <NotificationRow key={idx} notification={notification}/>
+                            )}
+                            </tbody>
+                        </Table>
+                    </Card.Body>
+                </Card>
                 <Pagination className={"justify-content-center"}>{pageList}</Pagination>
             </Container>
         </div>
     );
 };
+
