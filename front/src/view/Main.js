@@ -14,6 +14,8 @@ export default function Main() {
     const [ref, inView] = useInView();
     const [searchInput, setSearchInput] = useState("");
 
+    const [addresses, setAddresses] = useState([]);
+
     const init = async () => {
         try {
             const responseLikesTop5 = await customAxios.get("/restaurants/likes/top");
@@ -23,6 +25,7 @@ export default function Main() {
             setTopRatings(responseRatesTop5.data);
             setRestaurants(responseRestaurants.data.data);
             setLastId(responseRestaurants.data.lastId);
+            getAddresses(responseRestaurants.data.data);
         } catch (err) {
             if (err) {
                 console.log(err);
@@ -39,6 +42,7 @@ export default function Main() {
             else response= await customAxios.get(`/restaurants?lastId=${lastId}&name=${searchInput}`);
             setRestaurants((prevRestaurants) => [...prevRestaurants, ...response.data.data]);
             setLastId(response.data.lastId);
+            getAddresses(response.data.data);
         } catch (err) {
             console.log(err);
         }
@@ -66,6 +70,14 @@ export default function Main() {
         void fetch(true);
     }
 
+    const getAddresses =(restaurants)=>{
+        let fetchedAddresses = [];
+        restaurants?.map((restaurant, idx) => {
+            fetchedAddresses.push(restaurant.simpleRestaurantResponse);
+        });
+        setAddresses(fetchedAddresses);
+    }
+
     return (
         <div
             className="d-flex Login-body justify-content-center"
@@ -76,7 +88,7 @@ export default function Main() {
                     <div className="col-4">
                         <div className="container-fluid h-100">
                             <div className="row mb-4">
-                                <Map/>
+                                <Map locations ={addresses}/>
                             </div>
                             <div className="row">
                                 <RestaurantRecommendation

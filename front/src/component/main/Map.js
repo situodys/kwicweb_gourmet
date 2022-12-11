@@ -1,35 +1,66 @@
 /*global kakao*/
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 
-export const Map = () => {
-  useEffect(() => {
-    var container = document.getElementById("map");
-    var options = {
-      center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
-      level: 3,
-    };
+export const Map = (props) => {
 
-    var map = new kakao.maps.Map(container, options);
-    // var markerPosition = new kakao.maps.LatLng(
-    //   37.365264512305174,
-    //   127.10676860117488
-    // );
+    let container;
+    let options;
+    let map;
 
-    // var marker = new kakao.maps.Marker({
-    //   position: markerPosition,
-    // });
-    // marker.setMap(map);
-  }, []);
+    const {addresses} = props;
 
-  return (
-    <div className="w-100">
-      <div
-        id="map"
-        className="shadow-lg"
-        style={{ maxheight: "100%", aspectRatio: "1/1", borderRadius: "12px" }}
-      ></div>
-    </div>
-  );
+    useEffect(() => {
+        createMap();
+    }, []);
+
+    useEffect(() => {
+        markAddresses();
+    }, [addresses]);
+
+    const createMap = () => {
+        container = document.getElementById("map");
+        options = {
+            center: new kakao.maps.LatLng(37.62007363509869, 127.05875945815039),
+            level: 4,
+        };
+        map = new kakao.maps.Map(container, options);
+    }
+
+    const markAddresses = () => {
+        const geocoder = new kakao.maps.services.Geocoder();
+        for (let i = 0; i < addresses?.length; i++) {
+            geocoder?.addressSearch(toFullAddress(addresses[i]), (result, status) => {
+                if (status === kakao.maps.services.Status.OK) {
+                    let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    let marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+                    let infoWindow = new kakao.maps.InfoWindow({
+                        content: addresses[i]?.name
+                    });
+                    infoWindow.open(map, marker);
+                    map.setCenter(coords);
+                }
+            })
+        }
+    }
+
+    const toFullAddress = (simpleRestaurantResponse) => {
+        let fullAddr = simpleRestaurantResponse.address.city + " " +
+            simpleRestaurantResponse.address.street + " " +
+            simpleRestaurantResponse.address.zipcode;
+
+        return fullAddr;
+    }
+
+    return (
+        <div className="w-100">
+            <div
+                id="map"
+                className="shadow-lg"
+                style={{maxheight: "100%", aspectRatio: "1/1", borderRadius: "12px"}}
+            ></div>
+        </div>
+    );
 };
-
-export default Map;
