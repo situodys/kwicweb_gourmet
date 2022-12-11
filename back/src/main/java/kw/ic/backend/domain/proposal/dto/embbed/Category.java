@@ -8,9 +8,9 @@ public enum Category {
     MENU_NAME,
     @JsonProperty("price")
     PRICE,
-    @JsonProperty("closeTime")
-    OPEN_TIME,
     @JsonProperty("openTime")
+    OPEN_TIME,
+    @JsonProperty("closeTime")
     CLOSE_TIME;
 
     @JsonCreator

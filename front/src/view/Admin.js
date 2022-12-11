@@ -62,7 +62,7 @@ export default function Admin() {
         try {
             let response = await customAxios.post(`/admin/proposal/${status}`,
                 postData);
-
+            void await loadProposals(proposalResponse.curPage-1, 10, proposalResponse.totalCount);
         } catch (err) {
             console.log(err);
         }
@@ -72,7 +72,7 @@ export default function Admin() {
 
     return (
         <Container className={"align-items-center"} style={{marginTop: '10vh'}}>
-            <Table striped bordered hover>
+            <Table bordered hover className={"text-center"}>
                 <thead>
                 <tr>
                     <th>#</th>

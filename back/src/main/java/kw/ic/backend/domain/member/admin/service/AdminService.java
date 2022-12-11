@@ -35,15 +35,17 @@ public class AdminService {
 
     public void apply(ProposalRequest request) {
         Category category = request.getCategory();
-        Menu menu = menuRepository.findById(request.getMenuId())
-                .orElseThrow(() -> new CustomException(ErrorCode.ENTITY_NOT_FOUND));
 
         changeStatusToApply(request);
         if (category.equals(Category.PRICE)) {
+            Menu menu = menuRepository.findById(request.getMenuId())
+                    .orElseThrow(() -> new CustomException(ErrorCode.ENTITY_NOT_FOUND));
             modifyPrice(request, menu);
             return;
         }
         if (category.equals(Category.MENU_NAME)) {
+            Menu menu = menuRepository.findById(request.getMenuId())
+                    .orElseThrow(() -> new CustomException(ErrorCode.ENTITY_NOT_FOUND));
             modifyMenuName(request, menu);
             return;
         }
@@ -79,7 +81,7 @@ public class AdminService {
 
     private void modifyPrice(ProposalRequest request, Menu menu) {
         String previousContent = menu.getMenuName();
-        previousContent += String.valueOf(menu.getPrice());
+        previousContent = previousContent + ","+String.valueOf(menu.getPrice());
         menu.changePrice(request.getContent());
         menuRepository.save(menu);
         registerNotification(request, previousContent);

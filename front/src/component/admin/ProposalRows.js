@@ -4,8 +4,8 @@ export default function ProposalRows(props) {
     const {proposal, handleButton}  = props;
 
     const cols = [
-        "restaurantId",
         "proposalId",
+        "restaurantId",
         "title",
         "category",
         "content",
