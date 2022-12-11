@@ -5,17 +5,84 @@ import imgUrl from "../../../assets/data.json"
 
 import "../../../assets/styles.scss";
 import star from "../../common/star";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import jwt_decode from "jwt-decode";
+import customAxios from "../../../api/customAxios";
 
 const RestaurantCard = (props) => {
 
     const {restaurant} = props;
 
-    const [isLike, setIsLike] = useState();
+    const [isLike, setIsLike] = useState(restaurant.isLike);
+    const [likeCount, setLikeCount] = useState(restaurant.likeCount);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    const fullAddress = restaurant.address.city +"\n"+
-        restaurant.address.street +"\n"+
+    const fullAddress = restaurant.address.city + "\n" +
+        restaurant.address.street + "\n" +
         restaurant.address.zipcode;
+
+    useEffect(() => {
+        checkAuthenticated();
+    }, []);
+
+    const checkAuthenticated = () => {
+        let atk = window.localStorage.getItem("atk");
+        if(!atk) {
+            setIsAuthenticated(false);
+            return;
+        }
+        let jwtDecode = jwt_decode(atk);
+        if (jwtDecode.exp * 1000 <= Date.now()) {
+            window.localStorage.clear();
+            setIsAuthenticated(false);
+            return;
+        }
+        setIsAuthenticated(true);
+        return;
+    }
+
+    const getMemberId = () =>{
+        let payload = jwt_decode(window.localStorage.getItem("atk"));
+        return payload.sub;
+    }
+
+    const createLikePostData = ()=>{
+        let data = {};
+        data.memberId = getMemberId();
+        data.restaurantId = restaurant.restaurantId;
+        return data;
+    }
+
+    const handleLikeButton = async(e) => {
+        e.preventDefault();
+
+        if (isLike === true) {
+            await cancelLike();
+        }
+        if(isLike === false){
+            await addLike();
+        }
+        setIsLike(!isLike);
+    }
+
+    const handleLikeIconColor = ()=>{
+        if (isLike) {
+            return '#cc0000';
+        }
+        return '';
+    }
+
+    const cancelLike = async() => {
+        let response = await customAxios.post(`/likes/cancel`, createLikePostData());
+        setLikeCount(response.data);
+    }
+
+    const addLike = async () => {
+        let response = await customAxios.post(`/likes/add`, createLikePostData());
+        setLikeCount(response.data);
+    }
+
+
 
     return (
         <div
@@ -77,11 +144,11 @@ const RestaurantCard = (props) => {
                                     >
                                         영업중
                                     </p>
-                                    <p class="card-text">오픈시간 {restaurant.runningTime.openAt} / 마감 시간
-                                        {restaurant.runningTime.closeAt}</p>
+                                    <p class="card-text">영업
+                                        시간 {restaurant.runningTime.openAt} - {restaurant.runningTime.closeAt}</p>
                                 </div>
                                 <div class="mt-auto">
-                                    <p class="card-text"  style={{width: "160px", whiteSpace: 'pre-line'}}>
+                                    <p class="card-text" style={{width: "160px", whiteSpace: 'pre-line'}}>
                                         {fullAddress}
                                     </p>
                                 </div>
@@ -92,10 +159,12 @@ const RestaurantCard = (props) => {
                             <div class="d-flex align-items-end flex-column h-100">
                                 <div class="p-2">
                                     <Button
+                                        disabled={!isAuthenticated ? true:false}
                                         className="btn btn-heart btn-lg px-5"
                                         style={{borderRadius: "27px"}}
+                                        onClick={handleLikeButton}
                                     >
-                                        <Heart/> {restaurant.likeCount}
+                                        <Heart style={{fill: handleLikeIconColor()}}/> {likeCount}
                                     </Button>
                                 </div>
                             </div>

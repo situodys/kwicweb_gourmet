@@ -23,17 +23,17 @@ public class LikesController {
     ResponseEntity<Long> add(@RequestBody LikesRequest likesRequest) {
         log.info("memberId {} like to restaurantId {}");
 
-        Long likesId = likesService.add(likesRequest);
+        Long likeCount = likesService.add(likesRequest);
 
-        return ResponseEntity.ok(likesId);
+        return ResponseEntity.ok(likeCount);
     }
 
     @PostMapping("/cancel")
-    ResponseEntity<Void> cancel(@RequestBody LikesRequest likesRequest) {
+    ResponseEntity<Long> cancel(@RequestBody LikesRequest likesRequest) {
         log.info("memberId {} cancel like to restaurantId {}");
 
-        likesService.cancel(likesRequest);
+        Long likeCount = likesService.cancel(likesRequest);
 
-        return new ResponseEntity(HttpStatus.OK);
+        return ResponseEntity.ok(likeCount);
     }
 }
