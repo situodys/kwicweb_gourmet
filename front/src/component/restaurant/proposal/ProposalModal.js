@@ -23,7 +23,7 @@ const ProposalModal = (props) => {
     ];
     const [menus, setMenus] = useState();
     const [title, setTitle] = useState("");
-    const [category, setCategory] = useState("CLOSE_TIME");
+    const [category, setCategory] = useState("OPEN_TIME");
     const [content, setContent] = useState("");
     const [menuId, setMenuId] = useState();
 
@@ -41,6 +41,7 @@ const ProposalModal = (props) => {
         if(!menus){
             let response = await customAxios.get(`menus/all?restaurantId=${restaurantId}`);
             setMenus(response.data);
+            setMenuId(response?.data[0]?.menuId);
         }
         console.log(e.target.value);
     }
@@ -149,7 +150,7 @@ const ProposalModal = (props) => {
                             <Form.Group>
                                 <Form.Label>변경내용</Form.Label>
                                 {category === "PRICE" && <MenuModifySelector menus={menus} handleMenuId={handleMenuId} handleContent ={handleContent}/>}
-                                {category === "MENU_NAME"&& <MenuModifySelector menus={menus} setMenu={setMenuId} handleContent ={handleContent}/>}
+                                {category === "MENU_NAME"&& <MenuModifySelector menus={menus} handleMenuId={handleMenuId} handleContent ={handleContent}/>}
                                 {category === "OPEN_TIME" && <RstTimeSelect handleHour={handleHour} handleMinute={handleMinute}/>}
                                 {category === "CLOSE_TIME"&& <RstTimeSelect handleHour={handleHour} handleMinute={handleMinute}/>}
                             </Form.Group>
