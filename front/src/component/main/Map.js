@@ -1,11 +1,12 @@
 /*global kakao*/
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 export const Map = (props) => {
 
     let container;
     let options;
-    let map;
+    const [map,setMap] = useState();
+    const [infoWindows, setInfoWindows] = useState([]);
 
     const {addresses} = props;
 
@@ -14,8 +15,8 @@ export const Map = (props) => {
     }, []);
 
     useEffect(() => {
-        markAddresses();
-    }, [addresses]);
+        void markAddresses();
+    }, [addresses,map]);
 
     const createMap = () => {
         container = document.getElementById("map");
@@ -23,13 +24,25 @@ export const Map = (props) => {
             center: new kakao.maps.LatLng(37.62007363509869, 127.05875945815039),
             level: 4,
         };
-        map = new kakao.maps.Map(container, options);
+        setMap(new kakao.maps.Map(container, options));
     }
 
-    const markAddresses = () => {
+    const clearPrevRestaurantInMap = () =>{
+            infoWindows?.map((info) => clearInfo(info));
+    }
+
+    const clearInfo = (info) =>{
+        info.marker.setVisible(false);
+        info.infoWindow.close();
+    }
+
+    const markAddresses = async() => {
+        if(addresses.length===0) return;
         const geocoder = new kakao.maps.services.Geocoder();
+        clearPrevRestaurantInMap();
+        let currentInfoWindows = [];
         for (let i = 0; i < addresses?.length; i++) {
-            geocoder?.addressSearch(toFullAddress(addresses[i]), (result, status) => {
+            await geocoder?.addressSearch(toFullAddress(addresses[i]), (result, status) => {
                 if (status === kakao.maps.services.Status.OK) {
                     let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                     let marker = new kakao.maps.Marker({
@@ -39,11 +52,13 @@ export const Map = (props) => {
                     let infoWindow = new kakao.maps.InfoWindow({
                         content: addresses[i]?.name
                     });
+                    currentInfoWindows.push({infoWindow,marker});
                     infoWindow.open(map, marker);
-                    map.setCenter(coords);
                 }
             })
         }
+        console.log(currentInfoWindows)
+        setInfoWindows(currentInfoWindows);
     }
 
     const toFullAddress = (simpleRestaurantResponse) => {

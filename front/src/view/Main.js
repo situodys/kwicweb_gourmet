@@ -88,7 +88,7 @@ export default function Main() {
                     <div className="col-4">
                         <div className="container-fluid h-100">
                             <div className="row mb-4">
-                                <Map locations ={addresses}/>
+                                <Map addresses ={addresses}/>
                             </div>
                             <div className="row">
                                 <RestaurantRecommendation

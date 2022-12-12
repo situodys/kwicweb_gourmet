@@ -8,6 +8,7 @@ import star from "../../common/star";
 import {useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import customAxios from "../../../api/customAxios";
+import OpenStatusBadge from "../../common/OpenStatusBadge";
 
 const RestaurantCard = (props) => {
 
@@ -17,8 +18,8 @@ const RestaurantCard = (props) => {
     const [likeCount, setLikeCount] = useState(restaurant.likeCount);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    const fullAddress = restaurant.address.city + "\n" +
-        restaurant.address.street + "\n" +
+    const fullAddress = restaurant.address.city + " " +
+        restaurant.address.street + " " +
         restaurant.address.zipcode;
 
     useEffect(() => {
@@ -130,26 +131,13 @@ const RestaurantCard = (props) => {
                                         ({restaurant.reviewCount}명 작성)
                                     </span>
                                     <hr/>
-                                    <p
-                                        className="px-4 py-1 mb-2 mx-1"
-                                        style={{
-                                            width: "max-content",
-                                            cursor: "default",
-                                            color: "white",
-                                            borderRadius: "27px",
-                                            backgroundColor: "#28a745",
-                                            alignItems: "center",
-                                            fontSize: "15px",
-                                        }}
-                                    >
-                                        영업중
-                                    </p>
-                                    <p class="card-text">영업
-                                        시간 {restaurant.runningTime.openAt} - {restaurant.runningTime.closeAt}</p>
+                                    <OpenStatusBadge runningTime ={restaurant.runningTime}/>
+                                    <p class="card-text" style={{marginTop: '1vh'}}>운영
+                                        시간: {restaurant.runningTime.openAt} - {restaurant.runningTime.closeAt}</p>
                                 </div>
-                                <div class="mt-auto">
-                                    <p class="card-text" style={{width: "160px", whiteSpace: 'pre-line'}}>
-                                        {fullAddress}
+                                <div class="mt-2">
+                                    <p class="card-text" style={{ whiteSpace: 'pre-line'}}>
+                                        주소: {fullAddress}
                                     </p>
                                 </div>
                             </div>

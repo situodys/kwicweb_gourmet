@@ -5,6 +5,7 @@ import {faHeart} from "@fortawesome/free-solid-svg-icons";
 import Badge from "react-bootstrap/Badge";
 import Col from "react-bootstrap/Col";
 import star from "../common/star";
+import OpenStatusBadge from "../common/OpenStatusBadge";
 
 export const RestaurantSmallCard = (props) => {
     const {restaurant,imgURL} = props;
@@ -80,41 +81,23 @@ export const RestaurantSmallCard = (props) => {
                   <div className="col-12">
                     <div class="d-flex align-items-end flex-column h-100">
                       <div class="p-2 pt-4">
-                        <div
+                        <OpenStatusBadge runningTime ={restaurant?.simpleRestaurantResponse?.runningTime}/>
+                        <span
                           className="px-4 py-1 mb-2 mx-1"
                           style={{
-                            float: "right",
-                            cursor: "default",
-                            color: "white",
-                            borderRadius: "27px",
-                            backgroundColor: "#28a745",
-                            alignItems: "center",
-                            fontSize: "10px",
-                          }}
-                        >
-                          OPEN
-                        </div>
-
-                        <div
-                          className="px-4 py-1 mb-2 mx-1"
-                          style={{
-                            float: "right",
-                            cursor: "default",
                             color: "white",
                             borderRadius: "27px",
                             backgroundColor: "#F65390",
-                            display: "inline-flex",
-                            alignItems: "center",
-                            fontSize: "10px",
+                            fontSize: "12px",
                           }}
                         >
                           <FontAwesomeIcon
                             icon={faHeart}
                             size="sm"
-                            className="mr-2"
+                            className="mr-1"
                           />{" "}
                             {restaurant.likeCount}
-                        </div>
+                        </span>
                       </div>
                     </div>
                   </div>
