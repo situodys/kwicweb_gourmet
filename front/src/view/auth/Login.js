@@ -63,7 +63,7 @@ const Login = (props) => {
                 window.alert("로그인 성공");
                 window.localStorage.setItem("atk", response.data.atk);
                 window.localStorage.setItem("rtk", response.data.rtk);
-                navigate("/main");
+                window.location.href = "/main";
             }
         } catch (err) {
             if (err) {

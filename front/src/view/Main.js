@@ -81,7 +81,7 @@ export default function Main() {
     return (
         <div
             className="d-flex Login-body justify-content-center"
-            style={{height: "93vh", overflow: "hidden"}}
+            style={{height: "91vh", overflow: "hidden"}}
         >
             <Container fluid style={{maxWidth: "90rem", padding: "4vh"}}>
                 <div className="row h-100">
