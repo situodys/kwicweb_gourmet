@@ -43,7 +43,6 @@ const ProposalModal = (props) => {
             setMenus(response.data);
             setMenuId(response?.data[0]?.menuId);
         }
-        console.log(e.target.value);
     }
 
     const handleTitle = (e) =>{
@@ -54,13 +53,11 @@ const ProposalModal = (props) => {
     const handleHour = (e) => {
         e.preventDefault();
         setHour(e.target.value);
-        console.log(e.target.value);
     }
 
     const handleMinute = (e) => {
         e.preventDefault();
         setMinute(e.target.value);
-        console.log(e.target.value);
     }
 
     const handleContent = (e) =>{
@@ -71,7 +68,6 @@ const ProposalModal = (props) => {
     const handleMenuId = (e) =>{
         e.preventDefault();
         setMenuId(e.target.value);
-        console.log(e.target.value);
     }
 
     const getContent = () => {

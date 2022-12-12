@@ -96,7 +96,6 @@ const Register = (props) => {
       `${process.env.REACT_APP_API_BASE_URL}/auth/email`,
       { email: `${email}` }
     );
-    console.log(response.data);
     setAuthCode(response.data);
   };
 
@@ -124,7 +123,7 @@ const Register = (props) => {
         navigate("/login");
       }
     } catch (err) {
-      console.log("err");
+      console.log(err);
     }
   };
 

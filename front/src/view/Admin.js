@@ -32,7 +32,6 @@ export default function Admin() {
         try {
             let response = await customAxios.get(`/proposals?page=${page}&size=10&totalCount=${totalCount}`);
             setProposalResponse(response.data);
-            console.log(response.data);
         } catch (err) {
             console.log(err);
         }

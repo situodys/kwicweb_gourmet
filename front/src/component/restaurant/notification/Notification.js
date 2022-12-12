@@ -24,7 +24,6 @@ export default function Notification(props) {
         try {
             let response = await customAxios.get(`/notifications?restaurantId=${restaurantId}&page=${page}&size=10&totalCount=${totalCount}`);
             setNotificationResponse(response.data);
-            console.log(response.data);
         } catch (err) {
             console.log(err);
             setIsAuthenticated(false);

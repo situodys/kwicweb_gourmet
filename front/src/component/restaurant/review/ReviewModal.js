@@ -37,18 +37,15 @@ const ReviewModal = (props) => {
 
     const changeRating = (newRating) => {
         setRating(newRating);
-        console.log(rating);
     };
 
     const handleSelectMenu = (e, idx) => {
         e.preventDefault();
         if (selectedMenus.includes(menus[idx])) {
             setSelectedMenus(selectedMenus.filter(menu => menu !== menus[idx]));
-            console.log(selectedMenus);
             return;
         }
         setSelectedMenus([...selectedMenus, menus[idx]]);
-        console.log(selectedMenus);
     }
 
     const handleMenuColor = (menu) => {
@@ -72,7 +69,6 @@ const ReviewModal = (props) => {
         e.preventDefault();
         try{
             let response = await customAxios.post(`/reviews`, toPostData());
-            console.log(response.data);
             handleRegisterFlag();
             handleClose();
         }catch (err){

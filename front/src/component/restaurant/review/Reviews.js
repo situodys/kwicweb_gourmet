@@ -35,7 +35,6 @@ const Reviews = (props) => {
             await loadReviews("init");
             const response = await CustomAxios.get(`/menus/all?restaurantId=${restaurantId}`);
             setMenus(response.data);
-            console.log(response.data);
         } catch (err) {
             console.log(err);
         }
@@ -53,7 +52,6 @@ const Reviews = (props) => {
             setReviewsResponse(response.data);
             setReviews((prevReviews) => [...prevReviews, ...response.data.data]);
             setLastId(response?.data?.lastId);
-            console.log(response.data);
         } catch (err) {
             console.log(err);
             setIsAuthenticated(false);

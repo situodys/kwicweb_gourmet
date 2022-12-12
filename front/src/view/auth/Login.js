@@ -21,7 +21,6 @@ const Login = (props) => {
         const tk = window.localStorage.getItem("atk");
         if(!tk)return;
         let jwtDecode = jwt_decode(tk);
-        console.log(jwtDecode);
         if (jwtDecode.exp * 1000 <= Date.now()) {
             window.localStorage.clear();
             return;
@@ -42,7 +41,6 @@ const Login = (props) => {
     const handleEmail = (e) => {
         setEmail(e.target.value);
         setIdMessage(" ");
-        console.log(email);
     }
     const handlePassword = (e) => {
         setPassword(e.target.value);

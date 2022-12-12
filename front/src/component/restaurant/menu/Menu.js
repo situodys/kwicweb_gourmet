@@ -44,7 +44,6 @@ const Menu = (props) => {
         try {
             let response = await customAxios.get(`/menus?restaurantId=${restaurantId}&page=${page}&size=10&totalCount=${totalCount}`+toQueryString());
             setMenuResponse(response.data);
-            console.log(response.data);
         } catch (err) {
             console.log(err);
         }
@@ -84,7 +83,6 @@ const Menu = (props) => {
         e.preventDefault();
         setKeyword(e.target.value);
         setPlaceHolder(placeHolders[e.target.value]);
-        console.log(e.target.value);
     }
 
     const handleInput = (e) => {

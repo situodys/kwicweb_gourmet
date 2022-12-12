@@ -11,10 +11,6 @@ export default function OpenStatusBadge(props) {
         let openTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), open[0], open[1]);
         let closeTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), close[0], close[1]);
 
-        console.log(now);
-        console.log(openTime);
-        console.log(closeTime);
-
         if (openTime.getTime() < now.getTime() && now.getTime() < closeTime.getTime()) {
             return true;
         }

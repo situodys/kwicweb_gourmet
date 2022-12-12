@@ -18,10 +18,8 @@ export default function Restaurant() {
     const [restaurant, setRestaurant] = useState();
 
     const init = async () => {
-        console.log(restaurantId);
         const response = await CustomAxios.get(`/restaurants/${restaurantId}`);
         setRestaurant(response.data);
-        console.log(response.data);
     }
 
     useEffect(() => {
