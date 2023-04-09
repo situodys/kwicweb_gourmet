@@ -65,7 +65,7 @@
 
 # 🎨DB 설계 & 흐름도
 
-![erd.png](readme/erd.png)
+![erd.png](https://github.com/situodys/gourmet_BE/blob/dev/readme/erd.png)
 
 - Restaurant과 Notification(변동사항)은 1:N의 관계입니다.
 - Restaurant과 Menu는 1:N의 관계입니다.
@@ -77,14 +77,14 @@
 - Menu와 Proposal은 N:1의 관계입니다.
 - 하나의 리뷰는 여러개의 메뉴를 선택할수 있고 하나의 메뉴는 여러 리뷰에서 선택될 수 있기에 별도의 ReviewedMenu 테이블을 통해 1:N, N:1로 풀어내었습니다.
 
-![img.png](readme/flow.png)
+![img.png](https://github.com/situodys/gourmet_BE/blob/dev/readme/flow.png)
 
 
 # 🎨GA 분석 결과
 
-![ga1.png](readme/ga1.png)
+![ga1.png](https://github.com/situodys/gourmet_BE/blob/dev/readme/ga1.png)
 
-![ga2.png](readme/ga2.png)
+![ga2.png](https://github.com/situodys/gourmet_BE/blob/dev/readme/ga2.png)
 
 ### 분석
 
@@ -93,3 +93,35 @@
 데모데이의 참여한 학생들은 메인 페이지와 설명 시에 참고 했던 restaurant_id가 40인 페이지를 가장 많이 방문하였습니다.
 
 이 외 가장 많이 방문한 페이지의 음식점은 윤스쿡이었습니다.
+
+# 🎨 UI 미리보기
+
+## 메인화면
+<p>
+    <img src="https://github.com/situodys/gourmet_FE/blob/dev/docs/메인화면.gif" width="50%" />
+</p>
+
+## 음식점 상세(게스트)
+<p>
+    <img src="https://github.com/situodys/gourmet_FE/blob/dev/docs/게스트_식당상세.gif" width="50%" />
+</p>
+
+## 음식점 상세(인증 유저)
+<p>
+    <img src="https://github.com/situodys/gourmet_FE/blob/dev/docs/인증유저_식당상세.gif" width="50%" />
+</p>
+
+## 리뷰 등록
+<p>
+    <img src="https://github.com/situodys/gourmet_FE/blob/dev/docs/리뷰등록.gif" width="50%" />
+</p>
+
+## 요청사항 등록
+<p>
+    <img src="https://github.com/situodys/gourmet_FE/blob/dev/docs/요청사항등록.gif" width="50%" />
+</p>
+
+## 요청 처리 및 결과
+<p>
+    <img src="https://github.com/situodys/gourmet_FE/blob/dev/docs/요청처리및결과.gif" width="50%" />
+</p>
